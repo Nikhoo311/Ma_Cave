@@ -30,6 +30,7 @@ export class RegisterPage {
   }
 
   goToLogin() {
+    
     this.router.navigateByUrl('/login');
   }
 }

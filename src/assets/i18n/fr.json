@@ -1,0 +1,10 @@
+{
+  "AUTH": {
+    "LOGIN": "Connexion",
+    "REGISTER": "Inscription",
+    "FIELDS": {
+      "PASSWORD": "Mot de passe",
+      "EMAIL": "Email"
+    }
+  }
+}
