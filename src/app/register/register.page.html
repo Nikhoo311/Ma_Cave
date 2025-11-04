@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="auth-form ion-margin-bottom">
+    <ion-item>
+      <ion-input placeholder="Email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Mot de passe" type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-button expand="block" (click)="register()">Créer le compte</ion-button>
+  <ion-button fill="clear" (click)="goToLogin()">Déjà un compte ?</ion-button>
+</ion-content>
