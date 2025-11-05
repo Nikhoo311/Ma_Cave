@@ -29,32 +29,34 @@ export class AuthService {
 
   /** Inscription d’un nouvel utilisateur avec email et mot de passe */
   async register(email: string, password: string) {
-    const credential = await createUserWithEmailAndPassword(this.auth, email, password);
-    const firebaseUser = credential.user;
-    const user: User = {
-      id: firebaseUser.uid,
-      email: firebaseUser.email ?? '',
-      displayName: firebaseUser.displayName ?? undefined,
-      photoURL: firebaseUser.photoURL ?? undefined,
-      createdAt: new Date()
-    };
-    this.currentUserSubject.next(user);
-    return user;
+    return await createUserWithEmailAndPassword(this.auth, email, password).then(credential => {
+      const firebaseUser = credential.user;
+      const user: User = {
+        id: firebaseUser.uid,
+        email: firebaseUser.email ?? '',
+        displayName: firebaseUser.displayName ?? undefined,
+        photoURL: firebaseUser.photoURL ?? undefined,
+        createdAt: new Date()
+      };
+      this.currentUserSubject.next(user);
+      return user;
+    });
   }
 
   /** Connexion */
   async login(email: string, password: string) {
-    const credential = await signInWithEmailAndPassword(this.auth, email, password);
-    const firebaseUser = credential.user;
-    const user: User = {
-      id: firebaseUser.uid,
-      email: firebaseUser.email ?? '',
-      displayName: firebaseUser.displayName ?? undefined,
-      photoURL: firebaseUser.photoURL ?? undefined,
-      createdAt: new Date()
-    };
-    this.currentUserSubject.next(user);
-    return user;
+    return await signInWithEmailAndPassword(this.auth, email, password).then(credential => {
+      const firebaseUser = credential.user;
+      const user: User = {
+        id: firebaseUser.uid,
+        email: firebaseUser.email ?? '',
+        displayName: firebaseUser.displayName ?? undefined,
+        photoURL: firebaseUser.photoURL ?? undefined,
+        createdAt: new Date()
+      };
+      this.currentUserSubject.next(user);
+      return user;
+    });
   }
 
   /** Déconnexion */

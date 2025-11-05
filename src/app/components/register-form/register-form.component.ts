@@ -25,7 +25,7 @@ export class RegisterFormComponent {
 
   async register() {
     this.loading = true;
-    this.authService.login(this.email, this.password).then((_) => this.router.navigate(["/home"])).catch(async err => {
+    this.authService.register(this.email, this.password).then((_) => this.router.navigate(["/home"])).catch(async err => {
       const toast = await this.toastCtrl.create({
         message: err.message,
         duration: 2500,
