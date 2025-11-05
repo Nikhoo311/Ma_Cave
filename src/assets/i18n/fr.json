@@ -2,9 +2,11 @@
   "AUTH": {
     "LOGIN": "Connexion",
     "REGISTER": "Inscription",
-    "FIELDS": {
-      "PASSWORD": "Mot de passe",
-      "EMAIL": "Email"
-    }
+    "EMAIL": "Email",
+    "PASSWORD": "Mot de passe",
+    "LOGIN_BUTTON": "Se connecter",
+    "REGISTER_BUTTON": "S'inscrire",
+    "NO_ACCOUNT": "Pas encore de compte ? Inscrivez-vous",
+    "ALREADY_ACCOUNT": "Déjà un compte ? Connectez-vous"
   }
 }
