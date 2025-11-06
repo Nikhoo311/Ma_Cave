@@ -1,38 +1,57 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
+  standalone: true,
   templateUrl: './register-form.component.html',
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     TranslocoModule
   ],
 })
 export class RegisterFormComponent {
-  email: string = '';
-  password: string = '';
+  registerForm: FormGroup;
   loading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private toastCtrl: ToastController) {}
+  constructor(private authService: AuthService, private router: Router, private toastCtrl: ToastController, private transloco: TranslocoService) {
+    this.registerForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    });
+  }
 
   async register() {
-    this.loading = true;
-    this.authService.register(this.email, this.password).then((_) => this.router.navigate(["/home"])).catch(async err => {
+    if (this.registerForm.invalid) {
       const toast = await this.toastCtrl.create({
-        message: err.message,
+        message: this.transloco.translate('AUTH.RULES.FILL_ALL_FIELDS'),
         duration: 2500,
-        color: 'danger'
+        color: 'warning'
       });
       toast.present();
-      this.loading = false;
-    });
+      return;
+    }
+
+    this.loading = true;
+    const { email, password } = this.registerForm.value;
+
+    this.authService.register(email, password)
+      .then(() => this.router.navigate(['/home']))
+      .catch(async err => {
+        const toast = await this.toastCtrl.create({
+          message: this.transloco.translate('AUTH.RULES.REGISTER_ERROR', { error: err.message }),
+          duration: 2500,
+          color: 'danger'
+        });
+        toast.present();
+      })
+      .finally(() => this.loading = false);
   }
 }

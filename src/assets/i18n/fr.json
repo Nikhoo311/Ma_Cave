@@ -7,6 +7,13 @@
     "LOGIN_BUTTON": "Se connecter",
     "REGISTER_BUTTON": "S'inscrire",
     "NO_ACCOUNT": "Pas encore de compte ? Inscrivez-vous",
-    "ALREADY_ACCOUNT": "Déjà un compte ? Connectez-vous"
+    "ALREADY_ACCOUNT": "Déjà un compte ? Connectez-vous",
+    "RULES": {
+      "EMAIL": "Email est requis et dois être valide.",
+      "PASSWORD": "Le mot de passe est requis (min 6 caractères).",
+      "FILL_ALL_FIELDS": "Veuillez remplir correctement tous les champs.",
+      "LOGIN_ERROR": "Erreur lors de la connexion : {{error}}",
+      "REGISTER_ERROR": "Erreur lors de l'inscription : {{error}}"
+    }
   }
 }
