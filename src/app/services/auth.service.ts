@@ -10,7 +10,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
   constructor(private auth: Auth) {
-    // Écoute les changements d’état d’auth Firebase
+    // Listen to Firebase auth state changes
     onAuthStateChanged(this.auth, (firebaseUser: FirebaseUser | null) => {
       if (firebaseUser) {
         const user: User = {
@@ -27,7 +27,7 @@ export class AuthService {
     });
   }
 
-  /** Inscription d’un nouvel utilisateur avec email et mot de passe */
+  // Register a new user with email and password
   async register(email: string, password: string) {
     return await createUserWithEmailAndPassword(this.auth, email, password).then(credential => {
       const firebaseUser = credential.user;
@@ -43,7 +43,6 @@ export class AuthService {
     });
   }
 
-  /** Connexion */
   async login(email: string, password: string) {
     return await signInWithEmailAndPassword(this.auth, email, password).then(credential => {
       const firebaseUser = credential.user;
@@ -59,7 +58,6 @@ export class AuthService {
     });
   }
 
-  /** Déconnexion */
   async logout() {
     await signOut(this.auth);
     this.currentUserSubject.next(null);
