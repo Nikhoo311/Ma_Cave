@@ -30,15 +30,20 @@ export class RegisterFormComponent {
   }
 
   private passwordsMatchValidator(control: AbstractControl) {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
+    const password: string = control.get('password')?.value;
+    const confirmPassword: string = control.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
   async register() {
+    let message: string = this.transloco.translate('AUTH.RULES.FILL_ALL_FIELDS');
+    if (this.registerForm.hasError('passwordMismatch')) {
+      message = this.transloco.translate('AUTH.RULES.SAME_PASSWORD');
+    }
+
     if (this.registerForm.invalid) {
       const toast = await this.toastCtrl.create({
-        message: this.registerForm.hasError("passwordMismatch") ? this.transloco.translate('AUTH.RULES.SAME_PASSWORD') : this.transloco.translate('AUTH.RULES.FILL_ALL_FIELDS'),
+        message,
         duration: 2500,
         color: 'warning'
       });
@@ -52,8 +57,13 @@ export class RegisterFormComponent {
     this.authService.register(email, password)
       .then(() => this.router.navigate(['/home']))
       .catch(async err => {
+        let errorMessage: string = this.transloco.translate('AUTH.RULES.REGISTER_ERROR', { error: err.message });
+        if (err.code === 'auth/email-already-in-use') {
+          errorMessage = this.transloco.translate('AUTH.RULES.EMAIL_ALREADY_TAKEN');
+        }
+
         const toast = await this.toastCtrl.create({
-          message: this.transloco.translate('AUTH.RULES.REGISTER_ERROR', { error: err.message }),
+          message: errorMessage,
           duration: 2500,
           color: 'danger'
         });
