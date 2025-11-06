@@ -4,6 +4,7 @@
     "REGISTER": "Inscription",
     "EMAIL": "Email",
     "PASSWORD": "Mot de passe",
+    "CONFIRM_PASSWORD": "Confirmation de mot de passe",
     "LOGIN_BUTTON": "Se connecter",
     "REGISTER_BUTTON": "S'inscrire",
     "NO_ACCOUNT": "Pas encore de compte ? Inscrivez-vous",
@@ -11,6 +12,7 @@
     "RULES": {
       "EMAIL": "Email est requis et dois être valide.",
       "PASSWORD": "Le mot de passe est requis (min 6 caractères).",
+      "SAME_PASSWORD": "Les deux mots de passe doivent être identiques.",
       "FILL_ALL_FIELDS": "Veuillez remplir correctement tous les champs.",
       "LOGIN_ERROR": "Erreur lors de la connexion : {{error}}",
       "REGISTER_ERROR": "Erreur lors de l'inscription : {{error}}"

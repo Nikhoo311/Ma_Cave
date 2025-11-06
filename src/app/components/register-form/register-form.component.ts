@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
@@ -18,20 +18,27 @@ import { Router } from '@angular/router';
   ],
 })
 export class RegisterFormComponent {
-  registerForm: FormGroup;
+  registerForm!: FormGroup;
   loading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router, private toastCtrl: ToastController, private transloco: TranslocoService) {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
-    });
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      confirmPassword: new FormControl('', [Validators.required])
+    }, { validators: this.passwordsMatchValidator });
+  }
+
+  private passwordsMatchValidator(control: AbstractControl) {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
   async register() {
     if (this.registerForm.invalid) {
       const toast = await this.toastCtrl.create({
-        message: this.transloco.translate('AUTH.RULES.FILL_ALL_FIELDS'),
+        message: this.registerForm.hasError("passwordMismatch") ? this.transloco.translate('AUTH.RULES.SAME_PASSWORD') : this.transloco.translate('AUTH.RULES.FILL_ALL_FIELDS'),
         duration: 2500,
         color: 'warning'
       });
