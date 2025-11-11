@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { RegisterFormComponent } from '../register-form/register-form.component';
 import { TranslocoModule } from '@jsverse/transloco';
+import { AuthTypeEnum } from 'src/app/types/AuthTypeEnum';
 
 @Component({
   selector: 'app-auth-modal',
@@ -18,11 +19,12 @@ import { TranslocoModule } from '@jsverse/transloco';
   ],
 })
 export class AuthModalComponent {
-  @Input() mode: 'login' | 'register' = 'login';
-
+  @Input() mode: string = AuthTypeEnum.LOGIN;
+  AuthTypeEnum = AuthTypeEnum;
+  
   constructor() {}
 
   switchMode() {
-    this.mode = this.mode === 'login' ? 'register' : 'login';
+    this.mode = this.mode === AuthTypeEnum.LOGIN ? AuthTypeEnum.REGISTER : AuthTypeEnum.LOGIN;
   }
 }

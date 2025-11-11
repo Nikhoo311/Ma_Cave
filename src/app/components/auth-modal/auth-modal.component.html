@@ -1,20 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      {{ (mode === 'login' ? 'AUTH.LOGIN' : 'AUTH.REGISTER') | transloco }}
+      {{ ('AUTH.' + mode.toUpperCase()) | transloco }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ng-container [ngSwitch]="mode">
-    <app-login-form *ngSwitchCase="'login'"></app-login-form>
-    <app-register-form *ngSwitchCase="'register'"></app-register-form>
+    <app-login-form *ngSwitchCase="AuthTypeEnum.LOGIN"></app-login-form>
+    <app-register-form *ngSwitchCase="AuthTypeEnum.REGISTER"></app-register-form>
   </ng-container>
 
   <div class="ion-text-center ion-margin-top">
     <ion-button fill="clear" (click)="switchMode()">
-      {{ (mode === 'login' ? 'AUTH.NO_ACCOUNT' : 'AUTH.ALREADY_ACCOUNT') | transloco }}
+      {{ ('AUTH.' + (mode === AuthTypeEnum.LOGIN ? 'NO_ACCOUNT' : 'ALREADY_ACCOUNT')) | transloco }}
     </ion-button>
   </div>
 </ion-content>
