@@ -44,7 +44,7 @@ export class LoginFormComponent {
 
     this.loading = true;
 
-    const { email, password } = this.loginForm.value;
+    const { email, password }: { email: string, password: string } = this.loginForm.value;
 
     this.authService.login(email, password)
       .then((_) => this.router.navigate(['/home']))
