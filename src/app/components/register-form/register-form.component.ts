@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractContro
 import { IonicModule, ToastController } from '@ionic/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
+import { FormErrorComponent } from '../form-error/form-error.component';
 
 @Component({
   selector: 'app-register-form',
@@ -14,7 +15,8 @@ import { Router } from '@angular/router';
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    TranslocoModule
+    TranslocoModule,
+    FormErrorComponent
   ],
 })
 export class RegisterFormComponent {

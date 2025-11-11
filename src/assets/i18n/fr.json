@@ -1,22 +1,23 @@
 {
   "AUTH": {
     "LOGIN": "Connexion",
-    "REGISTER": "Inscription",
-    "EMAIL": "Email",
+    "REGISTER": "Créer un compte",
+    "EMAIL": "Adresse e-mail",
     "PASSWORD": "Mot de passe",
-    "CONFIRM_PASSWORD": "Confirmation de mot de passe",
+    "CONFIRM_PASSWORD": "Confirmer le mot de passe",
     "LOGIN_BUTTON": "Se connecter",
     "REGISTER_BUTTON": "S'inscrire",
-    "NO_ACCOUNT": "Pas encore de compte ? Inscrivez-vous",
-    "ALREADY_ACCOUNT": "Déjà un compte ? Connectez-vous",
+    "NO_ACCOUNT": "Pas encore de compte ? Créez-en un",
+    "ALREADY_ACCOUNT": "Vous avez déjà un compte ? Connectez-vous",
     "RULES": {
-      "EMAIL": "Email est requis et dois être valide.",
-      "EMAIL_ALREADY_TAKEN": "Cet email est déjà utilisé.",
-      "PASSWORD": "Le mot de passe est requis (min 6 caractères).",
-      "SAME_PASSWORD": "Les deux mots de passe doivent être identiques.",
-      "FILL_ALL_FIELDS": "Veuillez remplir correctement tous les champs.",
-      "LOGIN_ERROR": "Erreur lors de la connexion : {{error}}",
-      "REGISTER_ERROR": "Erreur lors de l'inscription : {{error}}"
+      "REQUIRED": "Ce champ est obligatoire.",
+      "EMAIL": "Veuillez entrer une adresse e-mail valide.",
+      "EMAIL_ALREADY_TAKEN": "Cette adresse e-mail est déjà utilisée.",
+      "PASSWORD": "Le mot de passe doit contenir au moins 6 caractères.",
+      "SAME_PASSWORD": "Les mots de passe ne correspondent pas.",
+      "FILL_ALL_FIELDS": "Merci de compléter tous les champs correctement.",
+      "LOGIN_ERROR": "Une erreur est survenue lors de la connexion : {{error}}",
+      "REGISTER_ERROR": "Une erreur est survenue lors de l'inscription : {{error}}"
     }
   }
 }

@@ -1,26 +1,19 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()">
-  <ion-item>
-    <ion-label position="floating">{{ 'AUTH.EMAIL' | transloco }}</ion-label>
-    <ion-input type="email" formControlName="email"></ion-input>
+  <ion-item class="input-form">
+    <ion-input type="email" formControlName="email" placeholder="{{ 'AUTH.EMAIL' | transloco }}"></ion-input>
   </ion-item>
-  <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="ion-padding-start ion-text-danger">
-    {{ 'AUTH.RULES.EMAIL' | transloco }}
-  </div>
+  <form-error [control]="registerForm.get('email')"></form-error>
 
-  <ion-item>
-    <ion-label position="floating">{{ 'AUTH.PASSWORD' | transloco }}</ion-label>
-    <ion-input type="password" formControlName="password"></ion-input>
+  <ion-item class="input-form">
+    <ion-input type="password" formControlName="password" placeholder="{{ 'AUTH.PASSWORD' | transloco }}"></ion-input>
   </ion-item>
-  <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="ion-padding-start ion-text-danger">
-    {{ 'AUTH.RULES.PASSWORD' | transloco }}
-  </div>
+  <form-error [control]="registerForm.get('password')"></form-error>
 
-  <ion-item>
-    <ion-label position="floating">{{ 'AUTH.CONFIRM_PASSWORD' | transloco }}</ion-label>
-    <ion-input type="password" formControlName="confirmPassword"></ion-input>
+  <ion-item class="input-form">
+    <ion-input type="password" formControlName="confirmPassword" placeholder="{{ 'AUTH.CONFIRM_PASSWORD' | transloco }}"></ion-input>
   </ion-item>
 
-  <ion-button expand="block" type="submit" [disabled]="loading">
+  <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="loading">
     {{ 'AUTH.REGISTER_BUTTON' | transloco }}
   </ion-button>
 </form>

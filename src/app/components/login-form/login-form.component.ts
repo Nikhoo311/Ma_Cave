@@ -5,16 +5,19 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 import { IonicModule, ToastController } from '@ionic/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
+import { FormErrorComponent } from '../form-error/form-error.component';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
   templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss'],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    TranslocoModule
+    TranslocoModule,
+    FormErrorComponent
   ],
 })
 export class LoginFormComponent {
