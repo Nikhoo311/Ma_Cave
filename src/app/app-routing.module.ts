@@ -15,11 +15,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'logout',
-    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule),
     canActivate: [GuestGuard]
