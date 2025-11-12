@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule),
+    loadComponent: () => import('./auth/auth.page').then(m => m.AuthPage),
     canActivate: [GuestGuard]
   },
 

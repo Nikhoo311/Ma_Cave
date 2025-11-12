@@ -1,3 +1,22 @@
 <ion-content class="auth-page ion-padding">
-  <app-auth-modal [mode]="mode"></app-auth-modal>
+  <ion-card class="auth-card">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        {{ ('AUTH.' + mode.toUpperCase()) | transloco }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ng-container [ngSwitch]="mode">
+        <app-login-form *ngSwitchCase="AuthTypeEnum.LOGIN"></app-login-form>
+        <app-register-form *ngSwitchCase="AuthTypeEnum.REGISTER"></app-register-form>
+      </ng-container>
+
+      <div class="ion-text-center ion-margin-top">
+        <ion-button fill="clear" (click)="switchMode()">
+          {{ ('AUTH.' + (mode === AuthTypeEnum.LOGIN ? 'NO_ACCOUNT' : 'ALREADY_ACCOUNT')) | transloco }}
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
