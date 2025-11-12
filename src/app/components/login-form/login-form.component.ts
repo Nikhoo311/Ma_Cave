@@ -37,7 +37,7 @@ export class LoginFormComponent {
     });
   }
 
-  login() {
+  async login() {
     if (this.loginForm.invalid) {
       this.toastService.warning(this.transloco.translate('AUTH.RULES.FILL_ALL_FIELDS'))
       return;
@@ -47,7 +47,7 @@ export class LoginFormComponent {
 
     const { email, password }: { email: string, password: string } = this.loginForm.value;
 
-    this.authService.login(email, password)
+    await this.authService.login(email, password)
       .then(() => this.router.navigate(['/home']))
       .catch(err => {
         this.toastService.error(this.transloco.translate('AUTH.RULES.LOGIN_ERROR', { error: err.message }))

@@ -42,7 +42,7 @@ export class RegisterFormComponent {
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  register() {
+  async register() {
     let message: string = this.transloco.translate('AUTH.RULES.FILL_ALL_FIELDS');
     if (this.registerForm.hasError('passwordMismatch')) {
       message = this.transloco.translate('AUTH.RULES.SAME_PASSWORD');
@@ -56,7 +56,7 @@ export class RegisterFormComponent {
     this.loading = true;
     const { email, password } = this.registerForm.value;
 
-    this.authService
+    await this.authService
       .register(email, password)
       .then(() => this.router.navigate(['/home']))
       .catch(err => {
