@@ -1,20 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header class="custom-header">
+  <div class="header-content">
+    <h1>🗒️ Mes notes</h1>
+    <ion-button fill="clear" class="settings-btn" (click)="openSettings()">
+      <ion-icon name="settings-outline"></ion-icon>
+    </ion-button>
+  </div>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true" class="ion-padding app-dark">
+  <div class="wrapper">
+    @for (item of items; track item.title) {
+      <ion-card class="app-card">
+        <ion-card-header>
+          <div class="card-header">
+            <ion-card-title>{{ item.title }}</ion-card-title>
+            <ion-badge class="tag" color="medium">{{ item.tag }}</ion-badge>
+          </div>
+        </ion-card-header>
+        <ion-card-content class="card-content">
+          {{ truncate(item.content, 100) }}
+        </ion-card-content>
+      </ion-card>
+    }
   </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="addItem()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
