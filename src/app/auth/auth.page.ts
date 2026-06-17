@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { AuthTypeEnum } from '../types/AuthTypeEnum';
-import { LoginFormComponent } from '../components/login-form/login-form.component';
-import { RegisterFormComponent } from '../components/register-form/register-form.component';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule } from '@jsverse/transloco';
+
+import { UtilsComponent } from '../components/utils/utils.component';
+import { AuthTypeEnum } from '../types/AuthTypeEnum';
 
 @Component({
   selector: 'app-auth',
@@ -14,8 +14,7 @@ import { TranslocoModule } from '@jsverse/transloco';
     CommonModule,
     IonicModule,
     TranslocoModule,
-    LoginFormComponent,
-    RegisterFormComponent
+    UtilsComponent
   ]
 })
 export class AuthPage {
@@ -25,8 +24,9 @@ export class AuthPage {
   constructor() {}
 
   switchMode() {
-    this.mode = this.mode === AuthTypeEnum.LOGIN
-      ? AuthTypeEnum.REGISTER
-      : AuthTypeEnum.LOGIN;
+    this.mode =
+      this.mode === AuthTypeEnum.LOGIN
+        ? AuthTypeEnum.REGISTER
+        : AuthTypeEnum.LOGIN;
   }
 }

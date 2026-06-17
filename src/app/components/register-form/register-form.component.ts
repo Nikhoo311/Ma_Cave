@@ -7,6 +7,7 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
 import { FormErrorComponent } from '../form-error/form-error.component';
 import { ToastService } from 'src/app/services/toast.service';
+import { ERRORS_CODES } from 'src/app/types/ErrorsCode';
 
 @Component({
   selector: 'app-register-form',
@@ -61,7 +62,7 @@ export class RegisterFormComponent {
       .then(() => this.router.navigate(['/home']))
       .catch(err => {
         let errorMessage = this.transloco.translate('AUTH.RULES.REGISTER_ERROR', { error: err.message });
-        if (err.code === 'auth/email-already-in-use') {
+        if (err.code === ERRORS_CODES.auth.emailAlreadyInUse) {
           errorMessage = this.transloco.translate('AUTH.RULES.EMAIL_ALREADY_TAKEN');
         }
         this.toastService.error(errorMessage);

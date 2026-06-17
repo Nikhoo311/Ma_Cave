@@ -8,8 +8,7 @@
 
     <ion-card-content>
       <ng-container [ngSwitch]="mode">
-        <app-login-form *ngSwitchCase="AuthTypeEnum.LOGIN"></app-login-form>
-        <app-register-form *ngSwitchCase="AuthTypeEnum.REGISTER"></app-register-form>
+        <app-utils [mode]="mode"></app-utils>
       </ng-container>
 
       <div class="ion-text-center ion-margin-top">
