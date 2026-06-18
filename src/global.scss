@@ -34,9 +34,163 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap');
+
+html,
+body,
+ion-app {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--mc-bg-main);
+  color: var(--mc-text-primary);
+}
+
+/* ==========
+   TYPO
+   ========== */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--mc-text-primary);
+  font-weight: 700;
+}
+
+p, span, label {
+  color: var(--mc-text-primary);
+}
+
+ion-content {
+  --background: var(--mc-bg-main);
+}
+
+/* ==========
+   CARTES BENTO
+   ========== */
+
+ion-card {
+  background: var(--mc-bg-card);
+  border-radius: var(--mc-radius-card);
+  box-shadow: var(--mc-shadow-soft);
+  border: 1px solid var(--mc-border);
+  margin: 0;
+}
+
+ion-card-title {
+  color: var(--mc-text-primary);
+  font-weight: 700;
+}
+
+/* ==========
+   INPUTS
+   ========== */
+
+ion-item {
+  --background: transparent;
+  --border-color: transparent;
+  --padding-start: 0;
+}
+
+ion-input {
+  --background: var(--mc-bg-card);
+  --color: var(--mc-text-primary);
+  --placeholder-color: #c2beb8;
+
+  border: 1.5px solid var(--mc-border);
+  border-radius: var(--mc-radius-input);
+
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+ion-input.has-focus {
+  border-color: var(--mc-wine-red);
+}
+
+/* ==========
+   BOUTONS
+   ========== */
+
+ion-button {
+  --border-radius: var(--mc-radius-pill);
+  font-weight: 700;
+  text-transform: none;
+}
+
+ion-button[color="primary"] {
+  --background: var(--mc-wine-red);
+  --background-hover: var(--mc-wine-red-dark);
+  --color: #F5F1EB;
+}
+
+ion-button.button-outline {
+  --border-color: var(--mc-border);
+  --color: var(--mc-text-primary);
+}
+
+/* ==========
+   TOOLBAR
+   ========== */
+
+ion-toolbar {
+  --background: var(--mc-wine-red);
+  --color: #F5F1EB;
+}
+
+ion-title {
+  font-weight: 700;
+}
+
+/* ==========
+   LISTES
+   ========== */
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: var(--mc-bg-card);
+  --border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+/* ==========
+   TOAST
+   ========== */
+
+ion-toast {
+  --background: var(--mc-text-primary);
+  --color: var(--mc-bg-main);
+  --border-radius: 999px;
+}
+
+/* ==========
+   UTILITAIRES
+   ========== */
+
+.bento-card {
+  background: var(--mc-bg-card);
+  border-radius: var(--mc-radius-card);
+  border: 1px solid var(--mc-border);
+  box-shadow: var(--mc-shadow-soft);
+  padding: 16px;
+}
+
+.bento-header {
+  background: var(--mc-wine-red);
+  color: #F5F1EB;
+  border-radius: 0 0 24px 24px;
+}
+
+.text-secondary {
+  color: var(--mc-text-secondary);
+}
 
 .input-form {
-    margin-top: 10px;
-    margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.page-padding {
+  padding: 16px;
 }
