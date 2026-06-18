@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, SegmentCustomEvent } from '@ionic/angular';
 import { TranslocoModule } from '@jsverse/transloco';
 
 import { UtilsComponent } from '../components/utils/utils.component';
@@ -10,6 +10,7 @@ import { AuthTypeEnum } from '../types/AuthTypeEnum';
   selector: 'app-auth',
   standalone: true,
   templateUrl: './auth.page.html',
+  styleUrls: ['./auth.page.scss'],
   imports: [
     CommonModule,
     IonicModule,
@@ -19,7 +20,7 @@ import { AuthTypeEnum } from '../types/AuthTypeEnum';
 })
 export class AuthPage {
   @Input() mode: string = AuthTypeEnum.LOGIN;
-  AuthTypeEnum = AuthTypeEnum;
+  protected readonly AuthTypeEnum = AuthTypeEnum;
 
   constructor() {}
 
@@ -28,5 +29,11 @@ export class AuthPage {
       this.mode === AuthTypeEnum.LOGIN
         ? AuthTypeEnum.REGISTER
         : AuthTypeEnum.LOGIN;
+  }
+
+    onModeChange(event: SegmentCustomEvent) {
+    if (event.detail.value) {
+      this.mode = event.detail.value as AuthTypeEnum;
+    }
   }
 }

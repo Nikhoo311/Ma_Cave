@@ -1,13 +1,26 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <ion-item class="input-form">
-    <ion-input type="email" formControlName="email" placeholder="{{ 'AUTH.EMAIL' | transloco }}"></ion-input>
-  </ion-item>
-  <form-error [control]="loginForm.get('email')"></form-error>
+<form id="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
 
-  <ion-item class="input-form">
-    <ion-input type="password" formControlName="password" placeholder="{{ 'AUTH.PASSWORD' | transloco }}"></ion-input>
-  </ion-item>
-  <form-error [control]="loginForm.get('password')"></form-error>
+  <div class="input-group">
+    <label class="input-label">{{ 'AUTH.EMAIL' | transloco }}</label>
+    <ion-item class="input-form">
+      <ion-input type="email" formControlName="email" placeholder="{{ 'AUTH.EMAIL_PLACEHOLDER' | transloco }}">
+        <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
+    </ion-item>
+    <form-error [control]="loginForm.get('email')"></form-error>
+  </div>
+
+  <div class="input-group">
+    <label class="input-label">{{ 'AUTH.PASSWORD' | transloco }}</label>
+    <ion-item class="input-form">
+      <ion-input type="password" formControlName="password" placeholder="••••••••">
+        <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
+    </ion-item>
+    <form-error [control]="loginForm.get('password')"></form-error>
+  </div>
+
+  <ion-text class="text-forgot-password">Mot de passe oublié ?</ion-text>
 
   <ion-button expand="block" type="submit" [disabled]="loading" class="ion-margin-top">
     {{ 'AUTH.LOGIN_BUTTON' | transloco }}

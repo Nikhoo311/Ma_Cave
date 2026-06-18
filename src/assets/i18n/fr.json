@@ -3,6 +3,7 @@
     "LOGIN": "Connexion",
     "REGISTER": "Créer un compte",
     "EMAIL": "Adresse e-mail",
+    "EMAIL_PLACEHOLDER": "vous@exemple.com",
     "PASSWORD": "Mot de passe",
     "CONFIRM_PASSWORD": "Confirmer le mot de passe",
     "LOGIN_BUTTON": "Se connecter",

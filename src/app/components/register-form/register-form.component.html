@@ -1,17 +1,33 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()">
-  <ion-item class="input-form">
-    <ion-input type="email" formControlName="email" placeholder="{{ 'AUTH.EMAIL' | transloco }}"></ion-input>
-  </ion-item>
-  <form-error [control]="registerForm.get('email')"></form-error>
 
-  <ion-item class="input-form">
-    <ion-input type="password" formControlName="password" placeholder="{{ 'AUTH.PASSWORD' | transloco }}"></ion-input>
-  </ion-item>
-  <form-error [control]="registerForm.get('password')"></form-error>
+  <div class="input-group">
+    <label class="input-label">{{ 'AUTH.EMAIL' | transloco }}</label>
+    <ion-item class="input-form">
+      <ion-input type="email" formControlName="email" placeholder="vous@exemple.com">
+        <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
+    </ion-item>
+    <form-error [control]="registerForm.get('email')"></form-error>
+  </div>
 
-  <ion-item class="input-form">
-    <ion-input type="password" formControlName="confirmPassword" placeholder="{{ 'AUTH.CONFIRM_PASSWORD' | transloco }}"></ion-input>
-  </ion-item>
+  <div class="input-group">
+    <label class="input-label">{{ 'AUTH.PASSWORD' | transloco }}</label>
+    <ion-item class="input-form">
+      <ion-input type="password" formControlName="password" placeholder="••••••••">
+        <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
+    </ion-item>
+    <form-error [control]="registerForm.get('password')"></form-error>
+  </div>
+
+  <div class="input-group">
+    <label class="input-label">{{ 'AUTH.CONFIRM_PASSWORD' | transloco }}</label>
+    <ion-item class="input-form">
+      <ion-input type="password" formControlName="confirmPassword" placeholder="••••••••">
+        <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
+    </ion-item>
+  </div>
 
   <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="loading">
     {{ 'AUTH.REGISTER_BUTTON' | transloco }}

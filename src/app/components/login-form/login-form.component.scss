@@ -1,0 +1,14 @@
+#login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text-forgot-password {
+    font-size: 0.8rem;
+    align-self: flex-end;
+}
+
+.text-forgot-password:hover {
+    color: var(--ion-color-primary);
+}
