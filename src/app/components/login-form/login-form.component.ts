@@ -54,4 +54,21 @@ export class LoginFormComponent {
       })
       .finally(() => this.loading = false);
   }
+
+  async forgotPassword() {
+    const email = this.loginForm.get('email')?.value?.trim();
+
+    if (!email) {
+      await this.toastService.error(this.transloco.translate('AUTH.FORGOT_PASSWORD_EMAIL_REQUIRED'));
+      return;
+    }
+
+    try {
+      await this.authService.sendPasswordResetEmail(email);
+      await this.toastService.success(this.transloco.translate('AUTH.FORGOT_PASSWORD_SUCCESS'));
+
+    } catch (error) {
+      await this.toastService.error(this.transloco.translate('AUTH.FORGOT_PASSWORD_ERROR'));
+    }
+  }
 }

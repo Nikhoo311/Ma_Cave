@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User as FirebaseUser } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,10 @@ export class AuthService {
   async logout() {
     await signOut(this.auth);
     this.currentUserSubject.next(null);
+  }
+
+  async sendPasswordResetEmail(email: string): Promise<void> {
+    await sendPasswordResetEmail(this.auth, email);
   }
 
   get currentUser(): User | null {

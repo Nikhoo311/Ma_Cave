@@ -20,9 +20,12 @@
     <form-error [control]="loginForm.get('password')"></form-error>
   </div>
 
-  <ion-text class="text-forgot-password">Mot de passe oublié ?</ion-text>
+  <button type="button" class="forgot-password-btn" (click)="forgotPassword()">
+    {{ 'AUTH.FORGOT_PASSWORD' | transloco }}
+  </button>
 
   <ion-button expand="block" type="submit" [disabled]="loading" class="ion-margin-top">
     {{ 'AUTH.LOGIN_BUTTON' | transloco }}
   </ion-button>
+
 </form>
