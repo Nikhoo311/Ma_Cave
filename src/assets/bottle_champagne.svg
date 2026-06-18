@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80" width="60" height="80">
+  <rect x="22" y="3" width="16" height="22" rx="3" fill="var(--champagne-accent, #F1C40F)"></rect>
+  
+  <path d="M12 65 C12 38 22 36 22 25 L38 25 C38 36 48 38 48 65 L48 73 Q48 80 41 80 L19 80 Q12 80 12 73 Z" fill="var(--champagne, #FBF4D7)"></path>
+  
+  <rect x="18" y="45" width="24" height="20" rx="6" fill="#FFFFFF" fill-opacity="0.9"></rect>
+</svg>

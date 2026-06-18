@@ -1,0 +1,22 @@
+#login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.forgot-password-btn {
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  padding: 4px 2px;
+  font-family: var(--ion-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mc-text-secondary);
+  cursor: pointer;
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--mc-wine-red);
+  }
+}

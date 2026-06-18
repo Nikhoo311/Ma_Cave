@@ -1,2 +1,156 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+/*
+ * Light par défaut
+ */
+
+:root {
+  /* =========
+   * Couleurs Ionic
+   * ========= */
+
+  --ion-background-color: #FAF7F2;
+  --ion-background-color-rgb: 250, 247, 242;
+
+  --ion-text-color: #2B2B2E;
+  --ion-text-color-rgb: 43, 43, 46;
+
+  --ion-color-primary: #6E2E3A;
+  --ion-color-primary-rgb: 110, 46, 58;
+  --ion-color-primary-contrast: #F5F1EB;
+  --ion-color-primary-shade: #5A2430;
+  --ion-color-primary-tint: #8B3A48;
+
+  --ion-color-secondary: #F1ECE3;
+  --ion-color-secondary-rgb: 241, 236, 227;
+  --ion-color-secondary-contrast: #2B2B2E;
+
+  --ion-color-success: #2E7D5E;
+  --ion-color-warning: #D4AF37;
+  --ion-color-danger: #C0392B;
+
+  /* =========
+   * Tokens MaCave
+   * ========= */
+
+  --mc-bg-main: #FAF7F2;
+  --mc-bg-card: #F1ECE3;
+  --mc-border: #E4E1DC;
+
+  --mc-text-primary: #2B2B2E;
+  --mc-text-secondary: #7A7670;
+
+  --mc-accent: #3F3F46;
+
+  --mc-wine-red: #6E2E3A;
+  --mc-wine-red-dark: #5A2430;
+  --mc-wine-red-light: #8B3A48;
+
+  --mc-goulot: #C0392B;
+  --mc-label-bg: #FAF7F2;
+
+  --bg: var(--mc-bg-main);
+  --card: var(--mc-bg-card);
+  --border: var(--mc-border);
+
+  --text: var(--mc-text-primary);
+  --text-soft: #8B8680;
+
+  --neutral-accent: #3F3F46;
+
+  --red: #6E2E3A;
+  --red-accent: #C0392B;
+
+  --white-wine: #F4E3B2;
+  --white-accent: #D4AF37;
+
+  --rose: #F6D7D2;
+  --rose-accent: #E8927C;
+
+  --champagne: #FBF4D7;
+  --champagne-accent: #F1C40F;
+
+  /* =========
+   * Vins
+   * ========= */
+
+  --wine-red: #6E2E3A;
+  --wine-red-accent: #C0392B;
+
+  --wine-white: #F4E3B2;
+  --wine-white-accent: #D4AF37;
+
+  --wine-rose: #F6D7D2;
+  --wine-rose-accent: #E8927C;
+
+  --wine-champagne: #FBF4D7;
+  --wine-champagne-accent: #F1C40F;
+
+  /* =========
+   * Radius
+   * ========= */
+
+  --radius-card: 22px;
+  --radius-pill: 999px;
+  --radius-input: 12px;
+
+  --mc-radius-card: 22px;
+  --mc-radius-input: 12px;
+  --mc-radius-pill: 999px;
+
+  /* =========
+   * Ombres
+   * ========= */
+
+  --mc-shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  --mc-shadow-card:
+    0 8px 40px rgba(0, 0, 0, 0.10),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ==========================
+   MODE SOMBRE
+   ========================== */
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --ion-background-color: #1C1B1F;
+//     --ion-background-color-rgb: 28, 27, 31;
+
+//     --ion-text-color: #F5F1EB;
+//     --ion-text-color-rgb: 245, 241, 235;
+
+//     --ion-color-primary: #8B3A48;
+//     --ion-color-primary-rgb: 139, 58, 72;
+
+//     --ion-color-secondary: #2A2930;
+
+//     --mc-bg-main: #1C1B1F;
+//     --mc-bg-card: #2A2930;
+
+//     --mc-border: #3A383F;
+
+//     --mc-text-primary: #F5F1EB;
+//     --mc-text-secondary: #A8A4A0;
+
+//     --mc-accent: #D8D4CF;
+
+//     --mc-label-bg: #2A2930;
+
+//     --mc-shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.25);
+
+//     --wine-red: #8B3A48;
+//     --wine-red-accent: #D35445;
+
+//     --wine-white: #DCCB99;
+//     --wine-white-accent: #D4AF37;
+
+//     --wine-rose: #DFAAA2;
+//     --wine-rose-accent: #E8927C;
+
+//     --wine-champagne: #E6DEBC;
+//     --wine-champagne-accent: #F1C40F;
+//   }
+// }
