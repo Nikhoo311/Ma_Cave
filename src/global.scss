@@ -168,9 +168,12 @@ ion-item.input-form:has(ion-input.has-focus) {
 /* ==========
    BOUTONS
    ========== */
-
 ion-button {
   --border-radius: var(--mc-radius-pill);
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
   font-weight: 700;
   text-transform: none;
 }

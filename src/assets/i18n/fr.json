@@ -7,7 +7,7 @@
     "PASSWORD": "Mot de passe",
     "CONFIRM_PASSWORD": "Confirmer le mot de passe",
     "FORGOT_PASSWORD": "Mot de passe oublié ?",
-    "FORGOT_PASSWORD_EMAIL_REQUIRED": "Saisis ton e-mail pour réinitialiser ton mot de passe.",
+    "FORGOT_PASSWORD_EMAIL_REQUIRED": "Saisissez votre e-mail pour réinitialiser votre mot de passe.",
     "FORGOT_PASSWORD_SUCCESS": "Un lien de réinitialisation a été envoyé ✓",
     "FORGOT_PASSWORD_ERROR": "Adresse introuvable ou erreur réseau.",
     "LOGIN_BUTTON": "Se connecter",
@@ -23,6 +23,12 @@
       "FILL_ALL_FIELDS": "Merci de compléter tous les champs correctement.",
       "LOGIN_ERROR": "Une erreur est survenue lors de la connexion : {{error}}",
       "REGISTER_ERROR": "Une erreur est survenue lors de l'inscription : {{error}}"
-    }
+    },
+    "OR_CONNEXION_WITH": "Ou continuer avec",
+    "GOOGLE_LOGIN": "Continuer avec Google",
+    "GOOGLE_REGISTER": "S'inscrire avec Google",
+    "GOOGLE_NO_ACCOUNT": "Aucun compte trouvé, veuillez vous inscrire.",
+    "GOOGLE_ALREADY_EXISTS": "Un compte existe déjà, veuillez vous connecter.",
+    "GOOGLE_ERROR": "Erreur lors de la connexion avec Google."
   }
 }
