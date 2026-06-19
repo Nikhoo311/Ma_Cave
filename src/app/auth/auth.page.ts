@@ -47,21 +47,10 @@ export class AuthPage {
 
   async loginWithGoogle() {
     this.loading = true;
-
-    if (this.mode === AuthTypeEnum.LOGIN) {
-      await this.authService.loginWithGoogle()
-        .then(() => this.router.navigate(['/home']))
-        .catch(err => {
-          this.toastService.error(this.transloco.translate(err.message ?? 'AUTH.GOOGLE_ERROR'));
-        })
-        .finally(() => this.loading = false);
-    } else {
-      await this.authService.registerWithGoogle()
-        .then(() => this.router.navigate(['/home']))
-        .catch(err => {
-          this.toastService.error(this.transloco.translate(err.message ?? 'AUTH.GOOGLE_ERROR'));
-        })
-        .finally(() => this.loading = false);
-    }
+    await this.authService.loginWithGoogle()
+      .catch(err => {
+        this.toastService.error(this.transloco.translate(err.message ?? 'AUTH.GOOGLE_ERROR'));
+      })
+      .finally(() => this.loading = false);
   }
 }
