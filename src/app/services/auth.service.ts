@@ -14,6 +14,7 @@ import {
 } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
+import { ERRORS_CODES } from '../types/ErrorsCode';
  
 @Injectable({
   providedIn: 'root'
@@ -61,8 +62,14 @@ export class AuthService {
       this.router.navigate(['home']);
       return user;
     } catch (error: any) {
-      if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+      if (error.code === ERRORS_CODES.auth.userNotFound) {
         throw new Error('AUTH.NO_ACCOUNT');
+      }
+      if (error.code === ERRORS_CODES.auth.tooManyRequests) {
+        throw new Error('AUTH.TOO_MANY_ATTEMPTS')
+      }
+      if (error.code === ERRORS_CODES.auth.invalidCredential) {
+        throw new Error('AUTH.INVALID_CREDENTIAL')
       }
       throw error;
     }

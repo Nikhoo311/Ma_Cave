@@ -50,7 +50,7 @@ export class LoginFormComponent {
     await this.authService.login(email, password)
       .then(() => this.router.navigate(['/home']))
       .catch(err => {
-        this.toastService.error(this.transloco.translate('AUTH.RULES.LOGIN_ERROR', { error: err.message }))
+        this.toastService.error(this.transloco.translate(err.message))
       })
       .finally(() => this.loading = false);
   }

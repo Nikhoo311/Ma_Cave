@@ -12,7 +12,9 @@
     "FORGOT_PASSWORD_ERROR": "Adresse introuvable ou erreur réseau.",
     "LOGIN_BUTTON": "Se connecter",
     "REGISTER_BUTTON": "S'inscrire",
-    "NO_ACCOUNT": "Pas encore de compte ? Créez-en un",
+    "NO_ACCOUNT": "Aucun compte n'est associé à cet utilisateur.",
+    "TOO_MANY_ATTEMPTS": "Trop de tentatives. Réessayez plus tard.",
+    "INVALID_CREDENTIAL": "L'adresse e-mail ou le mot de passe est incorrect.",
     "ALREADY_ACCOUNT": "Vous avez déjà un compte ? Connectez-vous",
     "RULES": {
       "REQUIRED": "Ce champ est obligatoire.",
@@ -21,7 +23,6 @@
       "PASSWORD": "Le mot de passe doit contenir au moins 6 caractères.",
       "SAME_PASSWORD": "Les mots de passe ne correspondent pas.",
       "FILL_ALL_FIELDS": "Merci de compléter tous les champs correctement.",
-      "LOGIN_ERROR": "Une erreur est survenue lors de la connexion : {{error}}",
       "REGISTER_ERROR": "Une erreur est survenue lors de l'inscription : {{error}}"
     },
     "OR_CONNEXION_WITH": "Ou continuer avec",

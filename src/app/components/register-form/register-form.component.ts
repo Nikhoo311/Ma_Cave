@@ -61,7 +61,7 @@ export class RegisterFormComponent {
       .register(email, password)
       .then(() => this.router.navigate(['/home']))
       .catch(err => {
-        let errorMessage = this.transloco.translate('AUTH.RULES.REGISTER_ERROR', { error: err.message });
+        let errorMessage = this.transloco.translate('AUTH.RULES.REGISTER_ERROR', { error: this.transloco.translate(err.message) });
         if (err.code === ERRORS_CODES.auth.emailAlreadyInUse) {
           errorMessage = this.transloco.translate('AUTH.RULES.EMAIL_ALREADY_TAKEN');
         }
