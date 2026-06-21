@@ -5,7 +5,6 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractContro
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
-import { FormErrorComponent } from '../form-error/form-error.component';
 import { ToastService } from 'src/app/services/toast.service';
 import { ERRORS_CODES } from 'src/app/types/ErrorsCode';
 import { InputComponent } from '../input/input.component';
@@ -19,7 +18,6 @@ import { InputComponent } from '../input/input.component';
     ReactiveFormsModule,
     IonicModule,
     TranslocoModule,
-    FormErrorComponent,
     InputComponent
   ],
 })
