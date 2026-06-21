@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { FormErrorComponent } from '../form-error/form-error.component';
 import { ToastService } from 'src/app/services/toast.service';
 import { ERRORS_CODES } from 'src/app/types/ErrorsCode';
+import { InputComponent } from '../input/input.component';
 
 @Component({
   selector: 'app-register-form',
@@ -18,7 +19,8 @@ import { ERRORS_CODES } from 'src/app/types/ErrorsCode';
     ReactiveFormsModule,
     IonicModule,
     TranslocoModule,
-    FormErrorComponent
+    FormErrorComponent,
+    InputComponent
   ],
 })
 export class RegisterFormComponent {

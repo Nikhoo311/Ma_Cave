@@ -7,6 +7,7 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
 import { FormErrorComponent } from '../form-error/form-error.component';
 import { ToastService } from 'src/app/services/toast.service';
+import { InputComponent } from "../input/input.component";
 
 @Component({
   selector: 'app-login-form',
@@ -18,8 +19,9 @@ import { ToastService } from 'src/app/services/toast.service';
     ReactiveFormsModule,
     IonicModule,
     TranslocoModule,
-    FormErrorComponent
-  ],
+    FormErrorComponent,
+    InputComponent
+],
 })
 export class LoginFormComponent {
   loginForm!: FormGroup;
