@@ -18,7 +18,7 @@ export class StepperComponent implements OnInit {
   @Input() max: number = 999;
   @Input() step: number = 1;
 
-  value = 0;
+  value: number = 0;
 
   constructor(private cdr: ChangeDetectorRef) {}
 

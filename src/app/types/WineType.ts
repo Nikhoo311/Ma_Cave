@@ -1,4 +1,4 @@
-export type WineType = 'white' | 'red' | 'rosé' | 'champagne';
+export type WineType = 'white' | 'red' | 'rose' | 'champagne';
 
 export interface WineTypeConfig {
   icon: string;
@@ -14,7 +14,7 @@ export const WINE_TYPE_CONFIG: Record<WineType, WineTypeConfig> = {
     icon: 'assets/bottle_white.svg',
     label: 'WINE.TYPE.WHITE',
   },
-  'rosé': {
+  rose: {
     icon: 'assets/bottle_rose.svg',
     label: 'WINE.TYPE.ROSE',
   },

@@ -1,0 +1,35 @@
+<ion-radio-group
+  class="chip-list"
+  [value]="control?.value">
+
+  <ion-item
+    *ngFor="let option of options"
+    lines="none"
+    button
+    class="chip"
+    [class.selected]="isSelected(option.value)"
+    (click)="select(option.value)">
+
+    @if (option.icon) {
+      <div
+        class="chip-swatch"
+        slot="start"
+        [style.background]="option.backgroundColor">
+        <img
+          [src]="option.icon"
+          [alt]="option.label"/>
+      </div>
+    }
+
+    <ion-label class="chip-label">
+      {{ option.label | transloco }}
+    </ion-label>
+
+    <ion-radio
+      slot="end"
+      [value]="option.value">
+    </ion-radio>
+
+  </ion-item>
+
+</ion-radio-group>

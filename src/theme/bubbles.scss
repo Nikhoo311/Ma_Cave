@@ -1,0 +1,110 @@
+$bubble-count: 6;
+ 
+$bubbles: (
+  (  7%,  9px, 3.2s, 0.0s,  4px,  17%,  6px, 2.6s, 0.7s, -5px),
+  ( 29%, 12px, 3.8s, 1.3s,  6px,  43%,  7px, 2.9s, 0.4s, -4px),
+  ( 56%,  8px, 3.4s, 2.1s,  5px,  69%,  5px, 2.7s, 1.6s, -3px),
+  ( 81%, 11px, 3.6s, 0.9s,  4px,  23%,  7px, 3.0s, 2.8s, -5px),
+  ( 11%, 13px, 4.1s, 1.8s,  7px,  49%,  6px, 2.4s, 3.2s, -4px),
+  ( 64%,  7px, 3.3s, 0.5s,  5px,  87%, 10px, 3.7s, 1.0s, -6px)
+);
+ 
+$variants: (
+  champagne: (rgba(241, 196,  15, 0.90), rgba(241, 196,  15, 0.45), rgba(255, 255, 255, 0.95), rgba(255, 255, 200, 0.50)),
+  white:     (rgba(212, 175,  55, 0.80), rgba(212, 175,  55, 0.35), rgba(255, 255, 255, 0.92), rgba(244, 227, 178, 0.55)),
+  rose:      (rgba(232, 146, 124, 0.80), rgba(232, 146, 124, 0.35), rgba(255, 255, 255, 0.88), rgba(246, 215, 210, 0.50)),
+  red:       (rgba(192,  57,  43, 0.70), rgba(192,  57,  43, 0.30), rgba(255, 255, 255, 0.80), rgba(220, 100,  90, 0.35))
+);
+ 
+@mixin bubble-style($border, $glow, $bg-from, $bg-to) {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: bubbleRise linear infinite;
+  background: radial-gradient(circle at 35% 35%, $bg-from, $bg-to);
+  border: 1.5px solid $border;
+  box-shadow: 0 0 5px $glow, inset 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+ 
+.bubble-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+ 
+  $default: map-get($variants, champagne);
+  $b: nth($default, 1);
+  $g: nth($default, 2);
+  $f: nth($default, 3);
+  $t: nth($default, 4);
+ 
+  @for $n from 1 through $bubble-count {
+    $data:    nth($bubbles, $n);
+ 
+    $left-b:  nth($data, 1);
+    $size-b:  nth($data, 2);
+    $dur-b:   nth($data, 3);
+    $del-b:   nth($data, 4);
+    $drift-b: nth($data, 5);
+ 
+    $left-a:  nth($data, 6);
+    $size-a:  nth($data, 7);
+    $dur-a:   nth($data, 8);
+    $del-a:   nth($data, 9);
+    $drift-a: nth($data, 10);
+ 
+    > i:nth-child(#{$n}) {
+      &::before {
+        @include bubble-style($b, $g, $f, $t);
+        width:              $size-b;
+        height:             $size-b;
+        left:               $left-b;
+        animation-duration: $dur-b;
+        animation-delay:    $del-b;
+        --drift:            #{$drift-b};
+      }
+      &::after {
+        @include bubble-style($b, $g, $f, $t);
+        width:              $size-a;
+        height:             $size-a;
+        left:               $left-a;
+        animation-duration: $dur-a;
+        animation-delay:    $del-a;
+        --drift:            #{$drift-a};
+      }
+    }
+  }
+ 
+  @each $name, $colors in $variants {
+    &--#{$name} {
+      $b: nth($colors, 1);
+      $g: nth($colors, 2);
+      $f: nth($colors, 3);
+      $t: nth($colors, 4);
+ 
+      > i::before,
+      > i::after {
+        background:   radial-gradient(circle at 35% 35%, $f, $t);
+        border-color: $b;
+        box-shadow:   0 0 5px $g, inset 0 1px 2px rgba(255, 255, 255, 0.85);
+      }
+    }
+  }
+}
+ 
+@keyframes bubbleRise {
+  0% { 
+        transform: translateY(0)
+        translateX(0);
+        opacity: 0;
+    }
+  6%   { opacity: 1; }
+  85%  { opacity: 0.9; }
+  100% {
+        transform: translateY(-100vh)
+        translateX(var(--drift)); 
+        opacity: 0;
+    }
+}

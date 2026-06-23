@@ -6,13 +6,14 @@ import { IonicModule } from '@ionic/angular';
 import { InputComponent } from '../components/input/input.component';
 import { StepperComponent } from '../components/stepper/stepper.component';
 import { WINE_TYPE_CONFIG, WineType } from '../types/WineType';
+import { RadioGroupComponent } from "../components/wines-radio-group/wines-radio-group.component";
 
 @Component({
   selector: 'app-preference',
   standalone: true,
   templateUrl: './preference.page.html',
   styleUrls: ['./preference.page.scss'],
-  imports: [CommonModule, IonicModule, ReactiveFormsModule, InputComponent, StepperComponent],
+  imports: [CommonModule, IonicModule, ReactiveFormsModule, InputComponent, StepperComponent, RadioGroupComponent],
 })
 export class PreferencePage {
   currentStep = 0;
@@ -62,6 +63,7 @@ export class PreferencePage {
 
   finishOnboarding(): void {
     if (this.identityForm.invalid || this.wineForm.invalid || this.caveForm.invalid) return;
+    console.log(this.wineForm.getRawValue(), this.caveForm.getRawValue(), this.identityForm.getRawValue())
     this.goToStep(4);
   }
 

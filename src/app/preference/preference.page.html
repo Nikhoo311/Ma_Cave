@@ -19,7 +19,7 @@
       <div class="welcome-sub">
         Créez votre profil et configurez votre cave en quelques instants pour commencer à organiser vos bouteilles.
       </div>
-      <ion-button class="btn-start" expand="block" shape="round" (click)="goToStep(1)">
+      <ion-button color="secondary" class="btn-start" expand="block" shape="round" (click)="goToStep(1)">
         Commencer
       </ion-button>
     </div>
@@ -49,7 +49,9 @@
         <ion-button expand="block" shape="round" [disabled]="!step1Valid" (click)="goToStep(2)">
           Continuer
         </ion-button>
-        <div class="back-link" (click)="goToStep(0)">‹ Retour</div>
+        <ion-button class="back-link" (click)="goToStep(0)">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Retour</ion-button>
       </div>
     </div>
 
@@ -64,68 +66,16 @@
       </div>
 
       <form [formGroup]="wineForm">
-        <ion-radio-group formControlName="selectedType" class="chip-list">
-
-          <ion-item lines="none" class="chip" [class.selected]="selectedType === 'red'" button
-                    (click)="wineForm.get('selectedType')?.setValue('rouge')">
-            <div class="chip-swatch" style="background:var(--red);" slot="start">
-              <svg viewBox="0 0 40 56">
-                <rect x="15" y="2" width="10" height="13" rx="2" fill="var(--red-accent)"/>
-                <path d="M8 44 C8 26 15 24 15 16 L25 16 C25 24 32 26 32 44 L32 50 Q32 56 26 56 L14 56 Q8 56 8 50 Z"
-                      fill="#FAF7F2" fill-opacity="0.18"/>
-              </svg>
-            </div>
-            <ion-label class="chip-label">Rouge</ion-label>
-            <ion-radio slot="end" value="rouge" class="chip-radio" />
-          </ion-item>
-
-          <ion-item lines="none" class="chip" [class.selected]="selectedType === 'white'" button
-                    (click)="wineForm.get('selectedType')?.setValue('blanc')">
-            <div class="chip-swatch" style="background:var(--white-wine);" slot="start">
-              <svg viewBox="0 0 40 56">
-                <rect x="15" y="2" width="10" height="13" rx="2" fill="var(--white-accent)"/>
-                <path d="M8 44 C8 26 15 24 15 16 L25 16 C25 24 32 26 32 44 L32 50 Q32 56 26 56 L14 56 Q8 56 8 50 Z"
-                      fill="#FAF7F2" fill-opacity="0.5"/>
-              </svg>
-            </div>
-            <ion-label class="chip-label">Blanc</ion-label>
-            <ion-radio slot="end" value="blanc" class="chip-radio" />
-          </ion-item>
-
-          <ion-item lines="none" class="chip" [class.selected]="selectedType === 'rosé'" button
-                    (click)="wineForm.get('selectedType')?.setValue('rose')">
-            <div class="chip-swatch" style="background:var(--rose);" slot="start">
-              <svg viewBox="0 0 40 56">
-                <rect x="15" y="2" width="10" height="13" rx="2" fill="var(--rose-accent)"/>
-                <path d="M8 44 C8 26 15 24 15 16 L25 16 C25 24 32 26 32 44 L32 50 Q32 56 26 56 L14 56 Q8 56 8 50 Z"
-                      fill="#FAF7F2" fill-opacity="0.5"/>
-              </svg>
-            </div>
-            <ion-label class="chip-label">Rosé</ion-label>
-            <ion-radio slot="end" value="rose" class="chip-radio" />
-          </ion-item>
-
-          <ion-item lines="none" class="chip" [class.selected]="selectedType === 'champagne'" button
-                    (click)="wineForm.get('selectedType')?.setValue('champagne')">
-            <div class="chip-swatch" style="background:var(--champagne);" slot="start">
-              <svg viewBox="0 0 40 56">
-                <rect x="15" y="2" width="10" height="13" rx="2" fill="var(--champagne-accent)"/>
-                <path d="M8 44 C8 26 15 24 15 16 L25 16 C25 24 32 26 32 44 L32 50 Q32 56 26 56 L14 56 Q8 56 8 50 Z"
-                      fill="#FAF7F2" fill-opacity="0.5"/>
-              </svg>
-            </div>
-            <ion-label class="chip-label">Champagne</ion-label>
-            <ion-radio slot="end" value="champagne" class="chip-radio" />
-          </ion-item>
-
-        </ion-radio-group>
+        <app-wines-radio-group [control]="wineForm.get('selectedType')"></app-wines-radio-group>
       </form>
 
       <div class="step-footer">
         <ion-button expand="block" shape="round" [disabled]="!step2Valid" (click)="goToStep(3)">
           Continuer
         </ion-button>
-        <div class="back-link" (click)="goToStep(1)">‹ Retour</div>
+        <ion-button class="back-link" (click)="goToStep(1)">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Retour</ion-button>
       </div>
     </div>
 
@@ -163,7 +113,9 @@
         <ion-button expand="block" shape="round" (click)="finishOnboarding()">
           Créer ma cave
         </ion-button>
-        <div class="back-link" (click)="goToStep(2)">‹ Retour</div>
+        <ion-button class="back-link" (click)="goToStep(2)">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Retour</ion-button>
       </div>
     </div>
 
@@ -195,9 +147,12 @@
         </div>
       </div>
 
-      <ion-button expand="block" shape="round" (click)="goToCave()">
+      <ion-button color="secondary" expand="block" shape="round" (click)="goToCave()">
         Découvrir ma cave
       </ion-button>
+      <ion-button class="back-link" (click)="goToStep(3)" >
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Retour</ion-button>
     </div>
 
   </div>
