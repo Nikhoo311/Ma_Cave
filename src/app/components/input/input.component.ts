@@ -14,7 +14,7 @@ export class InputComponent {
   @Input({ required: true }) label!: string;
   @Input({ required: true }) control!: AbstractControl | null;
 
-  @Input() type = 'text';
+  @Input() type: 'text' | 'email' | 'password' | 'number' | 'tel' = 'text';
   @Input() placeholder = '';
   @Input() iconName = '';
   @Input() showIcon = false;

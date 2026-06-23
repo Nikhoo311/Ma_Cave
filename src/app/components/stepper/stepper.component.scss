@@ -1,0 +1,55 @@
+.stepper-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card);
+  border-radius: var(--radius-input, 12px);
+  padding: 13px 14px;
+  margin-bottom: 10px;
+}
+
+.stepper-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ion-text-color, var(--text));
+}
+
+.stepper-controls {
+  display: flex;
+  align-items: center;
+  background: var(--bg, #FAF7F2);
+  border: 1.5px solid var(--border, #E4E1DC);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.stepper-btn {
+  --background: transparent;
+  --background-activated: var(--border, #E4E1DC);
+  --background-hover: transparent;
+  --box-shadow: none;
+  --padding-start: 0;
+  --padding-end: 0;
+  --color: var(--text);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  
+  ion-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.stepper-value {
+  width: 32px;
+  text-align: center;
+  font-family: var(--ion-font-family);
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text);
+}
