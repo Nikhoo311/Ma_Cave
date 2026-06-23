@@ -29,5 +29,13 @@
     "GOOGLE_LOGIN": "Continuer avec Google",
     "GOOGLE_REGISTER": "S'inscrire avec Google",
     "GOOGLE_ERROR": "Erreur lors de la connexion avec Google."
+  },
+  "WINE": {
+    "TYPE": {
+      "RED": "rouge",
+      "WHITE": "blanc",
+      "ROSE": "rosé",
+      "CHAMPAGNE": "champagne"
+    }
   }
 }
