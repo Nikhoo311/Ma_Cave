@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { TranslocoModule } from '@jsverse/transloco';
 import { InputComponent } from '../components/input/input.component';
 import { StepperComponent } from '../components/stepper/stepper.component';
-import { WINE_TYPE_CONFIG, WineType } from '../types/WineType';
+import { CAVE_MAX, WINE_TYPE_CONFIG, WineType } from '../types/WineType';
 import { RadioGroupComponent } from "../components/wines-radio-group/wines-radio-group.component";
 
 @Component({
@@ -13,11 +14,19 @@ import { RadioGroupComponent } from "../components/wines-radio-group/wines-radio
   standalone: true,
   templateUrl: './preference.page.html',
   styleUrls: ['./preference.page.scss'],
-  imports: [CommonModule, IonicModule, ReactiveFormsModule, InputComponent, StepperComponent, RadioGroupComponent],
+  imports: [
+    CommonModule,
+    IonicModule,
+    TranslocoModule,
+    ReactiveFormsModule,
+    InputComponent,
+    StepperComponent,
+    RadioGroupComponent
+  ],
 })
 export class PreferencePage {
-  currentStep = 0;
-  readonly CAVE_MAX = 240;
+  currentStep: number = 0;
+  readonly CAVE_MAX: number = CAVE_MAX;
 
   identityForm: FormGroup = this.fb.group({
     prenom: ['', [Validators.required, Validators.minLength(1)]],
@@ -35,7 +44,7 @@ export class PreferencePage {
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
-  // ── Getters pratiques ────────────────────────────────────────────────
+  // ── Getters ────────────────────────────────────────────────
 
   get rowsControl(): FormControl { return this.caveForm.get('rows') as FormControl; }
   get colsControl(): FormControl { return this.caveForm.get('cols') as FormControl; }
@@ -47,7 +56,6 @@ export class PreferencePage {
   get nomValue(): string     { return this.identityForm.get('nom')?.value ?? ''; }
   get selectedType(): WineType | null { return this.wineForm.get('selectedType')?.value ?? null; }
   get typeLabel(): string    { return this.selectedType ? WINE_TYPE_CONFIG[this.selectedType].label : '—'; }
-  get wineIcon(): string     { return WINE_TYPE_CONFIG['white'].icon; }
 
   get step1Valid(): boolean { return this.identityForm.valid; }
   get step2Valid(): boolean { return this.wineForm.valid; }

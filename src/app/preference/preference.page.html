@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" class="onboarding-content">
-
+ 
   <!-- Barre de progression -->
   <div class="progress" [class.show]="currentStep >= 1 && currentStep <= 3">
     <div class="seg"><div class="fill" [style.width]="currentStep >= 1 ? '100%' : '0%'"></div></div>
@@ -12,57 +12,56 @@
     <!-- Step 0 : Bienvenue -->
     <div class="step step-0">
       <div class="glass-illustration">
-        <img [src]="wineIcon" alt="Logo" />
+        <img src="assets/bottle_dark_red.svg" alt="Logo" />
       </div>
-      <div class="welcome-eyebrow">Bienvenue sur</div>
-      <div class="welcome-title">MaCave</div>
+      <div class="welcome-eyebrow">{{ 'PREFERENCES.WELCOME_TO' | transloco }}</div>
+      <div class="welcome-title">{{ 'APP_TITLE' | transloco }}</div>
       <div class="welcome-sub">
-        Créez votre profil et configurez votre cave en quelques instants pour commencer à organiser vos bouteilles.
+        {{ 'PREFERENCES.WELCOME_SUB_TEXT' | transloco }}
       </div>
       <ion-button color="secondary" class="btn-start" expand="block" shape="round" (click)="goToStep(1)">
-        Commencer
+        {{ 'PREFERENCES.START' | transloco }}
       </ion-button>
     </div>
 
     <!-- Step 1 : Identité -->
     <div class="step step-form">
       <div class="step-header">
-        <div class="step-eyebrow">Étape 1 sur 3</div>
-        <div class="step-title">Comment vous appelez-vous ?</div>
-        <div class="step-hint">On s'en sert pour personnaliser votre espace.</div>
+        <div class="step-eyebrow">{{ 'PREFERENCES.STEPS.STEP_ONE.AMOUNT_TITLE' | transloco }}</div>
+        <div class="step-title">{{ 'PREFERENCES.STEPS.STEP_ONE.QUESTION' | transloco }}</div>
+        <div class="step-hint">{{ 'PREFERENCES.STEPS.STEP_ONE.PRECISION' | transloco }}</div>
       </div>
 
       <form [formGroup]="identityForm">
         <app-input
-          label="Prénom"
-          placeholder="Ex. Camille"
+          [label]="'PREFERENCES.STEPS.STEP_ONE.FIRSTNAME_LABEL' | transloco"
+          [placeholder]="'PREFERENCES.STEPS.STEP_ONE.FIRSTNAME_PLACEHOLDER' | transloco"
           [control]="identityForm.get('prenom')"
         />
         <app-input
-          label="Nom"
-          placeholder="Ex. Dubois"
+          [label]="'PREFERENCES.STEPS.STEP_ONE.LASTNAME_LABEL' | transloco"
+          [placeholder]="'PREFERENCES.STEPS.STEP_ONE.LASTNAME_PLACEHOLDER' | transloco"
           [control]="identityForm.get('nom')"
         />
       </form>
 
       <div class="step-footer">
         <ion-button expand="block" shape="round" [disabled]="!step1Valid" (click)="goToStep(2)">
-          Continuer
+          {{ 'PREFERENCES.CONTINUE' | transloco }}
         </ion-button>
         <ion-button class="back-link" (click)="goToStep(0)">
-        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-        Retour</ion-button>
+          <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+          {{ 'PREFERENCES.BACK' | transloco }}
+        </ion-button>
       </div>
     </div>
 
     <!-- Step 2 : Vin préféré -->
     <div class="step step-form">
       <div class="step-header">
-        <div class="step-eyebrow">Étape 2 sur 3</div>
-        <div class="step-title">Votre vin préféré</div>
-        <div class="step-hint">
-          Choisissez le type que vous buvez le plus souvent — ça nous aide à mettre en avant les bonnes bouteilles.
-        </div>
+        <div class="step-eyebrow">{{ 'PREFERENCES.STEPS.STEP_TWO.AMOUNT_TITLE' | transloco }}</div>
+        <div class="step-title">{{ 'PREFERENCES.STEPS.STEP_TWO.QUESTION' | transloco }}</div>
+        <div class="step-hint">{{ 'PREFERENCES.STEPS.STEP_TWO.PRECISION' | transloco }}</div>
       </div>
 
       <form [formGroup]="wineForm">
@@ -71,33 +70,32 @@
 
       <div class="step-footer">
         <ion-button expand="block" shape="round" [disabled]="!step2Valid" (click)="goToStep(3)">
-          Continuer
+          {{ 'PREFERENCES.CONTINUE' | transloco }}
         </ion-button>
         <ion-button class="back-link" (click)="goToStep(1)">
-        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-        Retour</ion-button>
+          <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+          {{ 'PREFERENCES.BACK' | transloco }}
+        </ion-button>
       </div>
     </div>
 
     <!-- Step 3 : Taille de la cave -->
     <div class="step step-form">
       <div class="step-header">
-        <div class="step-eyebrow">Étape 3 sur 3</div>
-        <div class="step-title">Taille de votre cave</div>
-        <div class="step-hint">
-          Indiquez le nombre de rangées et de colonnes pour correspondre à votre cave réelle.
-        </div>
+        <div class="step-eyebrow">{{ 'PREFERENCES.STEPS.STEP_THREE.AMOUNT_TITLE' | transloco }}</div>
+        <div class="step-title">{{ 'PREFERENCES.STEPS.STEP_THREE.QUESTION' | transloco }}</div>
+        <div class="step-hint">{{ 'PREFERENCES.STEPS.STEP_THREE.PRECISION' | transloco }}</div>
       </div>
 
       <form [formGroup]="caveForm">
         <app-stepper
-          label="Rangées"
+          [label]="'PREFERENCES.STEPS.STEP_THREE.ROWS_LABEL' | transloco"
           [control]="rowsControl"
           [min]="1"
           [max]="rowsMax"
         />
         <app-stepper
-          label="Colonnes"
+          [label]="'PREFERENCES.STEPS.STEP_THREE.COLS_LABEL' | transloco"
           [control]="colsControl"
           [min]="1"
           [max]="colsMax"
@@ -105,54 +103,62 @@
       </form>
 
       <div class="total-line">
-        Capacité totale : <strong>{{ rows * cols }}</strong> emplacements
+        {{ 'PREFERENCES.STEPS.STEP_THREE.TOTAL_CAPACITY' | transloco }}
+        <span class="total-line__cave-capacity">{{ rows * cols }}</span>
+        {{ 'PREFERENCES.STEPS.STEP_THREE.LOCATION' | transloco }}
       </div>
-      <div class="capacity-cap">{{ CAVE_MAX }} emplacements maximum</div>
+      <div class="capacity-cap">
+        {{ 'PREFERENCES.STEPS.STEP_THREE.CAPACITY_CAP' | transloco : { max: CAVE_MAX } }}
+      </div>
 
       <div class="step-footer">
         <ion-button expand="block" shape="round" (click)="finishOnboarding()">
-          Créer ma cave
+          {{ 'PREFERENCES.STEPS.STEP_THREE.CREATE_BUTTON' | transloco }}
         </ion-button>
         <ion-button class="back-link" (click)="goToStep(2)">
-        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-        Retour</ion-button>
+          <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+          {{ 'PREFERENCES.BACK' | transloco }}
+        </ion-button>
       </div>
     </div>
 
     <!-- Step 4 : Confirmation -->
-    <div class="step step-confirm">
+    <div class="step step-confirm" [class.is-active]="currentStep === 4">
       <div class="check-circle">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-accent)"
              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-      <div class="welcome-title" style="font-size:24px;">C'est prêt, {{ prenomValue || 'vous' }} !</div>
+      <div class="welcome-title" style="font-size:24px;">
+        {{ 'PREFERENCES.CONFIRM.TITLE' | transloco : { prenom: prenomValue || ('PREFERENCES.CONFIRM.FALLBACK_NAME' | transloco) } }}
+      </div>
       <div class="welcome-sub" style="margin-bottom:0;">
-        Votre cave est configurée. Vous pouvez commencer à ranger vos premières bouteilles.
+        {{ 'PREFERENCES.CONFIRM.SUBTITLE' | transloco }}
       </div>
 
       <div class="summary-card">
         <div class="summary-row">
-          <span>Nom complet</span>
+          <span>{{ 'PREFERENCES.CONFIRM.FULL_NAME_LABEL' | transloco }}</span>
           <strong>{{ prenomValue }} {{ nomValue }}</strong>
         </div>
         <div class="summary-row">
-          <span>Vin préféré</span>
-          <strong>{{ typeLabel }}</strong>
+          <span>{{ 'PREFERENCES.CONFIRM.FAVORITE_WINE_LABEL' | transloco }}</span>
+          <strong class="summary-row__wine-type">{{ typeLabel | transloco}}</strong>
         </div>
         <div class="summary-row">
-          <span>Disposition</span>
-          <strong>{{ rows * cols }} emplacements ({{ rows }} × {{ cols }})</strong>
+          <span>{{ 'PREFERENCES.CONFIRM.LAYOUT_LABEL' | transloco }}</span>
+          <strong>{{ 'PREFERENCES.CONFIRM.LAYOUT_VALUE' | transloco : { total: rows * cols, rows: rows, cols: cols } }}</strong>
         </div>
       </div>
-
+ 
       <ion-button color="secondary" expand="block" shape="round" (click)="goToCave()">
-        Découvrir ma cave
+        {{ 'PREFERENCES.CONFIRM.CTA' | transloco }}
       </ion-button>
-      <ion-button class="back-link" (click)="goToStep(3)" >
+      <ion-button class="back-link" (click)="goToStep(3)">
         <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-        Retour</ion-button>
+        {{ 'PREFERENCES.BACK' | transloco }}
+      </ion-button>
     </div>
 
   </div>

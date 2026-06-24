@@ -23,3 +23,5 @@ export const WINE_TYPE_CONFIG: Record<WineType, WineTypeConfig> = {
     label: 'WINE.TYPE.CHAMPAGNE',
   },
 };
+
+export const CAVE_MAX = 240;

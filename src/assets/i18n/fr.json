@@ -1,4 +1,6 @@
 {
+  "APP_TITLE": "Ma Cave",
+  "APP_SLOGAN": "Votre cave à portée de main",
   "AUTH": {
     "LOGIN": "Connexion",
     "REGISTER": "Créer un compte",
@@ -29,6 +31,49 @@
     "GOOGLE_LOGIN": "Continuer avec Google",
     "GOOGLE_REGISTER": "S'inscrire avec Google",
     "GOOGLE_ERROR": "Erreur lors de la connexion avec Google."
+  },
+  "PREFERENCES": {
+    "WELCOME_TO": "Bienvenue sur",
+    "WELCOME_SUB_TEXT": "Créez votre profil et configurez votre cave en quelques instants pour commencer à organiser vos bouteilles.",
+    "START": "Commencer",
+    "CONTINUE": "Continuer",
+    "BACK": "Retour",
+    "STEPS": {
+      "STEP_ONE": {
+        "AMOUNT_TITLE": "Étape 1 sur 3",
+        "QUESTION": "Comment vous appelez-vous ?",
+        "PRECISION": "On s'en sert pour personnaliser votre espace.",
+        "FIRSTNAME_LABEL": "Prénom",
+        "FIRSTNAME_PLACEHOLDER": "Ex. Camille",
+        "LASTNAME_LABEL": "Nom",
+        "LASTNAME_PLACEHOLDER": "Ex. Dubois"
+      },
+      "STEP_TWO": {
+        "AMOUNT_TITLE": "Étape 2 sur 3",
+        "QUESTION": "Votre vin préféré",
+        "PRECISION": "Choisissez le type que vous buvez le plus souvent. Ceci nous aidera à mettre en avant les bonnes bouteilles."
+      },
+      "STEP_THREE": {
+        "AMOUNT_TITLE": "Étape 3 sur 3",
+        "QUESTION": "Taille de votre cave",
+        "PRECISION": "Indiquez le nombre de rangées et de colonnes pour correspondre à votre cave réelle.",
+        "ROWS_LABEL": "Rangées",
+        "COLS_LABEL": "Colonnes",
+        "TOTAL_CAPACITY": "Capacité totale :",
+        "LOCATION": "emplacements",
+        "CAPACITY_CAP": "{{max}} emplacements maximum",
+        "CREATE_BUTTON": "Créer ma cave"
+      }
+    },
+    "CONFIRM": {
+      "TITLE": "C'est prêt, {{prenom}} !",
+      "SUBTITLE": "Votre cave est configurée. Vous pouvez commencer à ranger vos premières bouteilles.",
+      "FULL_NAME_LABEL": "Nom complet",
+      "FAVORITE_WINE_LABEL": "Vin préféré",
+      "LAYOUT_LABEL": "Disposition",
+      "LAYOUT_VALUE": "{{total}} emplacements ({{rows}} x {{cols}})",
+      "CTA": "Découvrir ma cave"
+    }
   },
   "WINE": {
     "TYPE": {

@@ -1,11 +1,9 @@
-// ── Reset ion-content ──────────────────────────────────
 ion-content.onboarding-content {
   --background: transparent;
   --padding-top: 0;
   --padding-bottom: 0;
 }
 
-// ── Barre de progression ───────────────────────────────
 .progress {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 18px);
@@ -30,10 +28,14 @@ ion-content.onboarding-content {
     .fill {
       height: 100%;
       width: 0%;
-      background: var(--mc-accent);
+      background: var(--ion-color-primary);
       transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
   }
+}
+
+.glass-illustration {
+  margin-bottom: 2.1rem;
 }
 
 // ── Slider de steps ────────────────────────────────────
@@ -81,16 +83,31 @@ ion-content.onboarding-content {
     var(--mc-wine-red-light)  62%,
     var(--mc-bg-main)        100%
   );
+
+  .welcome-title, .welcome-sub, ion-button {
+    opacity: 0;
+    animation: none;
+  }
+
+  &.is-active {
+    .welcome-title {
+      animation: fadeUp 0.55s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .welcome-sub {
+      animation: fadeUp 0.55s ease forwards;
+      animation-delay: 0.65s;
+    }
+    ion-button {
+      animation: fadeUp 0.55s ease forwards;
+      animation-delay: 0.8s;
+    }
+  }
 }
 
-// ── Illustration bouteille (lévitation seule) ─────────
-.bottle-shape {
-  animation: floatBottle 3.4s ease-in-out infinite;
-}
-
-@keyframes floatBottle {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(-8px); }
+.total-line__cave-capacity {
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 // ── Textes welcome ─────────────────────────────────────
@@ -201,12 +218,24 @@ ion-content.onboarding-content {
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  animation: popIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: none;
+
+  .is-active & {
+    animation: popIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+  }
 }
 
 @keyframes popIn {
-  from { transform: scale(0.6); opacity: 0; }
-  to   { transform: scale(1);   opacity: 1; }
+  from {
+    transform: scale(0.6) rotate(-45deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 .summary-card {
@@ -217,6 +246,12 @@ ion-content.onboarding-content {
   width: 100%;
   margin: 20px 0 28px;
   text-align: left;
+  opacity: 0;
+  animation: none;
+
+  .is-active & {
+    animation: fadeUp 0.55s ease 0.95s forwards; // délai après les autres éléments
+  }
 }
 
 .summary-row {
@@ -248,4 +283,15 @@ ion-content.onboarding-content {
   width: max-content;
   height: max-content;
   align-self: center;
+  --ripple-color: transparent;
+  --background-activated: transparent;
+  --background-focused: transparent;
+  --background-hover: transparent;
+  --color-activated: var(--mc-text-secondary);
+  --color-focused: var(--mc-text-secondary);
+  --color-hover: var(--mc-text-secondary);
+}
+
+.summary-row__wine-type {
+  text-transform: capitalize;
 }
