@@ -13,38 +13,50 @@ import {
   sendPasswordResetEmail
 } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user.model';
+import { User, AuthProvider } from '../models/user.model'; // <-- Assure-toi que les imports sont corrects
 import { ERRORS_CODES } from '../types/ErrorsCode';
- 
+import { UserService } from './user.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
- 
-  constructor(private auth: Auth, private router: Router) {
+
+  constructor(private auth: Auth, private router: Router, private userService: UserService) {
     onAuthStateChanged(this.auth, (firebaseUser: FirebaseUser | null) => {
       this.currentUserSubject.next(firebaseUser ? this.mapFirebaseUser(firebaseUser) : null);
     });
   }
- 
+
   private mapFirebaseUser(firebaseUser: FirebaseUser): User {
+    const isGoogle = firebaseUser.providerData.some(p => p.providerId === 'google.com');
+    const provider: AuthProvider = isGoogle ? 'google' : 'password';
+
     return {
       id: firebaseUser.uid,
       email: firebaseUser.email ?? '',
-      displayName: firebaseUser.displayName ?? undefined,
-      photoURL: firebaseUser.photoURL ?? undefined,
-      createdAt: new Date()
+      firstName: '',
+      lastName: '',
+      favoriteWineType: null,
+      provider: provider,
+      createdAt: firebaseUser.metadata.creationTime ? new Date(firebaseUser.metadata.creationTime) : new Date(),
+
+      caveConfig: {
+        rows: 0,
+        cols: 0,
+      },
+      cave: []
     };
   }
- 
+
   // ── Email / Password ──────────────────────────────────────
   async register(email: string, password: string): Promise<User> {
     try {
       const credential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = this.mapFirebaseUser(credential.user);
       this.currentUserSubject.next(user);
-      this.router.navigate(['home']);
+      this.router.navigate(['preference']);
       return user;
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
@@ -53,7 +65,7 @@ export class AuthService {
       throw error;
     }
   }
- 
+
   async login(email: string, password: string): Promise<User> {
     try {
       const credential = await signInWithEmailAndPassword(this.auth, email, password);
@@ -74,19 +86,20 @@ export class AuthService {
       throw error;
     }
   }
- 
+
   // ── Google Login ──────────────────────────────────────────
   async loginWithGoogle(): Promise<User> {
     const result = await FirebaseAuthentication.signInWithGoogle();
     const credential = GoogleAuthProvider.credential(result.credential?.idToken);
     const firebaseResult = await signInWithCredential(this.auth, credential);
     const firebaseUser = firebaseResult.user;
- 
-    const isNewUser = firebaseUser.metadata.creationTime === firebaseUser.metadata.lastSignInTime;
-    this.router.navigate([isNewUser ? '/preference' : '/home']);
- 
+
     const user = this.mapFirebaseUser(firebaseUser);
     this.currentUserSubject.next(user);
+
+    const isSetuped = await this.userService.isUserSetupDone(user.id);
+    
+    this.router.navigate([!isSetuped ? '/preference' : '/home']);
     return user;
   }
 
@@ -96,11 +109,11 @@ export class AuthService {
     this.currentUserSubject.next(null);
     this.router.navigate(['auth']);
   }
- 
+
   async sendPasswordResetEmail(email: string): Promise<void> {
     await sendPasswordResetEmail(this.auth, email);
   }
- 
+
   get currentUser(): User | null {
     return this.currentUserSubject.value;
   }

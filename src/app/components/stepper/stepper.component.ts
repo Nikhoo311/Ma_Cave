@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -12,7 +12,7 @@ import { IonicModule } from '@ionic/angular';
   imports: [CommonModule, IonicModule, ReactiveFormsModule],
 })
 export class StepperComponent implements OnInit {
-  @Input({ required: true }) control!: FormControl;
+  @Input({ required: true }) control!: AbstractControl | null;
   @Input({ required: true }) label!: string;
   @Input() min: number = 1;
   @Input() max: number = 999;
@@ -23,9 +23,9 @@ export class StepperComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.value = this.control.value ?? this.min;
+    this.value = this.control?.value ?? this.min;
 
-    this.control.valueChanges.subscribe(v => {
+    this.control?.valueChanges.subscribe(v => {
       this.value = v ?? this.min;
       this.cdr.markForCheck();
     });
@@ -33,13 +33,13 @@ export class StepperComponent implements OnInit {
 
   decrement(): void {
     if (this.value - this.step < this.min) return;
-    this.control.setValue(this.value - this.step);
-    this.control.markAsDirty();
+    this.control?.setValue(this.value - this.step);
+    this.control?.markAsDirty();
   }
 
   increment(): void {
     if (this.value + this.step > this.max) return;
-    this.control.setValue(this.value + this.step);
-    this.control.markAsDirty();
+    this.control?.setValue(this.value + this.step);
+    this.control?.markAsDirty();
   }
 }
