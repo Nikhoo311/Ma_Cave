@@ -55,6 +55,13 @@ export class PreferencePage {
   get rowsMax() { return Math.floor(this.CAVE_MAX / Math.max(this.cols, 1)); }
   get colsMax() { return Math.floor(this.CAVE_MAX / Math.max(this.rows, 1)); }
 
+  get selectedTypeLabel(): string {
+    const type = this.wineForm.get('selectedType')?.value;
+    if (!type) return '-';
+
+    return this.transloco.translate(`WINE.TYPE.${type.toUpperCase()}`);
+  }
+
   goToStep(step: number): void { this.currentStep = step; }
 
   async finishOnboarding(): Promise<void> {
