@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule } from '@jsverse/transloco';
 
-import { AuthTypeEnum } from '../../types/AuthTypeEnum';
+import { AuthTypeEnum } from '../../core/types/AuthTypeEnum';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { RegisterFormComponent } from '../register-form/register-form.component';
 

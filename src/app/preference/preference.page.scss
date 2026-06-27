@@ -1,0 +1,297 @@
+ion-content.onboarding-content {
+  --background: transparent;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.progress {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 18px);
+  left: 24px;
+  right: 24px;
+  display: flex;
+  gap: 6px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  &.show { opacity: 1; }
+
+  .seg {
+    flex: 1;
+    height: 4px;
+    border-radius: var(--mc-radius-pill);
+    background: var(--mc-border);
+    overflow: hidden;
+
+    .fill {
+      height: 100%;
+      width: 0%;
+      background: var(--ion-color-primary);
+      transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+  }
+}
+
+.glass-illustration {
+  margin-bottom: 2.1rem;
+}
+
+// ── Slider de steps ────────────────────────────────────
+.steps {
+  display: flex;
+  width: 500%;
+  min-height: 100vh;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.step {
+  width: 20%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 26px calc(30px + env(safe-area-inset-bottom)) 26px;
+  background: var(--mc-bg-main);
+}
+
+// ── Steps hero (gradient) ──────────────────────────────
+%step-hero-base {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.step-0 {
+  @extend %step-hero-base;
+  padding-inline: 30px;
+  background: linear-gradient(
+    to top,
+    var(--mc-wine-red-dark)  10%,
+    var(--mc-wine-red)       17%,
+    var(--mc-wine-red-light) 57%,
+    var(--mc-bg-main)       100%
+  );
+}
+
+.step-confirm {
+  @extend %step-hero-base;
+  background: linear-gradient(
+    to top,
+    var(--mc-wine-red-dark)   0%,
+    var(--mc-wine-red)        35%,
+    var(--mc-wine-red-light)  62%,
+    var(--mc-bg-main)        100%
+  );
+
+  .welcome-title, .welcome-sub, ion-button {
+    opacity: 0;
+    animation: none;
+  }
+
+  &.is-active {
+    .welcome-title {
+      animation: fadeUp 0.55s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .welcome-sub {
+      animation: fadeUp 0.55s ease forwards;
+      animation-delay: 0.65s;
+    }
+    ion-button {
+      animation: fadeUp 0.55s ease forwards;
+      animation-delay: 0.8s;
+    }
+  }
+}
+
+.total-line__cave-capacity {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+// ── Textes welcome ─────────────────────────────────────
+%fade-up-base {
+  opacity: 0;
+  animation: fadeUp 0.55s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.welcome-eyebrow {
+  @extend %fade-up-base;
+  animation-delay: 0.15s;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.welcome-title {
+  @extend %fade-up-base;
+  animation-delay: 0.3s;
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--mc-bg-main);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.welcome-sub {
+  @extend %fade-up-base;
+  animation-delay: 0.45s;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 36px;
+}
+
+.btn-start {
+  @extend %fade-up-base;
+  animation-delay: 0.6s;
+  width: 100%;
+}
+
+// ── Steps formulaire ───────────────────────────────────
+.step-form {
+  padding-top: calc(env(safe-area-inset-top) + 16px);
+}
+
+.step-header {
+  padding-top: 64px;
+  margin-bottom: 6px;
+}
+
+.step-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--mc-text-secondary);
+}
+
+.step-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 3px;
+  margin-bottom: 8px;
+  color: var(--mc-text-primary);
+}
+
+.step-hint {
+  font-size: 0.8rem;
+  color: var(--mc-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 26px;
+}
+
+.total-line {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--mc-text-secondary);
+  margin: 16px 0 6px;
+
+  strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--mc-text-primary);
+  }
+}
+
+.capacity-cap {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--mc-text-secondary);
+  margin-bottom: 10px;
+}
+
+.check-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--rose);
+  border: 1.5px solid var(--rose-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  animation: none;
+
+  .is-active & {
+    animation: popIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+  }
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.6) rotate(-45deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.summary-card {
+  background: var(--mc-bg-card);
+  border: 1px solid var(--mc-border);
+  border-radius: 18px;
+  padding: 16px;
+  width: 100%;
+  margin: 20px 0 28px;
+  text-align: left;
+  opacity: 0;
+  animation: none;
+
+  .is-active & {
+    animation: fadeUp 0.55s ease 0.95s forwards; // délai après les autres éléments
+  }
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  padding: 8px 0;
+  color: var(--mc-text-secondary);
+
+  &:not(:last-child) { border-bottom: 1px solid var(--mc-border); }
+  strong { color: var(--mc-text-primary); }
+}
+
+.step-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.back-link {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--mc-text-secondary);
+  cursor: pointer;
+  --border: none;
+  --background: none;
+  --box-shadow: none;
+  font-weight: lighter;
+  width: max-content;
+  height: max-content;
+  align-self: center;
+  --ripple-color: transparent;
+  --background-activated: transparent;
+  --background-focused: transparent;
+  --background-hover: transparent;
+  --color-activated: var(--mc-text-secondary);
+  --color-focused: var(--mc-text-secondary);
+  --color-hover: var(--mc-text-secondary);
+}
+
+.summary-row__wine-type {
+  text-transform: capitalize;
+}

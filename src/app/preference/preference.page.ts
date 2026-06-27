@@ -1,24 +1,90 @@
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+
+import { InputComponent } from '../components/input/input.component';
+import { StepperComponent } from '../components/stepper/stepper.component';
+import { RadioGroupComponent } from "../components/wines-radio-group/wines-radio-group.component";
+
+import { CAVE_MAX, WineType } from '../core/types/WineType';
+import { UserService } from '../core/services/user.service';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-preference',
   standalone: true,
   templateUrl: './preference.page.html',
   styleUrls: ['./preference.page.scss'],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslocoModule,
-  ]
+  imports: [CommonModule, IonicModule, TranslocoModule, ReactiveFormsModule, InputComponent, StepperComponent, RadioGroupComponent],
 })
-export class PreferencePage implements OnInit {
+export class PreferencePage {
+  readonly CAVE_MAX = CAVE_MAX;
+  currentStep = 0;
 
-  constructor() { }
+  identityForm: FormGroup;
+  wineForm: FormGroup;
+  caveForm: FormGroup;
 
-  ngOnInit() {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService,
+    private transloco: TranslocoService
+  ) {
+    this.identityForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(1)]],
+      lastName: ['', [Validators.required, Validators.minLength(1)]],
+    });
+
+    this.wineForm = this.fb.group({
+      selectedType: [null as WineType | null, Validators.required],
+    });
+
+    this.caveForm = this.fb.group({
+      rows: [5, [Validators.required, Validators.min(1)]],
+      cols: [3, [Validators.required, Validators.min(1)]],
+    });
   }
 
+  get rows() { return this.caveForm.value.rows ?? 1; }
+  get cols() { return this.caveForm.value.cols ?? 1; }
+  get rowsMax() { return Math.floor(this.CAVE_MAX / Math.max(this.cols, 1)); }
+  get colsMax() { return Math.floor(this.CAVE_MAX / Math.max(this.rows, 1)); }
+
+  get selectedTypeLabel(): string {
+    const type = this.wineForm.get('selectedType')?.value;
+    if (!type) return '-';
+
+    return this.transloco.translate(`WINE.TYPE.${type.toUpperCase()}`);
+  }
+
+  goToStep(step: number): void { this.currentStep = step; }
+
+  async finishOnboarding(): Promise<void> {
+    if (this.identityForm.invalid || this.wineForm.invalid || this.caveForm.invalid) return;
+
+    const currentUser = this.authService.currentUser;
+    if (!currentUser) return;
+
+    const updatedUser = {
+      ...currentUser,
+      ...this.identityForm.value,
+      favoriteWineType: this.wineForm.get("selectedType")?.value,
+      caveConfig: {
+        rows: this.rows,
+        cols: this.cols
+      }
+    };
+
+    try {
+      await this.userService.saveUserPreferences(updatedUser as any);
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde :', error);
+    }
+  }
 }

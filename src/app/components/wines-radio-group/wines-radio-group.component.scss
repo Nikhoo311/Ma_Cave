@@ -1,0 +1,29 @@
+.chip-list { display: flex; flex-direction: column; gap: 10px; }
+
+.chip-swatch {
+  position: relative;
+  overflow: hidden;
+  width: 64px;
+  height: 64px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: 12px;
+
+  img { 
+    position: relative; 
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+.chip-label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--mc-text-primary);
+  text-transform: capitalize;
+}

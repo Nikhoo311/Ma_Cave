@@ -4,9 +4,9 @@ import { IonicModule, SegmentCustomEvent } from '@ionic/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 
 import { UtilsComponent } from '../components/utils/utils.component';
-import { AuthTypeEnum } from '../types/AuthTypeEnum';
-import { ToastService } from '../services/toast.service';
-import { AuthService } from '../services/auth.service';
+import { AuthTypeEnum } from '../core/types/AuthTypeEnum';
+import { ToastService } from '../core/services/toast.service';
+import { AuthService } from '../core/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({

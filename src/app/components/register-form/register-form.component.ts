@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
-import { FormErrorComponent } from '../form-error/form-error.component';
-import { ToastService } from 'src/app/services/toast.service';
-import { ERRORS_CODES } from 'src/app/types/ErrorsCode';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { ERRORS_CODES } from 'src/app/core/types/ErrorsCode';
+import { InputComponent } from '../input/input.component';
 
 @Component({
   selector: 'app-register-form',
@@ -18,7 +18,7 @@ import { ERRORS_CODES } from 'src/app/types/ErrorsCode';
     ReactiveFormsModule,
     IonicModule,
     TranslocoModule,
-    FormErrorComponent
+    InputComponent
   ],
 })
 export class RegisterFormComponent {
@@ -59,7 +59,6 @@ export class RegisterFormComponent {
 
     await this.authService
       .register(email, password)
-      .then(() => this.router.navigate(['/home']))
       .catch(err => {
         let errorMessage = this.transloco.translate('AUTH.RULES.REGISTER_ERROR', { error: this.transloco.translate(err.message) });
         if (err.code === ERRORS_CODES.auth.emailAlreadyInUse) {

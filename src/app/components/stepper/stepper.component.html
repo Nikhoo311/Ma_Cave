@@ -1,0 +1,12 @@
+<div class="stepper-row">
+  <span class="stepper-label">{{ label }}</span>
+  <div class="stepper-controls">
+    <ion-button mode="md" class="stepper-btn" fill="clear" [disabled]="value <= min" (click)="decrement()">
+      <ion-icon name="remove-outline" />
+    </ion-button>
+    <span class="stepper-value">{{ value }}</span>
+    <ion-button mode="md" class="stepper-btn" fill="clear" [disabled]="value >= max" (click)="increment()">
+      <ion-icon name="add-outline" />
+    </ion-button>
+  </div>
+</div>

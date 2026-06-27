@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
-import { FormErrorComponent } from '../form-error/form-error.component';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { InputComponent } from "../input/input.component";
 
 @Component({
   selector: 'app-login-form',
@@ -18,8 +18,8 @@ import { ToastService } from 'src/app/services/toast.service';
     ReactiveFormsModule,
     IonicModule,
     TranslocoModule,
-    FormErrorComponent
-  ],
+    InputComponent
+],
 })
 export class LoginFormComponent {
   loginForm!: FormGroup;
@@ -48,7 +48,6 @@ export class LoginFormComponent {
     const { email, password }: { email: string, password: string } = this.loginForm.value;
 
     await this.authService.login(email, password)
-      .then(() => this.router.navigate(['/home']))
       .catch(err => {
         this.toastService.error(this.transloco.translate(err.message))
       })

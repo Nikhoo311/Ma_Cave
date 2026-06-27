@@ -1,0 +1,13 @@
+<div class="input-group">
+  <label class="input-label">{{ label }}</label>
+
+  <ion-item class="input-form">
+    <ion-input [type]="type" [formControl]="$any(control)" [placeholder]="placeholder">
+      @if (iconName) {
+        <ion-icon slot="start" [name]="iconName"></ion-icon>
+      }
+    </ion-input>
+  </ion-item>
+
+  <form-error [control]="control"></form-error>
+</div>
