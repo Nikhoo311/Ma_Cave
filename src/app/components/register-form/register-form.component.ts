@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
-import { ToastService } from 'src/app/services/toast.service';
-import { ERRORS_CODES } from 'src/app/types/ErrorsCode';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { ERRORS_CODES } from 'src/app/core/types/ErrorsCode';
 import { InputComponent } from '../input/input.component';
 
 @Component({

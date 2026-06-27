@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule } from '@jsverse/transloco';
-import { WINE_TYPE_CONFIG } from 'src/app/types/WineType';
+import { WINE_TYPE_CONFIG } from 'src/app/core/types/WineType';
 
 export interface RadioOption {
   value: string;

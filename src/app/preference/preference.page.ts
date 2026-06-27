@@ -9,9 +9,9 @@ import { InputComponent } from '../components/input/input.component';
 import { StepperComponent } from '../components/stepper/stepper.component';
 import { RadioGroupComponent } from "../components/wines-radio-group/wines-radio-group.component";
 
-import { CAVE_MAX, WineType } from '../types/WineType';
-import { UserService } from '../services/user.service';
-import { AuthService } from '../services/auth.service';
+import { CAVE_MAX, WineType } from '../core/types/WineType';
+import { UserService } from '../core/services/user.service';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-preference',
