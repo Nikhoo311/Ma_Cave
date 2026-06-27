@@ -2,122 +2,114 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import {
-  Auth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signInWithCredential,
-  GoogleAuthProvider,
-  signOut,
-  onAuthStateChanged,
-  User as FirebaseUser,
-  sendPasswordResetEmail
+  Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  signInWithCredential, GoogleAuthProvider, signOut, onAuthStateChanged,
+  User as FirebaseUser, sendPasswordResetEmail
 } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
-import { User, AuthProvider } from '../models/user.model'; // <-- Assure-toi que les imports sont corrects
+import { User } from '../models/user.model';
 import { ERRORS_CODES } from '../types/ErrorsCode';
-import { UserService } from './user.service';
+import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
-  constructor(private auth: Auth, private router: Router, private userService: UserService) {
-    onAuthStateChanged(this.auth, (firebaseUser: FirebaseUser | null) => {
-      this.currentUserSubject.next(firebaseUser ? this.mapFirebaseUser(firebaseUser) : null);
+  constructor(private auth: Auth, private router: Router, private firestore: Firestore) {
+    onAuthStateChanged(this.auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        await this.syncUserFromFirestore(firebaseUser);
+      } else {
+        this.currentUserSubject.next(null);
+      }
     });
   }
 
-  private mapFirebaseUser(firebaseUser: FirebaseUser): User {
-    const isGoogle = firebaseUser.providerData.some(p => p.providerId === 'google.com');
-    const provider: AuthProvider = isGoogle ? 'google' : 'password';
-
-    return {
-      id: firebaseUser.uid,
-      email: firebaseUser.email ?? '',
-      firstName: '',
-      lastName: '',
-      favoriteWineType: null,
-      provider: provider,
-      createdAt: firebaseUser.metadata.creationTime ? new Date(firebaseUser.metadata.creationTime) : new Date(),
-
-      caveConfig: {
-        rows: 0,
-        cols: 0,
-      },
-      cave: []
-    };
+  // ── Logique centralisée pour Login/Register ────────────────
+  private async handleAuthSuccess(firebaseUser: FirebaseUser): Promise<void> {
+    const user = await this.syncUserFromFirestore(firebaseUser);
+    const isSetupDone = user.caveConfig?.rows > 0;
+    this.router.navigate([!isSetupDone ? '/preference' : '/home']);
   }
 
-  // ── Email / Password ──────────────────────────────────────
+  private async syncUserFromFirestore(firebaseUser: FirebaseUser): Promise<User> {
+    const userRef = doc(this.firestore, `users/${firebaseUser.uid}`);
+    const snap = await getDoc(userRef);
+
+    const user = snap.exists() ? (snap.data() as User) : this.mapFirebaseUser(firebaseUser);
+    
+    this.currentUserSubject.next(user);
+    return user;
+  }
+
   async register(email: string, password: string): Promise<User> {
     try {
-      const credential = await createUserWithEmailAndPassword(this.auth, email, password);
-      const user = this.mapFirebaseUser(credential.user);
-      this.currentUserSubject.next(user);
+      const { user } = await createUserWithEmailAndPassword(this.auth, email, password);
+
+      const mappedUser = this.mapFirebaseUser(user);
+      this.currentUserSubject.next(mappedUser);
       this.router.navigate(['/preference']);
-      return user;
+      return mappedUser;
     } catch (error: any) {
-      if (error.code === 'auth/email-already-in-use') {
-        throw new Error('AUTH.EMAIL_ALREADY_EXISTS');
-      }
-      throw error;
+      this.handleAuthError(error);
     }
   }
 
-  async login(email: string, password: string): Promise<User> {
+  async login(email: string, password: string): Promise<void> {
     try {
-      const credential = await signInWithEmailAndPassword(this.auth, email, password);
-      const user = this.mapFirebaseUser(credential.user);
-      this.currentUserSubject.next(user);
-
-      const isSetuped = await this.userService.isUserSetupDone(user.id);
-    
-      this.router.navigate([!isSetuped ? '/preference' : '/home']);
-      return user;
+      const { user } = await signInWithEmailAndPassword(this.auth, email, password);
+      await this.handleAuthSuccess(user);
     } catch (error: any) {
-      if (error.code === ERRORS_CODES.auth.userNotFound) {
-        throw new Error('AUTH.NO_ACCOUNT');
-      }
-      if (error.code === ERRORS_CODES.auth.tooManyRequests) {
-        throw new Error('AUTH.TOO_MANY_ATTEMPTS')
-      }
-      if (error.code === ERRORS_CODES.auth.invalidCredential) {
-        throw new Error('AUTH.INVALID_CREDENTIAL')
-      }
-      throw error;
+      this.handleAuthError(error);
     }
   }
 
-  // ── Google Login ──────────────────────────────────────────
-  async loginWithGoogle(): Promise<User> {
+  async loginWithGoogle(): Promise<void> {
     const result = await FirebaseAuthentication.signInWithGoogle();
     const credential = GoogleAuthProvider.credential(result.credential?.idToken);
-    const firebaseResult = await signInWithCredential(this.auth, credential);
-    const firebaseUser = firebaseResult.user;
+    const { user } = await signInWithCredential(this.auth, credential);
+    await this.handleAuthSuccess(user);
+  }
 
-    const user = this.mapFirebaseUser(firebaseUser);
-    this.currentUserSubject.next(user);
-
-    const isSetuped = await this.userService.isUserSetupDone(user.id);
-    
-    this.router.navigate([!isSetuped ? '/preference' : '/home']);
-    return user;
+  async saveUserPreferences(user: User): Promise<void> {
+    const userRef = doc(this.firestore, `users/${user.id}`);
+    await setDoc(userRef, { ...user, createdAt: user.createdAt.toISOString() }, { merge: true });
+    this.currentUserSubject.next(user); // Mise à jour réactive
   }
 
   async logout(): Promise<void> {
     await signOut(this.auth);
     await FirebaseAuthentication.signOut();
     this.currentUserSubject.next(null);
-    this.router.navigate(['auth']);
+    this.router.navigate(['/auth']);
   }
 
   async sendPasswordResetEmail(email: string): Promise<void> {
     await sendPasswordResetEmail(this.auth, email);
   }
 
-  get currentUser(): User | null {
-    return this.currentUserSubject.value;
+  // ── Utils ─────────────────────────────────────────────────
+  private mapFirebaseUser(firebaseUser: FirebaseUser): User {
+    return {
+      id: firebaseUser.uid,
+      email: firebaseUser.email ?? '',
+      firstName: '',
+      lastName: '',
+      favoriteWineType: null,
+      provider: firebaseUser.providerData.some(p => p.providerId === 'google.com') ? 'google' : 'password',
+      createdAt: new Date(firebaseUser.metadata.creationTime || Date.now()),
+      caveConfig: { rows: 0, cols: 0 },
+      cave: []
+    };
   }
+
+  private handleAuthError(error: any): never {
+    if (error.code === ERRORS_CODES.auth.userNotFound) throw new Error('AUTH.NO_ACCOUNT');
+    if (error.code === ERRORS_CODES.auth.tooManyRequests) throw new Error('AUTH.TOO_MANY_ATTEMPTS');
+    if (error.code === ERRORS_CODES.auth.invalidCredential) throw new Error('AUTH.INVALID_CREDENTIAL');
+    if (error.code === ERRORS_CODES.auth.emailAlreadyInUse) throw new Error('AUTH.RULES.EMAIL_ALREADY_TAKEN');
+    throw error;
+  }
+
+  get currentUser(): User | null { return this.currentUserSubject.value; }
 }

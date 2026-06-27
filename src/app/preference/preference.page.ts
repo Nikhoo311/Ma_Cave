@@ -10,7 +10,6 @@ import { StepperComponent } from '../components/stepper/stepper.component';
 import { RadioGroupComponent } from "../components/wines-radio-group/wines-radio-group.component";
 
 import { CAVE_MAX, WineType } from '../core/types/WineType';
-import { UserService } from '../core/services/user.service';
 import { AuthService } from '../core/services/auth.service';
 
 @Component({
@@ -31,7 +30,6 @@ export class PreferencePage {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService,
     private authService: AuthService,
     private transloco: TranslocoService
   ) {
@@ -81,7 +79,7 @@ export class PreferencePage {
     };
 
     try {
-      await this.userService.saveUserPreferences(updatedUser as any);
+      await this.authService.saveUserPreferences(updatedUser as any);
       this.router.navigate(['/home']);
     } catch (error) {
       console.error('Erreur lors de la sauvegarde :', error);
