@@ -48,7 +48,6 @@ export class LoginFormComponent {
     const { email, password }: { email: string, password: string } = this.loginForm.value;
 
     await this.authService.login(email, password)
-      .then(() => this.router.navigate(['/home']))
       .catch(err => {
         this.toastService.error(this.transloco.translate(err.message))
       })

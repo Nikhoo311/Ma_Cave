@@ -56,7 +56,7 @@ export class AuthService {
       const credential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = this.mapFirebaseUser(credential.user);
       this.currentUserSubject.next(user);
-      this.router.navigate(['preference']);
+      this.router.navigate(['/preference']);
       return user;
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
@@ -71,7 +71,10 @@ export class AuthService {
       const credential = await signInWithEmailAndPassword(this.auth, email, password);
       const user = this.mapFirebaseUser(credential.user);
       this.currentUserSubject.next(user);
-      this.router.navigate(['home']);
+
+      const isSetuped = await this.userService.isUserSetupDone(user.id);
+    
+      this.router.navigate([!isSetuped ? '/preference' : '/home']);
       return user;
     } catch (error: any) {
       if (error.code === ERRORS_CODES.auth.userNotFound) {
