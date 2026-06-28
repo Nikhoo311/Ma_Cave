@@ -82,5 +82,11 @@
       "ROSE": "rosé",
       "CHAMPAGNE": "champagne"
     }
+  },
+  "TABS": {
+    "HOME": "Accueil",
+    "CAVE": "Ma cave",
+    "STATS": "Stats",
+    "SETTINGS": "Réglages"
   }
 }

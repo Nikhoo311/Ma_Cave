@@ -1,0 +1,34 @@
+.custom-tabs {
+  --background: transparent;
+
+  ion-tab-bar {
+    margin: 0 1.25rem 0.4rem 1.25rem;
+    padding: 8px 0;
+
+    border-radius: var(--radius-pill);
+    background: var(--mc-bg-main);
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: none;
+
+    overflow: hidden; 
+  }
+
+  ion-tab-button {
+    --color: var(--mc-text-soft);
+    --color-selected: var(--mc-text-primary);
+
+    --background-focused: transparent;
+
+    ion-icon {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    ion-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+  }
+}

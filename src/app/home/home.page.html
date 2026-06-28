@@ -1,7 +1,113 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div id="header">
-    <p>Bonjour {{ user?.firstName }}</p>
-    <p>Votre cave</p>
-    <ion-button (click)="logout()">test</ion-button>
+  <div class="header">
+    <p class="header__small-text">Bonjour {{ user?.firstName || '' }} 👋</p>
+    <h1 class="header__title">Votre cave</h1>
   </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="bento-card star-card clickable" style="background: linear-gradient(135deg, var(--wine-champagne) 0%, #efe8c0 100%); color: var(--mc-text-primary);">
+          <svg viewBox="0 0 60 80" width="60" height="80" class="star-card__bottle">
+            <rect x="22" y="3" width="16" height="22" rx="2" fill="var(--wine-champagne-accent)"/>
+            <path d="M12 65 C12 38 22 36 22 25 L38 25 C38 36 48 38 48 65 L48 73 Q48 80 41 80 L19 80 Q12 80 12 73 Z" fill="#FAF7F2" fill-opacity="0.45"/>
+            <rect x="18" y="58" width="24" height="12" rx="4" fill="#FAF7F2" fill-opacity="0.9"/>
+          </svg>
+          
+          <div class="star-card__info">
+            <span class="star-card__tag">Vin star</span>
+            <h2 class="star-card__title">Champagne Brut Réserve</h2>
+            <p class="star-card__meta">NV · Champagne · 2 bouteilles</p>
+          </div>
+        </ion-card>
+      </ion-col>
+
+      <!-- DLC -->
+      <!-- <ion-col size="12">
+        <ion-card class="bento-card dlc-card">
+          <div class="bento-label">⚠️ DLC proche</div>
+          
+          <div class="dlc-row clickable">
+            <div class="dlc-icon">⏳</div>
+            <div class="dlc-info">
+              <div class="dlc-name">Roussette de Savoie</div>
+              <div class="dlc-sub">Blanc · 2022 · C3</div>
+            </div>
+            <div class="dlc-date">8 jours</div>
+          </div>
+          
+          <div class="dlc-row clickable">
+            <div class="dlc-icon">⏳</div>
+            <div class="dlc-info">
+              <div class="dlc-name">Côtes de Provence Rosé</div>
+              <div class="dlc-sub">Rosé · 2023 · D1</div>
+            </div>
+            <div class="dlc-date">15 jours</div>
+          </div>
+        </ion-card>
+      </ion-col> -->
+
+      <ion-col size="6">
+        <ion-card class="bento-card">
+          <ion-card-title class="bento-label">Stock total</ion-card-title>
+          <div class="bento-kpi">{{ totalBottles }}</div>
+          <div class="bento-sub-text">bouteilles</div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="bento-card">
+          <ion-card-title class="bento-label">Répartition</ion-card-title>
+          @for (wineDistribution of distributionEntries(); track wineDistribution[0]) {
+            <div class="repart-row">
+              <span class="repart-left">
+                <span
+                  class="dot"
+                  [style.background]="'var(--wine-' + wineDistribution[0] + '-accent)'">
+                </span>
+
+                {{ WINE_TYPE_CONFIG[wineDistribution[0]].label | transloco }}
+              </span>
+
+              <span>{{ wineDistribution[1] }}</span>
+            </div>
+          }
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="bento-card clickable">
+          <ion-card-title class="bento-label">Statistiques</ion-card-title>
+          <div class="bento-kpi">75%</div>
+          <div class="bento-sub-text">cave remplie · voir détail</div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="bento-card clickable">
+          <ion-card-title class="bento-label">Accord mets-vins</ion-card-title>
+          <div class="bento-sub-text" style="margin-top: 10px;">Choisissez un plat ou un vin pour une suggestion</div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="bento-card">
+          <ion-card-title class="bento-label">Valeur de la cave</ion-card-title>
+          <div class="bento-kpi">{{ totalValue }} €</div>
+          <div class="bento-sub-text">estimation (prix d'achat)</div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="bento-card clickable relative-card">
+          <ion-badge color="danger" class="bento-badge">3</ion-badge>
+          <ion-card-title class="bento-label">Wishlist</ion-card-title>
+          <div class="bento-kpi" style="font-size: 18px; margin-top: 8px;">3 vins</div>
+          <div class="bento-sub-text">à racheter — stock bas</div>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

@@ -1,27 +1,51 @@
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { TranslocoModule } from '@jsverse/transloco';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../core/models/user.model';
+import { CaveService } from '../core/services/cave.service';
+import { WINE_TYPE_CONFIG, WineType } from '../core/types/WineType';
+import { UserWine } from '../core/models/wine.model';
+import { TabsPage } from "../tabs/tabs.page";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, IonicModule, TranslocoModule, TabsPage],
 })
+
 export class HomePage implements OnInit {
-
   user!: User | null;
+  totalBottles!: number;
+  totalValue!: number;
+  distributionByType!: Record<WineType, number>;
+  readonly WINE_TYPE_CONFIG = WINE_TYPE_CONFIG;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private caveService: CaveService
+  ) {}
 
   ngOnInit(): void {
     this.user = this.authService.currentUser;
+    this.totalBottles = this.caveService.totalBottles;
+    this.totalValue = this.caveService.totalValue;
+
+    const allTypes = Object.keys(WINE_TYPE_CONFIG);
+    this.distributionByType = this.caveService.getDistributionBy('type', allTypes);
+  }
+
+  distributionEntries(): [WineType, number][] {
+    return Object.entries(this.distributionByType) as [WineType, number][];
   }
   
   async logout() {
-    console.log(this.user)
-    // await this.authService.logout();
-    // this.router.navigate(['/auth']);
+    await this.authService.logout();
+    this.router.navigate(['/auth']);
   }
 }
