@@ -20,6 +20,7 @@ export class HomePage implements OnInit {
   user!: User | null;
   totalBottles!: number;
   totalValue!: number;
+  wineCaveFillPercentage!: number;
   distributionByType!: Record<WineType, number>;
   readonly WINE_TYPE_CONFIG = WINE_TYPE_CONFIG;
 
@@ -33,6 +34,11 @@ export class HomePage implements OnInit {
     this.user = this.authService.currentUser;
     this.totalBottles = this.caveService.totalBottles;
     this.totalValue = this.caveService.totalValue;
+    
+    const totalSlots = this.caveService.caveConfig.cols * this.caveService.caveConfig.rows;
+    const usedSlots = this.caveService.cave.reduce((sum, wine) => sum + (wine.placements?.length ?? 0), 0);
+
+    this.wineCaveFillPercentage = totalSlots > 0 ? (usedSlots / totalSlots) * 100 : 0;
 
     const allTypes = Object.keys(WINE_TYPE_CONFIG);
     this.distributionByType = this.caveService.getDistributionBy('type', allTypes);
