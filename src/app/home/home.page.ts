@@ -7,15 +7,13 @@ import { Router } from '@angular/router';
 import { User } from '../core/models/user.model';
 import { CaveService } from '../core/services/cave.service';
 import { WINE_TYPE_CONFIG, WineType } from '../core/types/WineType';
-import { UserWine } from '../core/models/wine.model';
-import { TabsPage } from "../tabs/tabs.page";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, TranslocoModule, TabsPage],
+  imports: [CommonModule, IonicModule, TranslocoModule],
 })
 
 export class HomePage implements OnInit {
