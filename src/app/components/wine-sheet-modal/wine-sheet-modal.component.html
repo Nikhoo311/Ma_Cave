@@ -90,29 +90,23 @@
           </ion-row>
         </ion-grid>
 
-        @if (wine.description) {
-          <div class="sheet-section">
-            <h4>{{ 'WINE_SHEET_MODAL.DESCRIPTION' | transloco }}</h4>
+        <div class="sheet-section">
+          <h4>{{ 'WINE_SHEET_MODAL.DESCRIPTION' | transloco }}</h4>
+          @if (wine.description) {
             <p>{{ wine.description }}</p>
-          </div>
-        } @else {
-          <div class="sheet-section">
-            <h4>{{ 'WINE_SHEET_MODAL.DESCRIPTION' | transloco }}</h4>
+          } @else {
             <p>{{ 'WINE_SHEET_MODAL.NO_DESCRIPTION' | transloco }}</p>
-          </div>
-        }
+          }
+        </div>
 
-        @if (wine.foodPairing) {
-          <div class="sheet-section">
-            <h4>{{ 'WINE_SHEET_MODAL.FOOD_PAIRING' | transloco }}</h4>
-            <p>{{ wine.foodPairing.join(", ") }}</p>
-          </div>
-        } @else {
-          <div class="sheet-section">
-            <h4>{{ 'WINE_SHEET_MODAL.FOOD_PAIRING' | transloco }}</h4>
-            <p>{{ 'WINE_SHEET_MODAL.NO_FOOD_PAIRING' | transloco }}</p>
-          </div>
-        }
+        <div class="sheet-section">
+          <h4>{{ 'WINE_SHEET_MODAL.FOOD_PAIRING' | transloco }}</h4>
+            @if (wine.foodPairing) {
+              <p>{{ wine.foodPairing.join(", ") }}</p>
+            } @else {
+              <p>{{ 'WINE_SHEET_MODAL.NO_FOOD_PAIRING' | transloco }}</p>
+            }
+        </div>
 
         <div class="sheet-actions">
           <ion-button (click)="closeModal()" fill="outline" expand="block" shape="round" color="primary">
