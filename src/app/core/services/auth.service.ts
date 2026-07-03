@@ -99,7 +99,6 @@ export class AuthService {
       provider: firebaseUser.providerData.some(p => p.providerId === 'google.com') ? 'google' : 'password',
       createdAt: new Date(firebaseUser.metadata.creationTime || Date.now()),
       caveConfig: { rows: 0, cols: 0 },
-      cave: []
     };
   }
 

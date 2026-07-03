@@ -19,9 +19,6 @@ const routes: Routes = [
     loadChildren: () => import('./preference/preference.module').then( m => m.PreferencePageModule),
     canActivate: [AuthGuard]
   },
-
-
-
 ];
 
 @NgModule({

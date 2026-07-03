@@ -12,22 +12,22 @@ const routes: Routes = [
       {
         path: 'home',
         canActivate: [AuthGuard],
-        loadComponent: () => import("../home/home.module").then(m => m.HomePageModule),
+        loadChildren: () => import("../home/home.module").then(m => m.HomePageModule),
       },
       {
         path: 'cave',
         canActivate: [AuthGuard],
-        loadComponent: () => import("../home/home.module").then(m => m.HomePageModule),
+        loadChildren: () => import("../cave/cave.module").then(m => m.CavePageModule),
       },
       {
         path: 'stats',
         canActivate: [AuthGuard],
-        loadComponent: () => import("../home/home.module").then(m => m.HomePageModule),
+        loadChildren: () => import("../home/home.module").then(m => m.HomePageModule),
       },
       {
         path: 'settings',
         canActivate: [AuthGuard],
-        loadComponent: () => import("../home/home.module").then(m => m.HomePageModule),
+        loadChildren: () => import("../home/home.module").then(m => m.HomePageModule),
       },
       {
         path: '',

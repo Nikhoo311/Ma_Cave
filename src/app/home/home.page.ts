@@ -7,22 +7,19 @@ import { Router } from '@angular/router';
 import { User } from '../core/models/user.model';
 import { CaveService } from '../core/services/cave.service';
 import { WINE_TYPE_CONFIG, WineType } from '../core/types/WineType';
+import { UserWine } from '../core/models/wine.model';
+import { WineSheetModalComponent } from '../components/wine-sheet-modal/wine-sheet-modal.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, TranslocoModule],
+  imports: [CommonModule, IonicModule, TranslocoModule, WineSheetModalComponent],
 })
-
 export class HomePage implements OnInit {
-  user!: User | null;
-  totalBottles!: number;
-  totalValue!: number;
-  wineCaveFillPercentage!: number;
-  distributionByType!: Record<WineType, number>;
   readonly WINE_TYPE_CONFIG = WINE_TYPE_CONFIG;
+  isSheetOpen: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -31,17 +28,36 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.authService.currentUser;
-    this.totalBottles = this.caveService.totalBottles;
-    this.totalValue = this.caveService.totalValue;
-    
-    const totalSlots = this.caveService.caveConfig.cols * this.caveService.caveConfig.rows;
-    const usedSlots = this.caveService.cave.reduce((sum, wine) => sum + (wine.placements?.length ?? 0), 0);
+    console.log('Vin Star initial :', this.starWine);
+    console.log('Cave initiale :', this.caveService.cave);
+  }
 
-    this.wineCaveFillPercentage = totalSlots > 0 ? (usedSlots / totalSlots) * 100 : 0;
 
-    const allTypes = Object.keys(WINE_TYPE_CONFIG);
-    this.distributionByType = this.caveService.getDistributionBy('type', allTypes);
+  get user(): User | null {
+    return this.authService.currentUser;
+  }
+
+  get totalBottles(): number {
+    return this.caveService.totalBottles;
+  }
+
+  get totalValue(): number {
+    return this.caveService.totalValue;
+  }
+
+  get starWine(): UserWine {
+    return this.caveService.starWine;
+  }
+
+  get wineCaveFillPercentage(): number {
+    const config = this.caveService.caveConfig;
+    const totalSlots = (config?.cols || 0) * (config?.rows || 0);
+    return totalSlots > 0 ? (this.totalBottles / totalSlots) * 100 : 0;
+  }
+
+  get distributionByType(): Record<WineType, number> {
+    const allTypes = Object.keys(this.WINE_TYPE_CONFIG) as WineType[];
+    return this.caveService.getDistributionBy('type', allTypes);
   }
 
   distributionEntries(): [WineType, number][] {
@@ -51,5 +67,13 @@ export class HomePage implements OnInit {
   async logout() {
     await this.authService.logout();
     this.router.navigate(['/auth']);
+  }
+
+  openSheet(): void {
+    this.isSheetOpen = !this.isSheetOpen;
+  }
+
+  goToStats(): void {
+    this.router.navigate(['/stats']);
   }
 }

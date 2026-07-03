@@ -1,0 +1,84 @@
+.sheet-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 10;
+  --background: var(--mc-bg-card, #F1ECE3);
+  --border-radius: 50%;
+  --color: var(--text-soft, #8B8680);
+  width: 32px;
+  height: 32px;
+}
+
+
+.sheet-content {
+  .sheet-hero {
+    display: flex;
+    gap: 16px;
+    padding: 20px 4px 16px 4px;
+
+    &__wine-icon {
+      width: 65px;
+      height: 90px;
+      border-radius: var(--mc-radius-card);
+      padding: 0.4rem;
+      object-fit: contain;
+    }
+
+    .info {
+      h2 {
+        font-size: 1.3rem;
+        font-weight: bold;
+        line-height: 1.2;
+        margin: 4px 0;
+        color: var(--text);
+      }
+
+      .meta {
+        font-size: 0.8rem;
+        color: var(--text-soft, #8B8680);
+        margin: 0;
+      }
+    }
+  }
+
+  ion-chip {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .sheet-section {
+    margin-top: 20px;
+    padding: 0 4px;
+    h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-soft, #8B8680);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    p {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--text, #2B2B2E);
+      margin: 0;
+    }
+  }
+
+  .sheet-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+    ion-button {
+      flex: 1;
+      font-size: 0.8rem;
+      --padding-start: 0;
+      --padding-end: 0;
+    }
+  }
+}

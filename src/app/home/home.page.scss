@@ -9,6 +9,7 @@
   min-height: 140px;
   position: relative;
   overflow: hidden;
+  color: var(--mc-text-primary);
 
   &__bottle {
     position: relative;
@@ -42,7 +43,11 @@
   &__meta {
     font-size: 13px;
     margin-top: 2px;
-    color: var(--mc-text-secondary);
+    color: var(--mc-accent);
+    &-wine-type {
+      text-transform: capitalize;
+      color: var(--mc-accent);
+    }
   }
 }
 
@@ -140,7 +145,7 @@
 
 .relative-card {
   position: relative;
-  overflow: visible; // Permet au badge de ne pas être coupé s'il déborde légèrement
+  overflow: visible;
 }
 
 .bento-badge {

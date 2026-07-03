@@ -16,5 +16,4 @@ export interface User {
     rows: number;
     cols: number;
   };
-  cave: UserWine[];
 }

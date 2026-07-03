@@ -4,18 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TabsPageRoutingModule } from './tabs-routing.module';
-
-import { TranslocoModule } from '@jsverse/transloco';
+import { CavePageRoutingModule } from './cave-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TabsPageRoutingModule,
-    TranslocoModule,
+    CavePageRoutingModule
   ],
-  declarations: []
 })
-export class TabsPageModule {}
+export class CavePageModule {}

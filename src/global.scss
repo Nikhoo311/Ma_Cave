@@ -88,6 +88,20 @@ ion-card-title {
   letter-spacing: 0.04em;
 }
 
+ion-modal {
+  ion-card-title {
+    font-size: 0.7rem !important;
+  }
+  .bento-kpi {
+    font-size: 1.1rem;
+    display: flex;
+    ion-icon {
+      margin-left: 5px;
+    }
+  }
+
+}
+
 /* ==========
    INPUTS
    ========== */
