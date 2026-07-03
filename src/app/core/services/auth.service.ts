@@ -74,7 +74,7 @@ export class AuthService {
   async saveUserPreferences(user: User): Promise<void> {
     const userRef = doc(this.firestore, `users/${user.id}`);
     await setDoc(userRef, { ...user, createdAt: user.createdAt.toISOString() }, { merge: true });
-    this.currentUserSubject.next(user); // Mise à jour réactive
+    this.currentUserSubject.next(user);
   }
 
   async logout(): Promise<void> {

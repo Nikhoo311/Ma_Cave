@@ -11,12 +11,12 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule),
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule),
     canActivate: [GuestGuard]
   },
   {
     path: 'preference',
-    loadChildren: () => import('./preference/preference.module').then( m => m.PreferencePageModule),
+    loadChildren: () => import('./preference/preference.module').then(m => m.PreferencePageModule),
     canActivate: [AuthGuard]
   },
 ];

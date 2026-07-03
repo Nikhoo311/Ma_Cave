@@ -1,6 +1,3 @@
-/* ==================================================
-   CARTE : VIN STAR
-   ================================================== */
 .star-card {
   display: flex;
   flex-direction: row;
@@ -24,24 +21,22 @@
   }
 
   &__tag {
-    display: inline-block;
-    font-size: 0.6rem;
-    font-weight: 700;
-    background: rgba(0, 0, 0, 0.08);
-    padding: 3px 10px;
-    border-radius: var(--mc-radius-pill);
-    margin-bottom: 8px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding-left: 13px;
+    padding-right: 13px;
+    margin-bottom: 4px;
   }
 
   &__title {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: bold;
     margin: 0;
     color: var(--mc-text-primary);
   }
 
   &__meta {
-    font-size: 13px;
+    font-size: 0.813rem;
     margin-top: 2px;
     color: var(--mc-accent);
     &-wine-type {
@@ -51,9 +46,6 @@
   }
 }
 
-/* ==================================================
-   CARTE : ALERTE DLC
-   ================================================== */
 .dlc-card {
   border: 1px solid var(--wine-champagne-accent);
   background: linear-gradient(0deg, rgba(241,196,15,0.07), rgba(241,196,15,0.07)), var(--mc-bg-card);
@@ -95,7 +87,7 @@
 
 .dlc-name {
   font-size: 13px; 
-  font-weight: 700;
+  font-weight: bold;
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis;
@@ -109,7 +101,7 @@
 
 .dlc-date {
   font-size: 11px; 
-  font-weight: 700;
+  font-weight: bold;
   color: #9A6A00;
   background: rgba(241,196,15,0.25);
   padding: 4px 9px;
@@ -118,9 +110,6 @@
   white-space: nowrap;
 }
 
-/* ==================================================
-   CARTE : RÉPARTITION
-   ================================================== */
 .repart-row {
   display: flex;
   align-items: center;
