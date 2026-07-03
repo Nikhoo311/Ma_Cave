@@ -90,7 +90,7 @@
     "SETTINGS": "Réglages"
   },
   "HOME": {
-    "TITLE": "Votre cave",
+    "TITLE": "Accueil",
     "STAR_WINE_TAG": "Vin star",
     "TOTAL_STOCK_LABEL": "Stock total",
     "BOTTLES": "{count, plural, =0 {aucune bouteille} =1 {1 bouteille} other {bouteilles}}",
