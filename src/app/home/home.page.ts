@@ -49,10 +49,11 @@ export class HomePage implements OnInit {
     return this.caveService.starWine;
   }
 
-  get wineCaveFillPercentage(): number {
+  get wineCaveFillPercentage(): string {
     const config = this.caveService.caveConfig;
     const totalSlots = (config?.cols || 0) * (config?.rows || 0);
-    return totalSlots > 0 ? (this.totalBottles / totalSlots) * 100 : 0;
+    const percentage = totalSlots > 0 ? (this.totalBottles / totalSlots) * 100 : 0;
+    return percentage.toFixed(2)
   }
 
   get distributionByType(): Record<WineType, number> {
