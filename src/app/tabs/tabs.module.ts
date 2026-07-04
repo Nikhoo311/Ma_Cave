@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
-import { HomePageRoutingModule } from './home-routing.module';
-import { TranslocoModule } from '@jsverse/transloco';
+import { IonicModule } from '@ionic/angular';
 
+import { TabsPageRoutingModule } from './tabs-routing.module';
+
+import { TranslocoModule } from '@jsverse/transloco';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    TabsPageRoutingModule,
     TranslocoModule,
   ],
+  declarations: []
 })
-export class HomePageModule {}
+export class TabsPageModule {}

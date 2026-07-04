@@ -27,7 +27,8 @@ export interface CellPlacement {
 }
 
 export interface UserWine extends BaseWine {
-  id: string;
+  id?: string;
+  ownerId: string;
   wineCatalogueId?: string;
   isCustom: boolean;
   unitPrice: number;

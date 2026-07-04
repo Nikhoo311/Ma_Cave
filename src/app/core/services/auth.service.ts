@@ -74,7 +74,7 @@ export class AuthService {
   async saveUserPreferences(user: User): Promise<void> {
     const userRef = doc(this.firestore, `users/${user.id}`);
     await setDoc(userRef, { ...user, createdAt: user.createdAt.toISOString() }, { merge: true });
-    this.currentUserSubject.next(user); // Mise à jour réactive
+    this.currentUserSubject.next(user);
   }
 
   async logout(): Promise<void> {
@@ -99,7 +99,6 @@ export class AuthService {
       provider: firebaseUser.providerData.some(p => p.providerId === 'google.com') ? 'google' : 'password',
       createdAt: new Date(firebaseUser.metadata.creationTime || Date.now()),
       caveConfig: { rows: 0, cols: 0 },
-      cave: []
     };
   }
 
