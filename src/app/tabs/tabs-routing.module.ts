@@ -27,7 +27,7 @@ const routes: Routes = [
       {
         path: 'settings',
         canActivate: [AuthGuard],
-        loadChildren: () => import("../home/home.module").then(m => m.HomePageModule),
+        loadChildren: () => import("../settings/settings.module").then(m => m.SettingsPageModule),
       },
       {
         path: '',

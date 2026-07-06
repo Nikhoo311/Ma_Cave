@@ -1,0 +1,23 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="header">
+    <p class="header__small-text">{{ 'SETTINGS.SUBTITLE' | transloco }}</p>
+    <h1 class="header__title">{{ 'SETTINGS.TITLE' | transloco }}</h1>
+  </div>
+
+  <!-- Section Compte -->
+  <div class="settings-section">
+    <h3 class="settings-section__title">{{ 'SETTINGS.SECTIONS.ACCOUNT' | transloco }}</h3>
+
+    <ion-list class="settings-list">
+      <ion-item [button]="true" [detail]="true" (click)="goToInfoPerso()">
+        <ion-label>{{ 'SETTINGS.INFO_PERSONAL.TITLE' | transloco }}</ion-label>
+      </ion-item>
+
+      <ion-item [button]="true" [detail]="true" (click)="goToVinPrefere()">
+        <ion-label>{{ 'SETTINGS.FAVORITE_WINE.TITLE' | transloco }}</ion-label>
+        <ion-note slot="end">{{ favoriteWineLabelKey | transloco }}</ion-note>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

@@ -9,7 +9,8 @@ import {
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { ERRORS_CODES } from '../types/ErrorsCode';
-import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
+import { doc, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { WineType } from '../types/WineType';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -111,4 +112,17 @@ export class AuthService {
   }
 
   get currentUser(): User | null { return this.currentUserSubject.value; }
+
+  async updateFavoriteWine(selectedType: WineType): Promise<void> {
+    const user = this.currentUser;
+    if (!user || !user.id) throw new Error("Utilisateur non connecté.");
+
+    const userRef = doc(this.firestore, 'users', user.id);
+    await updateDoc(userRef, { favoriteWineType: selectedType })
+    .then(() => {
+      this.currentUserSubject.next({ ...user, favoriteWineType: selectedType });
+    }).catch((error) => {
+      this.handleAuthError(error);
+    });
+  }
 }

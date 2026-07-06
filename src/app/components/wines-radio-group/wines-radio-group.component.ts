@@ -1,15 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule } from '@jsverse/transloco';
-import { WINE_TYPE_CONFIG } from 'src/app/core/types/WineType';
+import { WINE_TYPE_CONFIG, WineType } from 'src/app/core/types/WineType';
 
 export interface RadioOption {
   value: string;
   label: string;
   icon?: string;
-  bubbles?: boolean;
   backgroundColor?: string;
 }
 
@@ -21,13 +20,14 @@ export interface RadioOption {
     ReactiveFormsModule,
     IonicModule,
     TranslocoModule,
-],
+  ],
   templateUrl: './wines-radio-group.component.html',
   styleUrls: ['./wines-radio-group.component.scss']
 })
-export class RadioGroupComponent {
+export class RadioGroupComponent implements OnInit {
 
   @Input({ required: true }) control!: AbstractControl | null;
+  @Input() defaultValue!: WineType | null;
 
   readonly options: RadioOption[] = Object.entries(WINE_TYPE_CONFIG).map(
     ([value, config]) => ({
@@ -38,7 +38,13 @@ export class RadioGroupComponent {
     })
   );
 
-  constructor () {}
+  constructor() {}
+
+  ngOnInit(): void {
+    if (this.defaultValue && !this.control?.value) {
+      this.control?.setValue(this.defaultValue);
+    }
+  }
 
   select(value: string): void {
     this.control?.setValue(value);

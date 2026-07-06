@@ -1,0 +1,31 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="topbar">
+      <ion-button
+        fill="clear"
+        shape="round"
+        class="back-btn"
+        (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <h1>{{ 'SETTINGS.FAVORITE_WINE.TITLE' | transloco }}</h1>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <p class="subtitle">{{ 'SETTINGS.FAVORITE_WINE.SUBTITLE' | transloco }}</p>
+
+  <form [formGroup]="wineForm" (ngSubmit)="updateFavoriteWine()">
+    <app-wines-radio-group [control]="wineForm.get('selectedType')" [defaultValue]="favoriteWine"></app-wines-radio-group>
+    <ion-button
+      class="ion-margin-top"
+      expand="block"
+      shape="round"
+      color="secondary"
+      type="submit"
+      [disabled]="wineForm.invalid">
+      {{ 'SETTINGS.FAVORITE_WINE.UPDATE_BUTTON' | transloco }}
+    </ion-button> 
+  </form>
+</ion-content>

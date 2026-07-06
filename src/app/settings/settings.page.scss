@@ -1,0 +1,52 @@
+.settings-section {
+  margin-bottom: 22px;
+
+  &__title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--mc-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+}
+
+.settings-list {
+  background: var(--mc-bg-card);
+  border-radius: var(--mc-radius-card);
+  overflow: hidden;
+  padding: 0;
+
+  ion-item {
+    --background: var(--mc-bg-card);
+    --border-color: var(--mc-border);
+    --border-width: 0 0 1px 0;
+    --min-height: 52px;
+    margin-bottom: 0;
+
+    &:last-of-type {
+      --border-width: 0;
+    }
+
+    ion-label {
+      padding-left: 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--mc-text-primary);
+    }
+
+    ion-note {
+      font-size: 0.875rem;
+      color: var(--mc-text-secondary);
+      margin-right: 4px;
+      text-transform: capitalize;
+    }
+
+    &::part(detail-icon) {
+      color: var(--mc-text-secondary);
+      opacity: 1;
+      font-size: 0.875rem;
+    }
+  }
+}

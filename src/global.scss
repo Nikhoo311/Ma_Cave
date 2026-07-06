@@ -296,14 +296,21 @@ ion-toast {
 
 .header {
   margin: 1.5rem 0 1rem 0.7rem;
-  .header__small-text {
-    font-size: 0.8rem;
-    color: var(--text-soft);
-  }
-  
-  .header__title {
-    font-weight: bold;
-    margin-top: 2px;
-    font-size: 1.6rem;
-  }
+}
+
+.header__small-text {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.header__title {
+  font-weight: bold;
+  margin-top: 2px;
+  font-size: 1.6rem;
+}
+
+.header__title-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }

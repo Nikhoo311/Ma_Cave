@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="header">
-    <p class="header__small-text">Bonjour {{ user?.firstName || '' }} 👋</p>
+    <p class="header__small-text">{{ 'HOME.WELCOME' | transloco }} {{ user?.firstName || '' }} 👋</p>
     <h1 class="header__title">{{ 'HOME.TITLE' | transloco }}</h1>
   </div>
 
