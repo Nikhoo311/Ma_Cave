@@ -155,7 +155,10 @@ ion-item.settings-row {
   &--muted { color: var(--mc-text-secondary); }
 }
 
-ion-note { text-transform: capitalize; }
+ion-note {
+  text-transform: capitalize;
+  color: var(--mc-text-secondary);
+}
 
 .edit-button, .navigate-button {
   --background: var(--mc-bg-main);

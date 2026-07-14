@@ -190,6 +190,7 @@ ion-item.input-form:has(ion-input.has-focus) {
    ========== */
 
 ion-alert {
+  --ion-overlay-background-color: var(--ion-background-color);
   .alert-button.alert-button-role-destructive .alert-button-inner {
     color: var(--ion-color-danger) !important;
     font-weight: bold !important;

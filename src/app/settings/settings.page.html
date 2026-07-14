@@ -26,7 +26,11 @@
 
     <ion-list class="settings-list">
       <ion-item [button]="true">
-        <ion-toggle mode="ios" labelPlacement="start">{{ 'SETTINGS.APPEARANCE.DARK_MODE' | transloco }}</ion-toggle>
+        <ion-toggle 
+          mode="ios"
+          labelPlacement="start"
+          [checked]="isDarkMode$ | async"
+          (ionChange)="onDarkModeToggle($event)">{{ 'SETTINGS.APPEARANCE.DARK_MODE' | transloco }}</ion-toggle>
       </ion-item>
 
       <ion-item [button]="true" [detail]="true" (click)="goToVinPrefere()">

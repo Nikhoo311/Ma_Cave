@@ -121,43 +121,44 @@
    MODE SOMBRE
    ========================== */
 
-// @media (prefers-color-scheme: dark) {
-//   :root {
-//     --ion-background-color: #1C1B1F;
-//     --ion-background-color-rgb: 28, 27, 31;
+/* ==========================
+   MODE SOMBRE
+   ========================== */
 
-//     --ion-text-color: #F5F1EB;
-//     --ion-text-color-rgb: 245, 241, 235;
+body.dark {
+  /* Couleurs globales Ionic */
+  --ion-background-color: #171514;
+  --ion-background-color-rgb: 28, 24, 20;
 
-//     --ion-color-primary: #8B3A48;
-//     --ion-color-primary-rgb: 139, 58, 72;
+  --ion-text-color: #F2EDE5;
+  --ion-text-color-rgb: 242, 237, 229;
 
-//     --ion-color-secondary: #2A2930;
+  --ion-color-primary: #8B3A48;
+  --ion-color-primary-rgb: 139, 58, 72;
 
-//     --mc-bg-main: #1C1B1F;
-//     --mc-bg-card: #2A2930;
+  --ion-color-secondary: #27221C;
 
-//     --mc-border: #3A383F;
+  /* Tokens MaCave - Mode Sombre issus de la maquette */
+  --mc-bg-main: #1C1814;
+  --mc-bg-card: #27221C;
+  --mc-border: #3A332A;
 
-//     --mc-text-primary: #F5F1EB;
-//     --mc-text-secondary: #A8A4A0;
+  --mc-text-primary: #F2EDE5;
+  --mc-text-secondary: #A39A8C;
 
-//     --mc-accent: #D8D4CF;
+  --mc-accent: #A39A8C;
+  --mc-label-bg: #27221C;
 
-//     --mc-label-bg: #2A2930;
+  /* Alias de variables */
+  --bg: var(--mc-bg-main);
+  --card: var(--mc-bg-card);
+  --border: var(--mc-border);
+  --text: var(--mc-text-primary);
+  --text-soft: var(--mc-text-secondary);
 
-//     --mc-shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.25);
-
-//     --wine-red: #8B3A48;
-//     --wine-red-accent: #D35445;
-
-//     --wine-white: #DCCB99;
-//     --wine-white-accent: #D4AF37;
-
-//     --wine-rose: #DFAAA2;
-//     --wine-rose-accent: #E8927C;
-
-//     --wine-champagne: #E6DEBC;
-//     --wine-champagne-accent: #F1C40F;
-//   }
-// }
+  /* Ombres Mode Sombre */
+  --mc-shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --mc-shadow-card:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+}

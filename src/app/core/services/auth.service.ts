@@ -12,7 +12,7 @@ import {
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { ERRORS_CODES } from '../types/ErrorsCode';
-import { doc, Firestore, getDoc, setDoc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { doc, Firestore, getDoc, setDoc, updateDoc, deleteDoc, collection, getDocs, writeBatch } from '@angular/fire/firestore';
 import { WineType } from '../types/WineType';
 
 @Injectable({ providedIn: 'root' })
@@ -164,6 +164,7 @@ export class AuthService {
         .catch((error) => this.handleAuthError(error));
     }
  
+    await this.deleteWineSubcollection(user.id).catch((error) => this.handleAuthError(error));
     await deleteDoc(doc(this.firestore, 'users', user.id)).catch((error) => this.handleAuthError(error));
     await deleteUser(firebaseUser).catch((error) => this.handleAuthError(error));
  
@@ -171,6 +172,22 @@ export class AuthService {
   }
  
   // ── Internes ───────────────────────────────────────────────
+
+  private async deleteWineSubcollection(userId: string): Promise<void> {
+    const wineRef = collection(this.firestore, `users/${userId}/wine`);
+    const snapshot = await getDocs(wineRef);
+
+    if (snapshot.empty) return;
+    const batchSize = 500;
+    const docs = snapshot.docs;
+
+    for (let i = 0; i < docs.length; i += batchSize) {
+      const batch = writeBatch(this.firestore);
+      const chunk = docs.slice(i, i + batchSize);
+      chunk.forEach((d) => batch.delete(d.ref));
+      await batch.commit();
+    }
+  }
  
   private handleAuthSuccess(firebaseUser: FirebaseUser): Promise<void> {
     return this.syncUserFromFirestore(firebaseUser).then((user) => {

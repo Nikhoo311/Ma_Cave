@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { TranslocoModule } from '@jsverse/transloco';
 import { AuthService } from '../core/services/auth.service';
 import { WINE_TYPE_CONFIG } from '../core/types/WineType';
+import { DarkModeSetting, PreferencesService } from '../core/services/preferences.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
@@ -19,8 +21,9 @@ import { WINE_TYPE_CONFIG } from '../core/types/WineType';
 })
 export class SettingsPage implements OnInit {
   readonly WINE_TYPE_CONFIG = WINE_TYPE_CONFIG;
+  isDarkMode$!: Observable<boolean>;
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService, private prefs: PreferencesService) { }
   get user() {
     return this.auth.currentUser;
   }
@@ -31,6 +34,9 @@ export class SettingsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.isDarkMode$ = this.prefs.preferences$.pipe(
+      map((p) => p.darkMode === 'dark')
+    );
   }
 
   goToInfoPerso() {
@@ -39,6 +45,12 @@ export class SettingsPage implements OnInit {
 
   goToVinPrefere() {
     this.router.navigate(['/settings/favorite-wine'], { state: { favoriteWine: this.auth.currentUser?.favoriteWineType } });
+  }
+
+  async onDarkModeToggle(event: CustomEvent): Promise<void> {
+    const isDark = event.detail.checked as boolean;
+    const value: DarkModeSetting = isDark ? 'dark' : 'light';
+    await this.prefs.setDarkMode(value);
   }
 
 }

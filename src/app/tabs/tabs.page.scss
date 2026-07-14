@@ -2,6 +2,7 @@
   --background: transparent;
 
   ion-tab-bar {
+    --background: var(--mc-bg-card);
     margin: 0 1.25rem 0.4rem 1.25rem;
     padding: 8px 0;
     border-radius: var(--radius-pill);
@@ -14,6 +15,7 @@
     --color: var(--mc-text-soft);
     --color-selected: var(--mc-text-primary);
     --background-focused: transparent;
+    --background: var(--mc-bg-card);
 
     ion-icon {
       font-size: 1.25rem;
