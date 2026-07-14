@@ -1,0 +1,218 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="topbar">
+      <ion-button
+        fill="clear"
+        shape="round"
+        class="back-btn"
+        (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content [fullscreen]="true">
+  <div class="profile-hero">
+    <div class="profile-avatar-wrapper">
+      <ion-avatar class="profile-avatar">
+        <span class="profile-avatar-initials">{{ initials }}</span>
+      </ion-avatar>
+ 
+      @if (!isGoogleUser) {
+        <div class="profile-avatar-badge">
+          <ion-icon name="mail-outline"></ion-icon>
+        </div>
+      } @else {
+        <div class="profile-avatar-badge profile-avatar-badge--google">
+          <img src="assets/google_logo.svg" alt="Google logo" />
+        </div>
+      }
+    </div>
+    <h1 class="profile-name">{{ fullName }}</h1>
+    <p class="profile-email">{{ user?.email }}</p>
+  </div>
+ 
+  <form [formGroup]="form" class="settings-form">
+    <p class="settings-section-label">{{ 'SETTINGS.ACCOUNT_PAGE.SECTIONS.PERSONAL_INFO' | transloco }}</p>
+    <ion-list class="settings-card" lines="none">
+ 
+      <!-- Prénom -->
+      <ion-item class="settings-row">
+        <ion-icon name="person-outline" slot="start" class="settings-row-icon settings-row-icon--standalone"></ion-icon>
+        <div class="settings-row-content">
+          <app-input
+            [control]="form.get('firstName')"
+            [label]="'SETTINGS.ACCOUNT_PAGE.FIRSTNAME' | transloco"
+            [grouped]="false"
+            [canEdit]="true"
+            type="text">
+          </app-input>
+        </div>
+      </ion-item>
+
+      <!-- Nom -->
+      <ion-item class="settings-row">
+        <ion-icon name="person-outline" slot="start" class="settings-row-icon settings-row-icon--standalone"></ion-icon>
+        <div class="settings-row-content">
+          <app-input
+            [control]="form.get('lastName')"
+            [label]="'SETTINGS.ACCOUNT_PAGE.LASTNAME' | transloco"
+            [grouped]="false"
+            [canEdit]="true"
+            type="text">
+          </app-input>
+        </div>
+      </ion-item>
+ 
+      <!-- Vin préféré -->
+      <ion-item class="settings-row" button="true" detail="false" (click)="goToFavoriteWine()">
+        <ion-icon name="wine-outline" slot="start" class="settings-row-icon settings-row-icon--standalone"></ion-icon>
+        <ion-label class="settings-row-content">
+          <p class="settings-row-label">{{ 'SETTINGS.FAVORITE_WINE.TITLE' | transloco }}</p>
+          <div class="wine-preference-chips">
+            @if (favoriteWineConfig) {
+              <ion-note slot="end">{{ favoriteWineConfig.label | transloco }}</ion-note>
+            } @else {
+              <ion-note slot="end">{{ 'SETTINGS.FAVORITE_WINE.NOT_SPECIFIED' | transloco }}</ion-note>
+            }
+          </div>
+        </ion-label>
+        <ion-button slot="end" fill="clear" shape="round" class="navigate-button">
+          <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+ 
+    <!-- Identifiant -->
+    <p class="settings-section-label">{{ 'SETTINGS.ACCOUNT_PAGE.SECTIONS.IDENTIFIER' | transloco }}</p>
+    <ion-list class="settings-card" lines="none">
+      <ion-item class="settings-row">
+        <ion-icon name="mail-outline" slot="start" class="settings-row-icon"></ion-icon>
+
+        <div class="settings-row-content">
+          <app-input
+            [control]="form.get('email')"
+            [label]="'SETTINGS.ACCOUNT_PAGE.EMAIL' | transloco"
+            [grouped]="false"
+            [canEdit]="!isGoogleUser"
+            type="email"
+            placeholder="exemple@email.com">
+          </app-input>
+
+          @if (isGoogleUser) {
+            <span class="google-managed-pill">
+              <img
+                src="assets/google_logo.svg"
+                alt="Google logo"
+                class="google-managed-dot">
+              {{ 'SETTINGS.ACCOUNT_PAGE.GOOGLE_MANAGED' | transloco }}
+            </span>
+          }
+        </div>
+      </ion-item>
+      @if(emailChanged) {
+        <ion-item class="settings-row info" lines="full">
+          <ion-icon aria-hidden="true" slot="start" name="information-circle-outline" class="settings-row-icon"></ion-icon>
+          Veuillez vous reconnecté pour voir l'adresse mail à jour.
+        </ion-item>
+      }
+    </ion-list>
+ 
+    <!-- Sécurité -->
+    <p class="settings-section-label">{{ 'SETTINGS.ACCOUNT_PAGE.SECTIONS.SECURITY' | transloco }}</p>
+    <ion-list class="settings-card" lines="none">
+      <ion-item
+        class="settings-row"
+        [button]="!isGoogleUser"
+        detail="false"
+        (click)="openPasswordModal()">
+ 
+        <ion-icon name="lock-closed-outline" slot="start" class="settings-row-icon"></ion-icon>
+ 
+        <ion-label class="settings-row-content">
+          <p class="settings-row-label">{{ 'SETTINGS.ACCOUNT_PAGE.PASSWORD' | transloco }}</p>
+          <h3 class="settings-row-value">••••••••••••</h3>
+ 
+          @if (isGoogleUser) {
+            <span class="google-managed-pill">
+              <img src="assets/google_logo.svg" alt="Google logo" class="google-managed-dot">
+              {{ 'SETTINGS.ACCOUNT_PAGE.GOOGLE_MANAGED' | transloco }}
+            </span>
+          }
+        </ion-label>
+
+        @if (!isGoogleUser) {
+          <ion-button slot="end" fill="clear" shape="round" class="navigate-button">
+            <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+        }
+      </ion-item>
+    </ion-list>
+
+    <div class="primary-action">
+      <ion-button expand="block" shape="round" color="secondary" (click)="save()">
+        <ion-icon class="slot-start-icon" slot="start" name="save-outline"></ion-icon>
+        {{ 'SETTINGS.ACCOUNT_PAGE.SAVE' | transloco }}
+      </ion-button>
+      <ion-button expand="block" shape="round" fill="outline" (click)="logout()">
+        <ion-icon class="slot-start-icon" slot="start" name="log-out-outline"></ion-icon>
+        {{ 'SETTINGS.ACCOUNT_PAGE.LOGOUT' | transloco }}
+      </ion-button>
+    </div>
+
+    <ion-button expand="block" shape="round" fill="outline" color="danger"
+      class="delete-account-button" (click)="confirmDeleteAccount()">
+      <ion-icon class="slot-start-icon" slot="start" name="trash-outline"></ion-icon>
+      {{ 'SETTINGS.ACCOUNT_PAGE.DELETE_ACCOUNT.BUTTON' | transloco }}
+    </ion-button>
+    <p class="delete-account-hint">
+      {{ 'SETTINGS.ACCOUNT_PAGE.DELETE_ACCOUNT.HINT' | transloco }}
+    </p>
+
+  </form>
+</ion-content>
+ 
+<!-- Modale : changer le mot de passe -->
+<ion-modal
+  [isOpen]="isPasswordModalOpen"
+  [breakpoints]="[0, 0.6, 0.9]"
+  [initialBreakpoint]="0.9"
+  (didDismiss)="closePasswordModal()">
+  <ng-template>
+    <ion-content class="password-modal-content">
+      <form [formGroup]="passwordForm" class="password-modal-form">
+        <h2 class="modal-heading">{{ 'SETTINGS.CHANGE_PASSWORD.TITLE' | transloco }}</h2>
+        <p class="modal-subheading">{{ 'SETTINGS.CHANGE_PASSWORD.SUBTITLE' | transloco }}</p>
+
+        <app-input
+          [control]="passwordForm.get('oldPassword')"
+          [label]="'SETTINGS.CHANGE_PASSWORD.CURRENT_LABEL' | transloco"
+          placeholder="••••••••"
+          type="password"
+          [showEye]="true">
+        </app-input>
+
+       <app-input
+          [control]="passwordForm.get('newPassword')"
+          [label]="'SETTINGS.CHANGE_PASSWORD.NEW_LABEL' | transloco"
+          placeholder="••••••••"
+          type="password"
+          [showEye]="true">
+        </app-input>
+
+        <app-input
+          [control]="passwordForm.get('confirmPassword')"
+          [label]="'SETTINGS.CHANGE_PASSWORD.CONFIRM_LABEL' | transloco"
+          placeholder="••••••••"
+          type="password"
+          [showEye]="true">
+        </app-input>
+
+        <ion-button expand="block" shape="round" color="secondary" (click)="submitPasswordChange()">
+          {{ 'SETTINGS.CHANGE_PASSWORD.SUBMIT' | transloco }}
+        </ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

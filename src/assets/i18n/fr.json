@@ -138,14 +138,60 @@
       "TITLE": "Informations personnelles",
       "UPDATE_BUTTON": "Enregistrer",
       "UPDATE_SUCCESS": "Vos informations personnelles ont été mises à jour avec succès.",
-      "UPDATE_ERROR": "Une erreur est survenue lors de la mise à jour.\n{{error}}"
+      "UPDATE_ERROR": "Une erreur est survenue lors de la mise à jour.\n{{error}}",
+      "REQUIRED_PASSWORD_UPDATE_EMAIL_ERROR": "Mot de passe requis pour changer l'e-mail.",
+      "REQUIRED_PASSWORD_DELETE_ERROR": "Mot de passe requis pour confirmer la suppression.",
+      "EMAIL_CONFIRMATION_SENT": "Un e-mail de confirmation a été envoyé à votre nouvelle adresse."
     },
     "FAVORITE_WINE": {
       "TITLE": "Vin préféré",
       "SUBTITLE": "Choisissez le type de vin que vous préférez.",
       "UPDATE_BUTTON": "Enregistrer",
       "UPDATE_SUCCESS": "Votre vin préféré a été mis à jour avec succès.",
-      "UPDATE_ERROR": "Une erreur est survenue lors de la mise à jour.\n{{error}}"
+      "UPDATE_ERROR": "Une erreur est survenue lors de la mise à jour.",
+      "NOT_SPECIFIED": "Non renseigné"
+    },
+    "ACCOUNT_PAGE": {
+      "SECTIONS": {
+        "PERSONAL_INFO": "Informations personnelles",
+        "IDENTIFIER": "Identifiant",
+        "SECURITY": "Sécurité"
+      },
+      "FIRSTNAME": "Prénom",
+      "LASTNAME": "Nom",
+      "EMAIL": "Adresse e-mail",
+      "PASSWORD": "Mot de passe",
+      "GOOGLE_MANAGED": "Géré par Google",
+      "SAVE": "Enregistrer",
+      "LOGOUT": "Se déconnecter",
+      "DELETE_ACCOUNT": {
+        "BUTTON": "Supprimer mon compte",
+        "HINT": "La suppression est définitive et entraîne la perte de toutes vos données.",
+        "CONFIRM_HEADER": "Supprimer mon compte",
+        "CONFIRM_MESSAGE": "La suppression est définitive et entraîne la perte de toutes vos données.",
+        "PASSWORD_PLACEHOLDER": "Mot de passe actuel",
+        "CANCEL": "Annuler",
+        "CONFIRM": "Supprimer",
+        "ERROR": "Impossible de supprimer le compte"
+      },
+      "EMAIL_CHANGE_CONFIRM": {
+        "HEADER": "Confirmer le changement d'e-mail",
+        "MESSAGE": "Pour des raisons de sécurité, merci de saisir votre mot de passe actuel.",
+        "PASSWORD_PLACEHOLDER": "Mot de passe actuel",
+        "CANCEL": "Annuler",
+        "CONFIRM": "Confirmer"
+      }
+    },
+    "CHANGE_PASSWORD": {
+      "TITLE": "Modifier le mot de passe",
+      "SUBTITLE": "Choisissez un mot de passe d'au moins 8 caractères.",
+      "CURRENT_LABEL": "Mot de passe actuel",
+      "NEW_LABEL": "Nouveau mot de passe",
+      "CONFIRM_LABEL": "Confirmer le nouveau mot de passe",
+      "SUBMIT": "Modifier le mot de passe",
+      "MISMATCH": "Les mots de passe ne correspondent pas",
+      "SUCCESS": "Mot de passe modifié avec succès",
+      "ERROR": "Impossible de modifier le mot de passe"
     }
   }
 }

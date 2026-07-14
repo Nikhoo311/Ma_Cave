@@ -34,7 +34,7 @@ export class SettingsPage implements OnInit {
   }
 
   goToInfoPerso() {
-    this.router.navigate(['/settings/informations-personnelles']);
+    this.router.navigate(['/settings/personal-information']);
   }
 
   goToVinPrefere() {

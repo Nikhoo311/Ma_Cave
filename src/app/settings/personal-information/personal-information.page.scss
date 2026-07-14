@@ -1,0 +1,233 @@
+.back-btn {
+  --background: var(--mc-bg-card);
+  --background-hover: var(--mc-bg-card);
+  --background-activated: var(--mc-border);
+  --color: var(--mc-text-primary);
+  --border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+
+  ion-icon {
+    font-size: 18px;
+  }
+}
+
+.profile-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0 28px;
+}
+.profile-avatar-wrapper {
+  position: relative;
+  margin-bottom: 14px;
+}
+ion-avatar.profile-avatar {
+  width: 88px;
+  height: 88px;
+  background: var(--mc-wine-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img { width: 100%; height: 100%; object-fit: cover; }
+}
+.profile-avatar-initials {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--wine-rose);
+}
+.profile-avatar-badge {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--mc-accent);
+  border: 2.5px solid var(--mc-bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon { color: #FAF7F2; font-size: 14px; }
+
+  &--google { background: #fff; }
+}
+.profile-name {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.profile-email {
+  font-size: 13px;
+  color: var(--mc-text-secondary);
+}
+
+.settings-form {
+  padding: 0 16px 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.settings-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mc-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding-left: 4px;
+}
+
+ion-list.settings-card {
+  background: var(--mc-bg-card);
+  border-radius: var(--mc-radius-card);
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.settings-card > ion-item:last-child {
+  margin-bottom: 0;
+  --padding-bottom: 15px;
+}
+
+ion-item.settings-row {
+  display: flex;
+  align-items: center;
+  --background: transparent;
+  --border-color: var(--mc-border);
+  --padding-start: 18px;
+  --padding-top: 15px;
+
+  &:last-of-type { --border-color: transparent; }
+  &.info ion-icon {
+    color: var(--ion-color-tertiary);
+  }
+  &.info::part(native) {
+    transition: 0.2s;
+    --background: rgba(var(--ion-color-tertiary-rgb), 0.2);
+    border: 1px solid var(--ion-color-tertiary);
+    border-radius: var(--mc-radius-card);
+  }
+}
+.settings-row-icon {
+  color: var(--mc-accent);
+  font-size: 17px;
+  margin-inline-end: 12px;
+
+  &--standalone { margin-inline-end: 12px; }
+}
+
+.settings-row-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  app-input {
+    padding-top: 0; 
+    width: 100%;
+    padding-top: 5px;
+  }
+}
+
+.settings-row-label {
+  display: block;
+  font-size: 0.688rem;
+  font-weight: bold;
+  color: var(--mc-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 2px;
+}
+.settings-row-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--mc-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &--muted { color: var(--mc-text-secondary); }
+}
+
+ion-note { text-transform: capitalize; }
+
+.edit-button, .navigate-button {
+  --background: var(--mc-bg-main);
+  --background-activated: var(--mc-bg-main);
+  --border-radius: 50%;
+  --box-shadow: none;
+  --padding-start: 5px;
+  --padding-end: 5px;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+}
+.edit-button ion-icon, .navigate-button ion-icon { color: var(--mc-accent); }
+
+.settings-row-icon, 
+.edit-button {
+  align-self: center; 
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.primary-action {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.delete-account-button {
+  --border-width: 2px;
+  --box-shadow: none;
+  height: 50px;
+  margin: 2rem 0 8px 0;
+}
+.delete-account-hint {
+  color: var(--mc-text-secondary);
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 4px;
+  font-size: 0.8rem;
+}
+
+.google-managed-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--mc-text-secondary);
+  background: var(--mc-bg-main);
+  border: 1.5px solid var(--mc-border);
+  border-radius: var(--mc-radius-pill);
+  padding: 4px 10px;
+  margin-top: 8px;
+  margin-left: 0;
+  align-self: flex-start;
+}
+
+.password-modal-content { --background: var(--mc-bg-main); }
+.password-modal-form { 
+  padding: 0 20px 0 20px;
+  margin-top: 30px;
+}
+.modal-heading {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.modal-subheading {
+  font-size: 0.8rem;
+  color: var(--mc-text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}

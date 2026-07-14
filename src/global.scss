@@ -152,14 +152,12 @@ ion-item.input-form ion-input {
   --placeholder-opacity: 1;
   --padding-start: 16px;
   --padding-end: 16px;
-  --padding-top: 14px;
-  --padding-bottom: 14px;
 
   border: 1.5px solid var(--mc-border);
   border-radius: var(--mc-radius-input);
   width: 100%;
   font-family: var(--ion-font-family);
-  font-size: 15px;
+  font-size: 0.9rem;
   transition: border-color 0.15s;
 }
 
@@ -188,6 +186,19 @@ ion-item.input-form:has(ion-input.has-focus) {
 }
 
 /* ==========
+   ALERTS
+   ========== */
+
+ion-alert {
+  .alert-button.alert-button-role-destructive .alert-button-inner {
+    color: var(--ion-color-danger) !important;
+    font-weight: bold !important;
+  }
+  .alert-button.alert-button-role-destructive.ion-activated {
+    background-color: rgba(var(--ion-color-danger-rgb), 0.3) !important;
+  } 
+}
+/* ==========
    BOUTONS
    ========== */
 ion-button {
@@ -198,6 +209,10 @@ ion-button {
   --padding-end: 1rem;
   font-weight: 700;
   text-transform: none;
+
+  .slot-start-icon {
+    margin-right: 5px;
+  }
 }
 
 ion-button[color="primary"] {
@@ -254,6 +269,20 @@ ion-toast {
   --background: var(--mc-text-primary);
   --color: var(--mc-bg-main);
   --border-radius: 999px;
+}
+
+/* ==========
+   TOOLBAR
+   ========== */
+
+ion-header {
+  ion-toolbar {
+    --background: var(--mc-bg-main);
+    --padding-start: 12px;
+    --padding-end: 18px;
+    --padding-top: 6px;
+    --padding-bottom: 6px;
+  }
 }
 
 /* ==========

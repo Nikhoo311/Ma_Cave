@@ -1,13 +1,47 @@
-<div class="input-group">
+@if (grouped) {
+  <div class="input-group">
+    <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+  </div>
+} @else {
+  <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+}
+
+<ng-template #inputTemplate>
   <label class="input-label">{{ label }}</label>
 
   <ion-item class="input-form">
-    <ion-input [type]="type" [formControl]="$any(control)" [placeholder]="placeholder">
+    <ion-input [type]="inputType" [formControl]="$any(control)" [placeholder]="placeholder">
       @if (iconName) {
         <ion-icon slot="start" [name]="iconName"></ion-icon>
       }
     </ion-input>
+
+    @if (showEye) {
+      <ion-button
+        type="button"
+        fill="clear"
+        shape="round"
+        class="eye-toggle-button"
+        slot="end"
+        (click)="togglePasswordVisibility()">
+        <ion-icon
+          slot="icon-only"
+          class="eye-toggle-icon"
+          [name]="passwordVisible ? 'eye-off-outline' : 'eye-outline'">
+        </ion-icon>
+      </ion-button>
+    }
+
+    @if (canEdit) {
+      <ion-button slot="end" fill="clear" shape="round" class="edit-button"
+        (click)="toggleEdit()">
+        <ion-icon 
+          slot="icon-only" 
+          [name]="isEditing ? 'checkmark-outline' : 'pencil-outline'">
+        </ion-icon>
+      </ion-button>
+    }
   </ion-item>
 
   <form-error [control]="control"></form-error>
-</div>
+</ng-template>
