@@ -134,6 +134,10 @@
       "CAVE": "Cave",
       "APPEARANCE": "Apparence"
     },
+    "APPEARANCE": {
+      "DARK_MODE": "Mode sombre",
+      "LANGUAGE": "Langue"
+    },
     "INFO_PERSONAL": {
       "TITLE": "Informations personnelles",
       "UPDATE_BUTTON": "Enregistrer",

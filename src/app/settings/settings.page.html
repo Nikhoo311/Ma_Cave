@@ -20,4 +20,20 @@
     </ion-list>
   </div>
 
+  <!-- Section Apparence -->
+  <div class="settings-section">
+    <h3 class="settings-section__title">{{ 'SETTINGS.SECTIONS.APPEARANCE' | transloco }}</h3>
+
+    <ion-list class="settings-list">
+      <ion-item [button]="true">
+        <ion-toggle mode="ios" labelPlacement="start">{{ 'SETTINGS.APPEARANCE.DARK_MODE' | transloco }}</ion-toggle>
+      </ion-item>
+
+      <ion-item [button]="true" [detail]="true" (click)="goToVinPrefere()">
+        <ion-label>{{ 'SETTINGS.APPEARANCE.LANGUAGE' | transloco }}</ion-label>
+        <ion-note slot="end">{{ favoriteWineLabelKey | transloco }}</ion-note>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>
