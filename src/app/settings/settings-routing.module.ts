@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SettingsPage } from './settings.page';
 import { FavoriteWinePage } from './favorite-wine/favorite-wine.page';
 import { PersonalInformationPage } from './personal-information/personal-information.page';
+import { LanguagePage } from './language/language.page';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'personal-information',
     component: PersonalInformationPage
+  },
+  {
+    path: 'language',
+    component: LanguagePage
   }
 
 

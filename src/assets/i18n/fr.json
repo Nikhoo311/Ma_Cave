@@ -136,7 +136,14 @@
     },
     "APPEARANCE": {
       "DARK_MODE": "Mode sombre",
-      "LANGUAGE": "Langue"
+      "LANGUAGE": {
+        "TITLE": "Langue",
+        "SUBTITLE": "Choisissez la langue de l'application.",
+        "SEARCH_PLACEHOLDER": "Rechercher une langue...",
+        "AVAILABLE": "Langues disponibles",
+        "NO_RESULTS": "Aucune langue trouvée",
+        "HINT": "La langue choisie s'applique à l'ensemble de l'application. Le redémarrage n'est pas nécessaire."
+      }
     },
     "INFO_PERSONAL": {
       "TITLE": "Informations personnelles",

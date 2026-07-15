@@ -33,9 +33,9 @@
           (ionChange)="onDarkModeToggle($event)">{{ 'SETTINGS.APPEARANCE.DARK_MODE' | transloco }}</ion-toggle>
       </ion-item>
 
-      <ion-item [button]="true" [detail]="true" (click)="goToVinPrefere()">
-        <ion-label>{{ 'SETTINGS.APPEARANCE.LANGUAGE' | transloco }}</ion-label>
-        <ion-note slot="end">{{ favoriteWineLabelKey | transloco }}</ion-note>
+      <ion-item [button]="true" [detail]="true" (click)="goToLanguage()">
+        <ion-label>{{ 'SETTINGS.APPEARANCE.LANGUAGE.TITLE' | transloco }}</ion-label>
+        <ion-note slot="end">{{ selectedLangague | transloco }}</ion-note>
       </ion-item>
     </ion-list>
   </div>

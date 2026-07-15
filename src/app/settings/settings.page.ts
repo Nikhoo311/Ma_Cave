@@ -7,6 +7,7 @@ import { AuthService } from '../core/services/auth.service';
 import { WINE_TYPE_CONFIG } from '../core/types/WineType';
 import { DarkModeSetting, PreferencesService } from '../core/services/preferences.service';
 import { Observable, map } from 'rxjs';
+import { LANGUAGE_CONFIG } from '../core/types/LanguageConfig';
 
 @Component({
   selector: 'app-settings',
@@ -33,6 +34,10 @@ export class SettingsPage implements OnInit {
     return type ? WINE_TYPE_CONFIG[type]?.label ?? '' : '';
   }
 
+  get selectedLangague(): string {
+    return LANGUAGE_CONFIG[this.prefs.current.language].nativeName;
+  }
+
   ngOnInit() {
     this.isDarkMode$ = this.prefs.preferences$.pipe(
       map((p) => p.darkMode === 'dark')
@@ -45,6 +50,10 @@ export class SettingsPage implements OnInit {
 
   goToVinPrefere() {
     this.router.navigate(['/settings/favorite-wine'], { state: { favoriteWine: this.auth.currentUser?.favoriteWineType } });
+  }
+  
+  goToLanguage() {
+    this.router.navigate(['/settings/language']);
   }
 
   async onDarkModeToggle(event: CustomEvent): Promise<void> {
