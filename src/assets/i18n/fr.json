@@ -50,7 +50,7 @@
       },
       "STEP_TWO": {
         "AMOUNT_TITLE": "Étape 2 sur 3",
-        "QUESTION": "Votre vin préféré",
+        "QUESTION": "Votre type de vin préféré",
         "PRECISION": "Choisissez le type que vous buvez le plus souvent. Ceci nous aidera à mettre en avant les bonnes bouteilles."
       },
       "STEP_THREE": {
@@ -155,10 +155,10 @@
       "EMAIL_CONFIRMATION_SENT": "Un e-mail de confirmation a été envoyé à votre nouvelle adresse."
     },
     "FAVORITE_WINE": {
-      "TITLE": "Vin préféré",
+      "TITLE": "Type de vin préféré",
       "SUBTITLE": "Choisissez le type de vin que vous préférez.",
       "UPDATE_BUTTON": "Enregistrer",
-      "UPDATE_SUCCESS": "Votre vin préféré a été mis à jour avec succès.",
+      "UPDATE_SUCCESS": "Votre type vin préféré a été mis à jour avec succès.",
       "UPDATE_ERROR": "Une erreur est survenue lors de la mise à jour.",
       "NOT_SPECIFIED": "Non renseigné"
     },
