@@ -1,7 +1,8 @@
 import { WineType } from "../types/WineType";
-import { UserWine } from "./wine.model";
 
 export type AuthProvider = 'google' | 'password';
+
+export type CaveView = 'grid' | 'list';
 
 export interface User {
   id: string;
@@ -15,5 +16,6 @@ export interface User {
   caveConfig: {
     rows: number;
     cols: number;
+    viewMode: CaveView;
   };
 }

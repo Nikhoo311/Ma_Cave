@@ -172,47 +172,39 @@
 
   </form>
 </ion-content>
- 
-<!-- Modale : changer le mot de passe -->
-<ion-modal
+
+<app-custom-modal
   [isOpen]="isPasswordModalOpen"
   [breakpoints]="[0, 0.6, 0.9]"
   [initialBreakpoint]="0.9"
   (didDismiss)="closePasswordModal()">
-  <ng-template>
-    <ion-content class="password-modal-content">
-      <form [formGroup]="passwordForm" class="password-modal-form">
-        <h2 class="modal-heading">{{ 'SETTINGS.CHANGE_PASSWORD.TITLE' | transloco }}</h2>
-        <p class="modal-subheading">{{ 'SETTINGS.CHANGE_PASSWORD.SUBTITLE' | transloco }}</p>
-
-        <app-input
-          [control]="passwordForm.get('oldPassword')"
-          [label]="'SETTINGS.CHANGE_PASSWORD.CURRENT_LABEL' | transloco"
-          placeholder="••••••••"
-          type="password"
-          [showEye]="true">
-        </app-input>
-
-       <app-input
-          [control]="passwordForm.get('newPassword')"
-          [label]="'SETTINGS.CHANGE_PASSWORD.NEW_LABEL' | transloco"
-          placeholder="••••••••"
-          type="password"
-          [showEye]="true">
-        </app-input>
-
-        <app-input
-          [control]="passwordForm.get('confirmPassword')"
-          [label]="'SETTINGS.CHANGE_PASSWORD.CONFIRM_LABEL' | transloco"
-          placeholder="••••••••"
-          type="password"
-          [showEye]="true">
-        </app-input>
-
-        <ion-button expand="block" shape="round" color="secondary" (click)="submitPasswordChange()">
-          {{ 'SETTINGS.CHANGE_PASSWORD.SUBMIT' | transloco }}
-        </ion-button>
-      </form>
-    </ion-content>
-  </ng-template>
-</ion-modal>
+  
+  <form [formGroup]="passwordForm" class="password-modal-form">
+    <h2 class="modal-heading">{{ 'SETTINGS.CHANGE_PASSWORD.TITLE' | transloco }}</h2>
+    <p class="modal-subheading">{{ 'SETTINGS.CHANGE_PASSWORD.SUBTITLE' | transloco }}</p>
+    <app-input
+      [control]="passwordForm.get('oldPassword')"
+      [label]="'SETTINGS.CHANGE_PASSWORD.CURRENT_LABEL' | transloco"
+      placeholder="••••••••"
+      type="password"
+      [showEye]="true">
+    </app-input>
+    <app-input
+      [control]="passwordForm.get('newPassword')"
+      [label]="'SETTINGS.CHANGE_PASSWORD.NEW_LABEL' | transloco"
+      placeholder="••••••••"
+      type="password"
+      [showEye]="true">
+    </app-input>
+    <app-input
+      [control]="passwordForm.get('confirmPassword')"
+      [label]="'SETTINGS.CHANGE_PASSWORD.CONFIRM_LABEL' | transloco"
+      placeholder="••••••••"
+      type="password"
+      [showEye]="true">
+    </app-input>
+    <ion-button expand="block" shape="round" color="secondary" (click)="submitPasswordChange()">
+      {{ 'SETTINGS.CHANGE_PASSWORD.SUBMIT' | transloco }}
+    </ion-button>
+  </form>
+</app-custom-modal>

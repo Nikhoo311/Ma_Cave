@@ -222,7 +222,7 @@ export class AuthService {
       favoriteWineType: null,
       provider: firebaseUser.providerData.some(p => p.providerId === 'google.com') ? 'google' : 'password',
       createdAt: new Date(firebaseUser.metadata.creationTime || Date.now()),
-      caveConfig: { rows: 0, cols: 0 },
+      caveConfig: { rows: 0, cols: 0, viewMode: 'grid' },
     };
   }
 

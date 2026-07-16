@@ -1,0 +1,12 @@
+.sheet-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 10;
+  --background: var(--mc-bg-card, red);
+  --color: var(--text-soft);
+  height: 32px;
+  width: 32px;
+  --padding-start: 0;
+  --padding-end: 0; 
+}

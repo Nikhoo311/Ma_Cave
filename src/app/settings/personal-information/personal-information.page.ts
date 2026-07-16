@@ -10,6 +10,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { InputComponent } from "src/app/components/input/input.component";
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { User } from 'src/app/core/models/user.model';
+import { CustomModalComponent } from "src/app/components/custom-modal/custom-modal.component";
 
 type EditableField = 'firstName' | 'lastName' | 'email';
 
@@ -21,8 +22,9 @@ type EditableField = 'firstName' | 'lastName' | 'email';
     CommonModule,
     IonicModule,
     TranslocoModule,
-    InputComponent
-  ],
+    InputComponent,
+    CustomModalComponent
+],
   templateUrl: './personal-information.page.html',
   styleUrls: ['./personal-information.page.scss'],
 })

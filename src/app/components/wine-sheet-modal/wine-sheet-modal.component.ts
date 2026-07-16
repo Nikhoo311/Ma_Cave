@@ -5,13 +5,14 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { UserWine } from '../../core/models/wine.model';
 import { WINE_TYPE_CONFIG } from '../../core/types/WineType';
 import { CaveService } from 'src/app/core/services/cave.service';
+import { CustomModalComponent } from '../custom-modal/custom-modal.component';
 
 @Component({
   selector: 'app-wine-sheet-modal',
   templateUrl: './wine-sheet-modal.component.html',
   styleUrls: ['./wine-sheet-modal.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, TranslocoModule]
+  imports: [CommonModule, IonicModule, TranslocoModule, CustomModalComponent]
 })
 export class WineSheetModalComponent {
   @Input({ required: true }) canRemoveBottle: boolean = false;

@@ -195,7 +195,7 @@
     },
     "CHANGE_PASSWORD": {
       "TITLE": "Modifier le mot de passe",
-      "SUBTITLE": "Choisissez un mot de passe d'au moins 8 caractères.",
+      "SUBTITLE": "Choisissez un mot de passe d'au moins 6 caractères.",
       "CURRENT_LABEL": "Mot de passe actuel",
       "NEW_LABEL": "Nouveau mot de passe",
       "CONFIRM_LABEL": "Confirmer le nouveau mot de passe",
@@ -203,6 +203,25 @@
       "MISMATCH": "Les mots de passe ne correspondent pas",
       "SUCCESS": "Mot de passe modifié avec succès",
       "ERROR": "Impossible de modifier le mot de passe"
+    },
+    "CAVE": {
+      "DISPOSITION": {
+        "TITLE": "Disposition de la cave",
+        "SLOTS": "{count, plural, =0 {emplacement} =1 {emplacement} other {emplacements}}",
+        "ROWS": "{count, plural, =0 {rangée} =1 {rangée} other {rangées}}",
+        "COLS": "{count, plural, =0 {colonne} =1 {colonne} other {colonnes}}"
+      },
+      "DISPLAY": {
+        "TITLE": "Affichage de l'inventaire",
+        "SUBTITLE": "Vue par défaut",
+        "GRID": "Grille",
+        "LIST": "Liste"
+      },
+      "NOTIFICATIONS": {
+        "TITLE": "Alertes à boire",
+        "ENABLED": "Activées",
+        "DISABLED": "Désactivées"
+      }
     }
   }
 }
