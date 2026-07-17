@@ -96,3 +96,34 @@ ion-segment-button {
     border-radius: var(--mc-radius-pill);
   }
 }
+
+ .modal {
+  &-title {
+    font-size: 1.125rem;
+    margin-top: 1.1rem;
+    margin-bottom: 4px;
+    color: var(--mc-text-primary);
+  }
+  &-hint {
+    font-size: 0.781rem;
+    color: var(--mc-text-secondary);
+    margin-bottom: 18px;
+  }
+  &-total-line {
+    text-align: center;
+    font-size: 0.781rem;
+    color: var(--mc-text-secondary);
+    margin: 14px 0 18px 0;
+
+    strong {
+      color: var(--mc-text-primary);
+    }
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}

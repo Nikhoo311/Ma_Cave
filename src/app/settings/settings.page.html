@@ -38,10 +38,10 @@
           <p>{{ 'SETTINGS.CAVE.DISPLAY.SUBTITLE' | transloco }} : {{ ('SETTINGS.CAVE.DISPLAY.' + selectedView.toUpperCase()) | transloco }}</p>
         </ion-label>
         <ion-segment slot="end" [value]="selectedView" (ionChange)="onViewChange($event)">
-          <ion-segment-button value="grid">
+          <ion-segment-button [disabled]="isViewChangePending" value="grid">
             <ion-icon name="grid-outline"></ion-icon>
           </ion-segment-button>
-          <ion-segment-button value="list">
+          <ion-segment-button [disabled]="isViewChangePending" value="list">
             <ion-icon name="list-outline"></ion-icon>
           </ion-segment-button>
         </ion-segment>
@@ -81,5 +81,40 @@
       </ion-item>
     </ion-list>
   </div>
-
 </ion-content>
+
+<app-custom-modal
+  [isOpen]="isDispositionModalOpen"
+  [initialBreakpoint]="0.6"
+  [breakpoints]="[0, 0.6]"
+  (didDismiss)="closeDispositionModal()">
+
+  <h2 class="modal-title">{{ 'SETTINGS.CAVE.DISPOSITION.TITLE' | transloco }}</h2>
+  <p class="modal-hint">{{ 'SETTINGS.CAVE.DISPOSITION.MODAL.HINT' | transloco: { max: maxEmplacements } }}</p>
+
+  <form [formGroup]="dispositionForm">
+    <app-stepper
+      [control]="dispositionForm.get('rows')"
+      [label]="'PREFERENCES.STEPS.STEP_THREE.ROWS_LABEL' | transloco"
+      [min]="1"
+      [max]="maxRows">
+    </app-stepper>
+
+    <app-stepper
+      [control]="dispositionForm.get('cols')"
+      [label]="'PREFERENCES.STEPS.STEP_THREE.COLS_LABEL' | transloco"
+      [min]="1"
+      [max]="maxCols">
+    </app-stepper>
+  </form>
+
+  <p class="modal-total-line">
+    {{ 'SETTINGS.CAVE.DISPOSITION.MODAL.TOTAL_LABEL' | transloco }}
+    <strong>{{ dispositionTotal }}</strong>
+    {{ 'SETTINGS.CAVE.DISPOSITION.SLOTS' | transloco: { count: dispositionTotal } }}
+  </p>
+
+  <ion-button type="submit" expand="block" shape="round" [color]="isDarkMode ? 'primary' : 'secondary'" (click)="saveDisposition()">
+    {{ 'SETTINGS.CAVE.DISPOSITION.MODAL.SAVE' | transloco }}
+  </ion-button>
+</app-custom-modal>

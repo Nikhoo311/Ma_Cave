@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { AuthService } from '../core/services/auth.service';
-import { WINE_TYPE_CONFIG } from '../core/types/WineType';
+import { CAVE_MAX, WINE_TYPE_CONFIG } from '../core/types/WineType';
 import { DarkModeSetting, PreferencesService } from '../core/services/preferences.service';
 import { Observable, map } from 'rxjs';
 import { LANGUAGE_CONFIG } from '../core/types/LanguageConfig';
 import { CaveView } from '../core/models/user.model';
+import { CustomModalComponent } from '../components/custom-modal/custom-modal.component';
+import { StepperComponent } from '../components/stepper/stepper.component';
+import { ToastService } from '../core/services/toast.service';
 
 @Component({
   selector: 'app-settings',
@@ -18,17 +22,36 @@ import { CaveView } from '../core/models/user.model';
   imports: [
     CommonModule,
     IonicModule,
-    TranslocoModule
+    TranslocoModule,
+    ReactiveFormsModule,
+    CustomModalComponent,
+    StepperComponent,
   ],
 })
 export class SettingsPage implements OnInit {
   readonly WINE_TYPE_CONFIG = WINE_TYPE_CONFIG;
+  readonly maxEmplacements = CAVE_MAX;
+
   isDarkMode$!: Observable<boolean>;
-
-  selectedView: CaveView = 'grid';
   notificationsEnabled$!: Observable<boolean>;
+  selectedView: CaveView = 'grid';
 
-  constructor(private router: Router, private auth: AuthService, private prefs: PreferencesService) { }
+  isDispositionModalOpen = false;
+  isViewChangePending = false;
+  dispositionForm: FormGroup = this.fb.group({
+    rows: [this.caveConfig?.rows],
+    cols: [this.caveConfig?.cols],
+  });
+
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private prefs: PreferencesService,
+    private fb: FormBuilder,
+    private toastService: ToastService,
+    private transloco: TranslocoService
+  ) {}
+
   get user() {
     return this.auth.currentUser;
   }
@@ -50,20 +73,89 @@ export class SettingsPage implements OnInit {
     return LANGUAGE_CONFIG[this.prefs.current.language].nativeName;
   }
 
+  get isDarkMode(): boolean {
+    return this.prefs.current.darkMode === 'dark';
+  }
+
+  get maxRows(): number {
+    return Math.floor(this.maxEmplacements / (this.dispositionForm.get('cols')?.value || 1));
+  }
+
+  get maxCols(): number {
+    return Math.floor(this.maxEmplacements / (this.dispositionForm.get('rows')?.value || 1));
+  }
+
+  get dispositionTotal(): number {
+    return (this.dispositionForm.get('rows')?.value || 0) * (this.dispositionForm.get('cols')?.value || 0);
+  }
+
   ngOnInit() {
     this.isDarkMode$ = this.prefs.preferences$.pipe(map((p) => p.darkMode === 'dark'));
     this.notificationsEnabled$ = this.prefs.preferences$.pipe(map((p) => p.notificationsEnabled));
     this.selectedView = this.auth.currentUser?.caveConfig?.viewMode ?? 'grid';
   }
 
-
   openDispositionSheet() {
-    // ouverture de l'ion-modal / bottom sheet de disposition (stepper rangées/colonnes)
+    this.dispositionForm.patchValue(
+      { rows: this.caveConfig?.rows ?? 5, cols: this.caveConfig?.cols ?? 3 },
+      { emitEvent: false }
+    );
+    this.isDispositionModalOpen = true;
   }
 
-  onViewChange(event: CustomEvent) {
-    this.selectedView = event.detail.value as CaveView;
-    // persister le choix (Firestore ou @capacitor/preferences selon ce que tu veux)
+  closeDispositionModal() {
+    this.isDispositionModalOpen = false;
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async saveDisposition(): Promise<void> {
+    const rows = this.dispositionForm.get('rows')?.value;
+    const cols = this.dispositionForm.get('cols')?.value;
+
+    await this.auth.updateCaveConfig({ rows, cols })
+      .then(() => {
+        this.toastService.success(
+          this.transloco.translate('SETTINGS.CAVE.DISPOSITION.MODAL.SAVE_SUCCESS')
+        );
+        this.closeDispositionModal();
+      })
+      .catch(() => {
+        this.toastService.error(
+          this.transloco.translate('SETTINGS.CAVE.DISPOSITION.MODAL.SAVE_ERROR')
+        );
+      });
+  }
+
+  async onViewChange(event: CustomEvent): Promise<void> {
+    if (this.isViewChangePending) return;
+
+    const previousView = this.selectedView;
+    const newView = event.detail.value as CaveView;
+
+    if (newView === previousView) return;
+
+    this.selectedView = newView;
+    this.isViewChangePending = true;
+
+    await this.auth.updateCaveConfig({ viewMode: newView })
+      .then(async () => {
+        await this.delay(2000);
+        this.toastService.success(
+          this.transloco.translate('SETTINGS.CAVE.DISPLAY.UPDATE_SUCCESS', { view: this.transloco.translate(`SETTINGS.CAVE.DISPLAY.${newView.toUpperCase()}`) })
+        );
+      })
+      .catch((error) => {
+        this.selectedView = previousView;
+        this.toastService.error(
+          this.transloco.translate('SETTINGS.CAVE.DISPLAY.UPDATE_ERROR', { error: error.message })
+        );
+      })
+      .finally(() => {
+        this.isViewChangePending = false;
+      });
   }
 
   onNotificationsToggle(event: CustomEvent) {
@@ -78,7 +170,7 @@ export class SettingsPage implements OnInit {
   goToVinPrefere() {
     this.router.navigate(['/settings/favorite-wine'], { state: { favoriteWine: this.auth.currentUser?.favoriteWineType } });
   }
-  
+
   goToLanguage() {
     this.router.navigate(['/settings/language']);
   }
@@ -88,5 +180,4 @@ export class SettingsPage implements OnInit {
     const value: DarkModeSetting = isDark ? 'dark' : 'light';
     await this.prefs.setDarkMode(value);
   }
-
 }

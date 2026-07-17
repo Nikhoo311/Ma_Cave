@@ -10,7 +10,7 @@ import {
   deleteUser
 } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user.model';
+import { CaveView, User } from '../models/user.model';
 import { ERRORS_CODES } from '../types/ErrorsCode';
 import { doc, Firestore, getDoc, setDoc, updateDoc, deleteDoc, collection, getDocs, writeBatch } from '@angular/fire/firestore';
 import { WineType } from '../types/WineType';
@@ -141,6 +141,23 @@ export class AuthService {
     return updateDoc(userRef, { favoriteWineType: selectedType })
       .then(() => {
         this.currentUserSubject.next({ ...user, favoriteWineType: selectedType });
+      })
+      .catch((error) => this.handleAuthError(error));
+  }
+
+  updateCaveConfig(config: { rows?: number; cols?: number; viewMode?: CaveView }): Promise<void> {
+    const user = this.currentUser;
+    if (!user || !user.id) {
+      return Promise.reject(new Error('Utilisateur non connecté.'));
+    }
+
+    const userRef = doc(this.firestore, 'users', user.id);
+    return updateDoc(userRef, { caveConfig: { ...user.caveConfig, ...config } })
+      .then(() => {
+        this.currentUserSubject.next({
+          ...user,
+          caveConfig: { ...user.caveConfig, ...config },
+        });
       })
       .catch((error) => this.handleAuthError(error));
   }
