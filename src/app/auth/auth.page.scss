@@ -58,6 +58,10 @@
   margin: 0;
 }
 
+#app-header__title, #app-header__slogan {
+  color: var(--ion-color-primary-contrast);
+}
+
 .auth-segment {
   --background: transparent;
   background: var(--mc-bg-card);
@@ -108,8 +112,4 @@
   --color: var(--mc-text-primary);
   --background-hover: var(--mc-bg-card);
   margin-top: 0;
-
-  svg {
-    margin-right: 4px;
-  }
 }

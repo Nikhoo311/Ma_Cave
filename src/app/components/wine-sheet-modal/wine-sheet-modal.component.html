@@ -1,126 +1,151 @@
-<ion-modal [isOpen]="isOpen" 
-           (didDismiss)="closeModal()" 
-           [initialBreakpoint]="0.95" 
-           [breakpoints]="[0, 0.5, 0.7, 0.95]"
-           mode="ios">
-  <ng-template>
-    @if (wine) {
-      <ion-button fill="clear" color="medium" class="sheet-close" (click)="closeModal()">
-        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+<app-custom-modal
+  [isOpen]="isOpen"
+  [background]="wine ? ('linear-gradient(to top, color-mix(in srgb, ' + (WINE_TYPE_CONFIG[wine.type].gradientColor === 'accent' ? 'var(--wine-' + wine.type + '-accent)' : 'var(--wine-' + wine.type + ')') + ' 55%, transparent) 0%, color-mix(in srgb, ' + (WINE_TYPE_CONFIG[wine.type].gradientColor === 'accent' ? 'var(--wine-' + wine.type + '-accent)' : 'var(--wine-' + wine.type + ')') + ' 18%, transparent) 35%, transparent 75%), var(--mc-bg-main, var(--bg))') : null"
+  (didDismiss)="closeModal()">
+
+  @if (wine) {
+    <div class="sheet-hero">
+      <img
+        [src]="WINE_TYPE_CONFIG[wine.type].icon"
+        class="sheet-hero__wine-icon"
+        [style.background]="WINE_TYPE_CONFIG[wine.type].gradientColor == 'accent'
+          ? 'color-mix(in srgb, var(--wine-' + wine.type + '-accent) 65%, transparent)'
+          : 'color-mix(in srgb, var(--wine-' + wine.type + ') 65%, transparent)'"
+      />
+
+      <div class="info">
+        <ion-chip
+          [outline]="true"
+          [style.background]="WINE_TYPE_CONFIG[wine.type].gradientColor == 'accent'
+            ? 'color-mix(in srgb, var(--wine-' + wine.type + '-accent) 30%, transparent)'
+            : 'color-mix(in srgb, var(--wine-' + wine.type + ') 30%, transparent)'"
+          [style.color]="'var(--wine-' + wine.type + '-accent)'"
+        >
+          {{ WINE_TYPE_CONFIG[wine.type].label | transloco }}
+        </ion-chip>
+
+        <h2>{{ wine.name }}</h2>
+
+        <p class="meta">
+          {{ wine.domain }} ·
+          {{ wine.region || ('WINE_SHEET_MODAL.REGION_NOT_SPECIFIED' | transloco) }}
+          · {{ wine.vintage }}
+        </p>
+      </div>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="bento-card">
+            <ion-card-title>
+              {{ 'WINE_SHEET_MODAL.LOCATION' | transloco }}
+            </ion-card-title>
+
+            <div class="bento-kpi">
+              {{ formattedPlacements.join(', ') }}
+            </div>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card class="bento-card">
+            <ion-card-title>
+              {{ 'WINE_SHEET_MODAL.QUANTITY' | transloco }}
+            </ion-card-title>
+
+            <div class="bento-kpi">
+              {{ wine.placements.length || 0 }}
+              {{ 'WINE_SHEET_MODAL.BOTTLES_SHORT' | transloco }}
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="bento-card">
+            <ion-card-title>
+              {{ 'WINE_SHEET_MODAL.GRAPE_VARIETY' | transloco }}
+            </ion-card-title>
+
+            <div class="bento-kpi">
+              {{ wine.grapeVariety || '-' }}
+            </div>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card class="bento-card">
+            <ion-card-title>
+              {{ 'WINE_SHEET_MODAL.REGION' | transloco }}
+            </ion-card-title>
+
+            <div class="bento-kpi">
+              {{ wine.region || '-' }}
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="bento-card">
+            <ion-card-title>
+              {{ 'WINE_SHEET_MODAL.UNIT_PRICE' | transloco }}
+            </ion-card-title>
+
+            <div class="bento-kpi">
+              {{ (wine.unitPrice | number) || '—' }} €
+            </div>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card class="bento-card">
+            <ion-card-title>
+              {{ 'WINE_SHEET_MODAL.RATING' | transloco }}
+            </ion-card-title>
+
+            <div class="bento-kpi">
+              {{ (wine.rating | number) || '—' }}
+              <ion-icon name="star"></ion-icon>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="sheet-section">
+      <h4>{{ 'WINE_SHEET_MODAL.DESCRIPTION' | transloco }}</h4>
+
+      @if (wine.description) {
+        <p>{{ wine.description }}</p>
+      } @else {
+        <p>{{ 'WINE_SHEET_MODAL.NO_DESCRIPTION' | transloco }}</p>
+      }
+    </div>
+
+    <div class="sheet-section">
+      <h4>{{ 'WINE_SHEET_MODAL.FOOD_PAIRING' | transloco }}</h4>
+
+      @if (wine.foodPairing) {
+        <p>{{ wine.foodPairing.join(', ') }}</p>
+      } @else {
+        <p>{{ 'WINE_SHEET_MODAL.NO_FOOD_PAIRING' | transloco }}</p>
+      }
+    </div>
+
+    <div class="sheet-actions">
+      <ion-button (click)="closeModal()" expand="block" shape="round" color="primary">
+        {{ 'WINE_SHEET_MODAL.CLOSE' | transloco }}
       </ion-button>
 
-      <ion-content class="ion-padding sheet-content"
-        [style.--background]="'linear-gradient(to top, color-mix(in srgb, var(--wine-' + wine.type + '-accent) 55%, transparent) 0%, color-mix(in srgb, var(--wine-' + wine.type + '-accent) 18%, transparent) 35%, transparent 75%), var(--mc-bg-main, var(--bg))'">
-        <div class="sheet-hero">
-          <img [src]="WINE_TYPE_CONFIG[wine.type].icon"
-               class="sheet-hero__wine-icon"
-               [style.background]="WINE_TYPE_CONFIG[wine.type].gradientColor == 'accent' ? 'color-mix(in srgb, var(--wine-' + wine.type + '-accent) 65%, transparent)' : 'color-mix(in srgb, var(--wine-' + wine.type + ') 65%, transparent)'"/>
-
-          <div class="info">
-            <ion-chip
-              [outline]="true"
-              [style.background]="WINE_TYPE_CONFIG[wine.type].gradientColor == 'accent' ? 'color-mix(in srgb, var(--wine-' + wine.type + '-accent) 30%, transparent)' : 'color-mix(in srgb, var(--wine-' + wine.type + ') 30%, transparent)'"
-              [style.color]="'var(--wine-' + wine.type + '-accent)'">
-              {{ WINE_TYPE_CONFIG[wine.type].label | transloco }}
-            </ion-chip>
-
-            <h2>{{ wine.name }}</h2>
-
-            <p class="meta">
-              {{ wine.domain }} ·
-              {{ wine.region || ('WINE_SHEET_MODAL.REGION_NOT_SPECIFIED' | transloco) }}
-              · {{ wine.vintage }}
-            </p>
-          </div>
-        </div>
-
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">
-              <ion-card class="bento-card">
-                <ion-card-title>{{ 'WINE_SHEET_MODAL.LOCATION' | transloco }}</ion-card-title>
-                <div class="bento-kpi">{{ formattedPlacements.join(', ') }}</div>
-              </ion-card>
-            </ion-col>
-
-            <ion-col size="6">
-              <ion-card class="bento-card">
-                <ion-card-title>{{ 'WINE_SHEET_MODAL.QUANTITY' | transloco }}</ion-card-title>
-                <div class="bento-kpi">
-                  {{ wine.placements.length || 0 }}
-                  {{ 'WINE_SHEET_MODAL.BOTTLES_SHORT' | transloco }}
-                </div>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col size="6">
-              <ion-card class="bento-card">
-                <ion-card-title>{{ 'WINE_SHEET_MODAL.GRAPE_VARIETY' | transloco }}</ion-card-title>
-                <div class="bento-kpi">{{ wine.grapeVariety || '-' }}</div>
-              </ion-card>
-            </ion-col>
-
-            <ion-col size="6">
-              <ion-card class="bento-card">
-                <ion-card-title>{{ 'WINE_SHEET_MODAL.REGION' | transloco }}</ion-card-title>
-                <div class="bento-kpi">{{ wine.region || '-' }}</div>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col size="6">
-              <ion-card class="bento-card">
-                <ion-card-title>{{ 'WINE_SHEET_MODAL.UNIT_PRICE' | transloco }}</ion-card-title>
-                <div class="bento-kpi">{{ (wine.unitPrice | number) || '—' }} €</div>
-              </ion-card>
-            </ion-col>
-
-            <ion-col size="6">
-              <ion-card class="bento-card">
-                <ion-card-title>{{ 'WINE_SHEET_MODAL.RATING' | transloco }}</ion-card-title>
-                <div class="bento-kpi">
-                  {{ (wine.rating | number) || '—' }}
-                  <ion-icon name="star"></ion-icon>
-                </div>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <div class="sheet-section">
-          <h4>{{ 'WINE_SHEET_MODAL.DESCRIPTION' | transloco }}</h4>
-          @if (wine.description) {
-            <p>{{ wine.description }}</p>
-          } @else {
-            <p>{{ 'WINE_SHEET_MODAL.NO_DESCRIPTION' | transloco }}</p>
-          }
-        </div>
-
-        <div class="sheet-section">
-          <h4>{{ 'WINE_SHEET_MODAL.FOOD_PAIRING' | transloco }}</h4>
-            @if (wine.foodPairing) {
-              <p>{{ wine.foodPairing.join(", ") }}</p>
-            } @else {
-              <p>{{ 'WINE_SHEET_MODAL.NO_FOOD_PAIRING' | transloco }}</p>
-            }
-        </div>
-
-        <div class="sheet-actions">
-          <ion-button (click)="closeModal()" fill="outline" expand="block" shape="round" color="primary">
-            {{ 'WINE_SHEET_MODAL.CLOSE' | transloco }}
-          </ion-button>
-
-          @if (canRemoveBottle && coords) {
-            <ion-button (click)="removeBottle(coords!)" expand="block" shape="round" color="secondary">
-              {{ 'WINE_SHEET_MODAL.REMOVE_BOTTLE' | transloco }}
-            </ion-button>
-          }
-        </div>
-
-      </ion-content>
-    }
-  </ng-template>
-</ion-modal>
+      @if (canRemoveBottle && coords) {
+        <ion-button (click)="removeBottle(coords!)" expand="block" shape="round" color="secondary">
+          {{ 'WINE_SHEET_MODAL.REMOVE_BOTTLE' | transloco }}
+        </ion-button>
+      }
+    </div>
+  }
+</app-custom-modal>

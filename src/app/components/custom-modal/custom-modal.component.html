@@ -1,0 +1,15 @@
+<!-- custom-modal.component.html -->
+<ion-modal
+  [isOpen]="isOpen"
+  (didDismiss)="handleDidDismiss()"
+  [initialBreakpoint]="initialBreakpoint"
+  [breakpoints]="breakpoints"
+  mode="ios">
+  <ng-template>
+    <ion-content
+      class="ion-padding sheet-content"
+      [style.--background]="background ?? 'var(--mc-bg-main, var(--bg))'">
+      <ng-content></ng-content>
+    </ion-content>
+  </ng-template>
+</ion-modal>

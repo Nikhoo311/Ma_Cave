@@ -17,7 +17,7 @@ export const WINE_TYPE_CONFIG: Record<WineType, WineTypeConfig> = {
   white: {
     icon: 'assets/bottle_white.svg',
     label: 'WINE.TYPE.WHITE',
-    gradientColor: "base",
+    gradientColor: "accent",
   },
   rose: {
     icon: 'assets/bottle_rose.svg',
@@ -31,4 +31,5 @@ export const WINE_TYPE_CONFIG: Record<WineType, WineTypeConfig> = {
   },
 };
 
-export const CAVE_MAX = 240;
+export const CAVE_MAX = 24;
+export const CAVE_MAX_PRENIUM = 240;

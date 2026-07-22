@@ -1,0 +1,120 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="header">
+    <p class="header__small-text">{{ 'SETTINGS.SUBTITLE' | transloco }}</p>
+    <h1 class="header__title">{{ 'SETTINGS.TITLE' | transloco }}</h1>
+  </div>
+
+  <!-- Section Compte -->
+  <div class="settings-section">
+    <h3 class="settings-section__title">{{ 'SETTINGS.SECTIONS.ACCOUNT' | transloco }}</h3>
+
+    <ion-list class="settings-list">
+      <ion-item [button]="true" [detail]="true" (click)="goToInfoPerso()">
+        <ion-label>{{ 'SETTINGS.INFO_PERSONAL.TITLE' | transloco }}</ion-label>
+      </ion-item>
+
+      <ion-item [button]="true" [detail]="true" (click)="goToVinPrefere()">
+        <ion-label>{{ 'SETTINGS.FAVORITE_WINE.TITLE' | transloco }}</ion-label>
+        <ion-note slot="end">{{ favoriteWineLabelKey | transloco }}</ion-note>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Section Cave -->
+  <div class="settings-section">
+    <h3 class="settings-section__title">{{ 'SETTINGS.SECTIONS.CAVE' | transloco }}</h3>
+
+    <ion-list class="settings-list">
+      <ion-item [button]="true" [detail]="true" (click)="openDispositionSheet()">
+        <ion-label>
+          <h2>{{ 'SETTINGS.CAVE.DISPOSITION.TITLE' | transloco }}</h2>
+          <p>{{ maxSlots }} {{ 'SETTINGS.CAVE.DISPOSITION.SLOTS' | transloco: { count: maxSlots } }} · {{ caveConfig?.rows }} {{ 'SETTINGS.CAVE.DISPOSITION.ROWS' | transloco: { count: caveConfig?.rows } }} x {{ caveConfig?.cols }} {{ 'SETTINGS.CAVE.DISPOSITION.COLS' | transloco: { count: caveConfig?.cols } }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <h2>{{ 'SETTINGS.CAVE.DISPLAY.TITLE' | transloco }}</h2>
+          <p>{{ 'SETTINGS.CAVE.DISPLAY.SUBTITLE' | transloco }} : {{ ('SETTINGS.CAVE.DISPLAY.' + selectedView.toUpperCase()) | transloco }}</p>
+        </ion-label>
+        <ion-segment slot="end" [value]="selectedView" (ionChange)="onViewChange($event)">
+          <ion-segment-button [disabled]="isViewChangePending" value="grid">
+            <ion-icon name="grid-outline"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button [disabled]="isViewChangePending" value="list">
+            <ion-icon name="list-outline"></ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-item>
+
+      <ion-item [button]="true">
+        <ion-toggle
+          mode="ios"
+          labelPlacement="start"
+          [checked]="notificationsEnabled$ | async"
+          (ionChange)="onNotificationsToggle($event)">
+          <ion-label>
+            <h2>{{ 'SETTINGS.CAVE.NOTIFICATIONS.TITLE' | transloco }}</h2>
+            <p>{{ ((notificationsEnabled$ | async) ? 'SETTINGS.CAVE.NOTIFICATIONS.ENABLED' : 'SETTINGS.CAVE.NOTIFICATIONS.DISABLED') | transloco }}</p>
+          </ion-label>
+        </ion-toggle>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Section Apparence -->
+  <div class="settings-section">
+    <h3 class="settings-section__title">{{ 'SETTINGS.SECTIONS.APPEARANCE' | transloco }}</h3>
+
+    <ion-list class="settings-list">
+      <ion-item [button]="true">
+        <ion-toggle 
+          mode="ios"
+          labelPlacement="start"
+          [checked]="isDarkMode$ | async"
+          (ionChange)="onDarkModeToggle($event)">{{ 'SETTINGS.APPEARANCE.DARK_MODE' | transloco }}</ion-toggle>
+      </ion-item>
+
+      <ion-item [button]="true" [detail]="true" (click)="goToLanguage()">
+        <ion-label>{{ 'SETTINGS.APPEARANCE.LANGUAGE.TITLE' | transloco }}</ion-label>
+        <ion-note slot="end">{{ selectedLangague }}</ion-note>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<app-custom-modal
+  [isOpen]="isDispositionModalOpen"
+  [initialBreakpoint]="0.6"
+  [breakpoints]="[0, 0.6]"
+  (didDismiss)="closeDispositionModal()">
+
+  <h2 class="modal-title">{{ 'SETTINGS.CAVE.DISPOSITION.TITLE' | transloco }}</h2>
+  <p class="modal-hint">{{ 'SETTINGS.CAVE.DISPOSITION.MODAL.HINT' | transloco: { max: maxEmplacements } }}</p>
+
+  <form [formGroup]="dispositionForm">
+    <app-stepper
+      [control]="dispositionForm.get('rows')"
+      [label]="'PREFERENCES.STEPS.STEP_THREE.ROWS_LABEL' | transloco"
+      [min]="1"
+      [max]="maxRows">
+    </app-stepper>
+
+    <app-stepper
+      [control]="dispositionForm.get('cols')"
+      [label]="'PREFERENCES.STEPS.STEP_THREE.COLS_LABEL' | transloco"
+      [min]="1"
+      [max]="maxCols">
+    </app-stepper>
+  </form>
+
+  <p class="modal-total-line">
+    {{ 'SETTINGS.CAVE.DISPOSITION.MODAL.TOTAL_LABEL' | transloco }}
+    <strong>{{ dispositionTotal }}</strong>
+    {{ 'SETTINGS.CAVE.DISPOSITION.SLOTS' | transloco: { count: dispositionTotal } }}
+  </p>
+
+  <ion-button type="submit" expand="block" shape="round" [color]="isDarkMode ? 'primary' : 'secondary'" (click)="saveDisposition()">
+    {{ 'SETTINGS.CAVE.DISPOSITION.MODAL.SAVE' | transloco }}
+  </ion-button>
+</app-custom-modal>

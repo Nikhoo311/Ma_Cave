@@ -50,7 +50,7 @@
       },
       "STEP_TWO": {
         "AMOUNT_TITLE": "Étape 2 sur 3",
-        "QUESTION": "Votre vin préféré",
+        "QUESTION": "Votre type de vin préféré",
         "PRECISION": "Choisissez le type que vous buvez le plus souvent. Ceci nous aidera à mettre en avant les bonnes bouteilles."
       },
       "STEP_THREE": {
@@ -91,6 +91,7 @@
   },
   "HOME": {
     "TITLE": "Accueil",
+    "WELCOME": "Bonjour",
     "STAR_WINE_TAG": "Vin star",
     "TOTAL_STOCK_LABEL": "Stock total",
     "BOTTLES": "{count, plural, =0 {aucune bouteille} =1 {bouteille} other {bouteilles}}",
@@ -124,5 +125,112 @@
     "CLOSE": "Fermer",
     "REMOVE_BOTTLE": "Retirer une bouteille",
     "BOTTLES_SHORT": "btl"
+  },
+  "SETTINGS": {
+    "TITLE": "Paramètres",
+    "SUBTITLE": "Compte & préférences",
+    "SECTIONS": {
+      "ACCOUNT": "Compte",
+      "CAVE": "Cave",
+      "APPEARANCE": "Apparence"
+    },
+    "APPEARANCE": {
+      "DARK_MODE": "Mode sombre",
+      "LANGUAGE": {
+        "TITLE": "Langue",
+        "SUBTITLE": "Choisissez la langue de l'application.",
+        "SEARCH_PLACEHOLDER": "Rechercher une langue...",
+        "AVAILABLE": "Langues disponibles",
+        "NO_RESULTS": "Aucune langue trouvée",
+        "HINT": "La langue choisie s'applique à l'ensemble de l'application. Le redémarrage n'est pas nécessaire."
+      }
+    },
+    "INFO_PERSONAL": {
+      "TITLE": "Informations personnelles",
+      "UPDATE_BUTTON": "Enregistrer",
+      "UPDATE_SUCCESS": "Vos informations personnelles ont été mises à jour avec succès.",
+      "UPDATE_ERROR": "Une erreur est survenue lors de la mise à jour.\n{{error}}",
+      "REQUIRED_PASSWORD_UPDATE_EMAIL_ERROR": "Mot de passe requis pour changer l'e-mail.",
+      "REQUIRED_PASSWORD_DELETE_ERROR": "Mot de passe requis pour confirmer la suppression.",
+      "EMAIL_CONFIRMATION_SENT": "Un e-mail de confirmation a été envoyé à votre nouvelle adresse."
+    },
+    "FAVORITE_WINE": {
+      "TITLE": "Type de vin préféré",
+      "SUBTITLE": "Choisissez le type de vin que vous préférez.",
+      "UPDATE_BUTTON": "Enregistrer",
+      "UPDATE_SUCCESS": "Votre type vin préféré a été mis à jour avec succès.",
+      "UPDATE_ERROR": "Une erreur est survenue lors de la mise à jour.",
+      "NOT_SPECIFIED": "Non renseigné"
+    },
+    "ACCOUNT_PAGE": {
+      "SECTIONS": {
+        "PERSONAL_INFO": "Informations personnelles",
+        "IDENTIFIER": "Identifiant",
+        "SECURITY": "Sécurité"
+      },
+      "FIRSTNAME": "Prénom",
+      "LASTNAME": "Nom",
+      "EMAIL": "Adresse e-mail",
+      "PASSWORD": "Mot de passe",
+      "GOOGLE_MANAGED": "Géré par Google",
+      "SAVE": "Enregistrer",
+      "LOGOUT": "Se déconnecter",
+      "DELETE_ACCOUNT": {
+        "BUTTON": "Supprimer mon compte",
+        "HINT": "La suppression est définitive et entraîne la perte de toutes vos données.",
+        "CONFIRM_HEADER": "Supprimer mon compte",
+        "CONFIRM_MESSAGE": "La suppression est définitive et entraîne la perte de toutes vos données.",
+        "PASSWORD_PLACEHOLDER": "Mot de passe actuel",
+        "CANCEL": "Annuler",
+        "CONFIRM": "Supprimer",
+        "ERROR": "Impossible de supprimer le compte"
+      },
+      "EMAIL_CHANGE_CONFIRM": {
+        "HEADER": "Confirmer le changement d'e-mail",
+        "MESSAGE": "Pour des raisons de sécurité, merci de saisir votre mot de passe actuel.",
+        "PASSWORD_PLACEHOLDER": "Mot de passe actuel",
+        "CANCEL": "Annuler",
+        "CONFIRM": "Confirmer"
+      }
+    },
+    "CHANGE_PASSWORD": {
+      "TITLE": "Modifier le mot de passe",
+      "SUBTITLE": "Choisissez un mot de passe d'au moins 6 caractères.",
+      "CURRENT_LABEL": "Mot de passe actuel",
+      "NEW_LABEL": "Nouveau mot de passe",
+      "CONFIRM_LABEL": "Confirmer le nouveau mot de passe",
+      "SUBMIT": "Modifier le mot de passe",
+      "MISMATCH": "Les mots de passe ne correspondent pas",
+      "SUCCESS": "Mot de passe modifié avec succès",
+      "ERROR": "Impossible de modifier le mot de passe"
+    },
+    "CAVE": {
+      "DISPOSITION": {
+        "TITLE": "Disposition de la cave",
+        "SLOTS": "{count, plural, =0 {emplacement} =1 {emplacement} other {emplacements}}",
+        "ROWS": "{count, plural, =0 {rangée} =1 {rangée} other {rangées}}",
+        "COLS": "{count, plural, =0 {colonne} =1 {colonne} other {colonnes}}",
+        "MODAL": {
+          "HINT": "Ajuste le nombre de rangées et de colonnes pour correspondre à ta cave réelle ({{max}} emplacements max).",
+          "TOTAL_LABEL": "Capacité totale :",
+          "SAVE": "Enregistrer",
+          "SAVE_SUCCESS": "La disposition de votre cave a été enregistrée.",
+          "SAVE_ERROR": "Une erreur est survenue lors de l'enregistrement de la disposition.\n{{error}}"
+        }
+      },
+      "DISPLAY": {
+        "TITLE": "Affichage de l'inventaire",
+        "SUBTITLE": "Vue par défaut",
+        "GRID": "Grille",
+        "LIST": "Liste",
+        "UPDATE_SUCCESS": "Vue par défaut modifiée : {{view}}",
+        "UPDATE_ERROR": "Une erreur est survenue lors de la modification de la vue."
+      },
+      "NOTIFICATIONS": {
+        "TITLE": "Alertes de maturité",
+        "ENABLED": "Activées",
+        "DISABLED": "Désactivées"
+      }
+    }
   }
 }

@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="topbar">
+      <ion-button
+        fill="clear"
+        shape="round"
+        class="back-btn"
+        (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <h1>{{ 'SETTINGS.APPEARANCE.LANGUAGE.TITLE' | transloco }}</h1>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="settings-form">
+    <span class="settings-section-label">{{ 'SETTINGS.APPEARANCE.LANGUAGE.AVAILABLE' | transloco }}</span>
+
+    @if (languages.length) {
+      <ion-list class="settings-card" lines="full">
+        @for (lang of languages; track lang.code) {
+          <ion-item
+            [button]="true"
+            [detail]="false"
+            (click)="selectLanguage(lang.code)"
+          >
+            <div slot="start" class="lang-code"><img [src]="lang.flag"/></div>
+            <ion-label class="lang-info">
+              <h2 class="lang-native">{{ lang.nativeName }}</h2>
+              <p class="lang-english">{{ lang.englishName }}</p>
+            </ion-label>
+            @if (lang.code === selectedLanguage) {
+              <ion-icon
+                name="checkmark-circle"
+                color="primary"
+                slot="end"
+              ></ion-icon>
+            }
+          </ion-item>
+        }
+      </ion-list>
+    } @else {
+      <p class="no-results">{{ 'SETTINGS.APPEARANCE.LANGUAGE.NO_RESULTS' | transloco }}</p>
+    }
+
+    <p class="hint ion-text-center">{{ 'SETTINGS.APPEARANCE.LANGUAGE.HINT' | transloco }}</p>
+  </div>
+</ion-content>

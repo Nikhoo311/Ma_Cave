@@ -14,5 +14,5 @@ export const TOAST_CONFIG: Record<ToastType, ToastTypeConfig> = {
   success: { color: 'success', icon: checkmarkCircleOutline },
   error: { color: 'danger', icon: closeCircleOutline },
   warning: { color: 'warning', icon: alertCircleOutline },
-  info: { color: 'primary', icon: informationCircleOutline }
+  info: { color: 'tertiary', icon: informationCircleOutline }
 };
