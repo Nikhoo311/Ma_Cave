@@ -25,7 +25,7 @@
             [detail]="false"
             (click)="selectLanguage(lang.code)"
           >
-            <div slot="start" class="lang-code">{{ lang.code.toUpperCase() }}</div>
+            <div slot="start" class="lang-code"><img [src]="lang.flag"/></div>
             <ion-label class="lang-info">
               <h2 class="lang-native">{{ lang.nativeName }}</h2>
               <p class="lang-english">{{ lang.englishName }}</p>

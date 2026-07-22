@@ -66,12 +66,13 @@
 }
 
 .lang-code {
-  width: 40px;
-  flex-shrink: 0;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--mc-text-secondary);
-  text-align: left;
+  display: flex;
+  justify-content: center;
+  margin-right: 0.8rem;
+  img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .lang-info {

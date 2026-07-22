@@ -12,7 +12,7 @@ import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat'
   providers: [
       provideTransloco({
         config: {
-          availableLangs: ['fr', 'en'],
+          availableLangs: ['fr', 'en', 'it', 'es'],
           defaultLang: 'fr',
           // Remove this option if your application doesn't support changing language in runtime.
           reRenderOnLangChange: true,
