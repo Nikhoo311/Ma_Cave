@@ -31,4 +31,5 @@ export const WINE_TYPE_CONFIG: Record<WineType, WineTypeConfig> = {
   },
 };
 
-export const CAVE_MAX = 240;
+export const CAVE_MAX = 24;
+export const CAVE_MAX_PRENIUM = 240;
