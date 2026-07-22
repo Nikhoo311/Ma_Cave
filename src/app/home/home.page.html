@@ -49,7 +49,9 @@
               <span class="repart-left">
                 <span
                   class="dot"
-                  [style.background]="'var(--wine-' + wineDistribution[0] + '-accent)'">
+                  [style.background]="WINE_TYPE_CONFIG[wineDistribution[0]].gradientColor === 'accent'
+                    ? 'var(--wine-' + wineDistribution[0] + '-accent)'
+                    : 'var(--wine-' + wineDistribution[0] + ')'">
                 </span>
 
                 {{ WINE_TYPE_CONFIG[wineDistribution[0]].label | transloco }}

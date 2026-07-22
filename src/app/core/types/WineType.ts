@@ -17,7 +17,7 @@ export const WINE_TYPE_CONFIG: Record<WineType, WineTypeConfig> = {
   white: {
     icon: 'assets/bottle_white.svg',
     label: 'WINE.TYPE.WHITE',
-    gradientColor: "base",
+    gradientColor: "accent",
   },
   rose: {
     icon: 'assets/bottle_rose.svg',

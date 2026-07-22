@@ -1,6 +1,6 @@
 <app-custom-modal
   [isOpen]="isOpen"
-  [background]="wine ? 'linear-gradient(to top, color-mix(in srgb, var(--wine-' + wine.type + '-accent) 55%, transparent) 0%, color-mix(in srgb, var(--wine-' + wine.type + '-accent) 18%, transparent) 35%, transparent 75%), var(--mc-bg-main, var(--bg))' : null"
+  [background]="wine ? ('linear-gradient(to top, color-mix(in srgb, ' + (WINE_TYPE_CONFIG[wine.type].gradientColor === 'accent' ? 'var(--wine-' + wine.type + '-accent)' : 'var(--wine-' + wine.type + ')') + ' 55%, transparent) 0%, color-mix(in srgb, ' + (WINE_TYPE_CONFIG[wine.type].gradientColor === 'accent' ? 'var(--wine-' + wine.type + '-accent)' : 'var(--wine-' + wine.type + ')') + ' 18%, transparent) 35%, transparent 75%), var(--mc-bg-main, var(--bg))') : null"
   (didDismiss)="closeModal()">
 
   @if (wine) {
